@@ -54,7 +54,7 @@ class ErrorHandlingFunctionalTests extends functionaltestplugin.FunctionalTestCa
 	        assertContentContains 'Grails Runtime Exception'
 	        assertContentContains 'tagExpressionError.gsp '
 			assertContentContains '<strong>Exception Message:</strong> Cannot get property \'bar\' on null object'
-			assertContentContains '<strong>Caused by:</strong> Error evaluating expression [foo.bar] on line [14]: java.lang.NullPointerException: Cannot get property \'bar\' on null object'
+			assertContentContains '<strong>Caused by:</strong> Error evaluating expression [foo.bar] on line [14]: Cannot get property \'bar\' on null object'
 	        assertContentContains '<strong>At Line:</strong> [14]'
 			assertContentContains '&lt;g:each var=&quot;c&quot; in=&quot;${foo.bar}&quot;&gt;'					
 		}
