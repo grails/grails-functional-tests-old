@@ -15,19 +15,31 @@
 
     <taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy" classpathref="classpath"/>
 
-    <target name="init">
-        <groovy>
-            ant.property(name:"grails.home", location:"../grails")
-        </groovy>
+    <target name="get-grails" unless="grails.home.was.set" depends="init">
+      <mkdir dir="checkout"/>
+      <get src="http://github.com/grails/grails-core/zipball/master" dest="checkout/grails-src.zip" verbose="true"/>
+      <unzip src="checkout/grails-src.zip" dest="checkout">
+        <mapper type="regexp" from="(grails-grails-core-[\w]*/)(.*)" to="grails-src/\2"/>
+      </unzip>
+      <chmod dir="checkout/grails-src/bin" perm="+x" includes="**/*"/>
+    </target>
 
-		<condition property="grailsCmd" value="grails.bat" else="grails">
-			<os family="windows"/>
-		</condition>
-		<property name="grailsCmd.absolute" location="${grails.home}/bin/${grailsCmd}"/>
+    <target name="init">
+      <condition property="grails.home.was.set">
+        <isset property="grails.home"/>
+      </condition>
+
+      <!-- grails.home may be set interactively, which would take precedence over this... -->
+      <property name="grails.home" value="checkout/grails-src"/>
+
+      <condition property="grailsCmd" value="grails.bat" else="grails">
+        <os family="windows"/>
+      </condition>
+      <property name="grailsCmd.absolute" location="${grails.home}/bin/${grailsCmd}"/>
 
     </target>
 
-    <target name="-build-grails" unless="skipGrailsBuild">
+    <target name="-build-grails" unless="skipGrailsBuild" depends="init, get-grails">
         <echo>GRAILS_HOME=${grails.home}</echo>
         <ant dir="${grails.home}" antfile="build.xml" target="jar">
             <property name="skipTests" value="true"/>
@@ -140,7 +152,7 @@
 		                   failure = true
 		               }
 
-		               // Install the appropriate testing plugin, run the tests, and check the reports..
+		               // Install the appropriate testing plugin, run the tests, and check the reportsDir
                        if (new File(appDir, "test/functional").exists()) {
                            // Install the Functional Test plugin.
                            ant.grails(command:"install-plugin", args:"functional-test 1.2.7", projectName:properties.projectName, resultID:grailsInvocationCounter++)
@@ -150,7 +162,7 @@
                            }
                        
                            // Run the tests.
-		                   ant.grails(command:"functional-tests", args: "--dev-mode", environment:"dev", projectName:properties.projectName, resultID:grailsInvocationCounter++)
+		                   ant.grails(command:"test-app", args: "functional: --dev-mode", environment:"dev", projectName:properties.projectName, resultID:grailsInvocationCounter++)
 		                   outcomes << "Functional tests in application ${properties.projectName}: " +
 		                               ((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
 		
@@ -161,7 +173,7 @@
                            // Copy reports
                            ant.mkdir(dir:"reports/${properties.projectName}")
                            ant.copy(todir:"reports/${properties.projectName}") {
-                               fileset(dir:"${properties.checkoutDir}/${properties.projectName}/test/reports")
+                               fileset(dir:"${properties.checkoutDir}/${properties.projectName}/target/test-reports")
                            }
 
                            // Run the WAR tests.
@@ -176,7 +188,7 @@
                            // Copy reports
                            ant.mkdir(dir:"reports/${properties.projectName}_war")
                            ant.copy(todir:"reports/${properties.projectName}_war") {
-                               fileset(dir:"${properties.checkoutDir}/${properties.projectName}/test/reports")
+                               fileset(dir:"${properties.checkoutDir}/${properties.projectName}/target/test-reports")
                            }
 
                        }
@@ -189,7 +201,7 @@
                            }
                        
                            // Run the tests.
-		                   ant.grails(command:"run-webtest", environment:"dev", projectName:properties.projectName, resultID:grailsInvocationCounter++)
+		                   ant.grails(command:"test-app", args: "functional:webtest", environment:"dev", projectName:properties.projectName, resultID:grailsInvocationCounter++)
 		                   outcomes << "Functional tests in application ${properties.projectName}: " +
 		                                ((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
 		
@@ -200,7 +212,7 @@
                            // Copy reports
                            ant.mkdir(dir:"reports/${properties.projectName}")
                            ant.copy(todir:"reports/${properties.projectName}") {
-                               fileset(dir:"${properties.checkoutDir}/${properties.projectName}/webtest/reports")
+                               fileset(dir:"${properties.checkoutDir}/${properties.projectName}/target/test-reports")
                            }
                        }
 		           }
@@ -253,6 +265,7 @@
         <delete dir="reports" failonerror="false"/>
         <delete dir="target" failonerror="false"/>
         <delete dir="work-global" failonerror="false"/>
+        <delete dir="checkout" failonerror="false"/>
     </target>
 
 	<target name="clean-reports">
