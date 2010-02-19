@@ -1,8 +1,11 @@
 <project name="grails-functional-test" default="functional-test">
-                                                                
+
+    <!-- optional local properties -->
+    <property file='build.properties'/>
+
     <property environment="env"/>
     <property name="checkoutDir" location="apps"/>
-	
+
     <property name="newWebApp" value="myTestWebApp"/>
     <property name="target" value="target"/>
     <property name="default.port" value="8183"/>
@@ -55,7 +58,7 @@
         <mkdir dir="reports" />
         <antcall target="-functional-test-apps" />
         <antcall target="-functional-test-scripts" />
-		<antcall target="show-failures" />
+        <antcall target="show-failures" />
     </target>
 
     <target name="run-test-scripts" depends="clean-reports,init">
@@ -66,43 +69,41 @@
         <antcall target="-functional-test-apps" />
     </target>
 
-	<target name="show-failures">
+    <target name="show-failures">
         <groovy>
-			def reportsDir = new File('reports')
-			if(reportsDir.exists()) {
-				reportsDir.eachDir { dir ->
-					def reportFile = new File("$dir/TESTS-TestSuites.xml")
-					
-					if(reportFile.exists()) {
-						def xml = new XmlSlurper().parse(reportFile)
-						def errors = xml.testsuite.@errors.text()
-						if(errors) {
-							errors = errors.toInteger()
-							if(errors > 0) {
-								println "$dir.name has $errors errors"
-							}
-						}
-						def failures = xml.testsuite.@failures.text()
-						if(failures) {
-							failures = failures.toInteger()
-							if(failures > 0) {
-								println "$dir.name has $failures failures"
-							}
-						}
-						
-					}
-					
-				}
-			}
-		</groovy>
-	</target>
+            def reportsDir = new File('reports')
+            if(reportsDir.exists()) {
+                reportsDir.eachDir { dir ->
+                    def reportFile = new File("$dir/TESTS-TestSuites.xml")
+
+                    if(reportFile.exists()) {
+                        def xml = new XmlSlurper().parse(reportFile)
+                        def errors = xml.testsuite.@errors.text()
+                        if(errors) {
+                            errors = errors.toInteger()
+                            if(errors > 0) {
+                                println "$dir.name has $errors errors"
+                            }
+                        }
+                        def failures = xml.testsuite.@failures.text()
+                        if(failures) {
+                            failures = failures.toInteger()
+                            if(failures > 0) {
+                                println "$dir.name has $failures failures"
+                            }
+                        }
+                    }
+                }
+            }
+        </groovy>
+    </target>
     <target name="-functional-test-scripts" unless="skipScripts">
          <delete dir="target/scripts" failonerror="false" />
          <mkdir dir="target/scripts" />
          <groovy>
 <![CDATA[
              String scriptName = ant.antProject.properties."test.script.name"
-             def scriptFiles = new File("scripts").listFiles().findAll { 
+             def scriptFiles = new File("scripts").listFiles().findAll {
                  it.name.endsWith('.xml')
              }
              println "Running functional test scripts"
@@ -112,30 +113,30 @@
                  } else {
                      ant.ant(antfile:file, inheritRefs:true)
                  }
-			 }
-			]]>
+             }
+            ]]>
          </groovy>
     </target>
 
     <target name="-functional-test-apps" unless="skipApps">
         <groovy><![CDATA[
-			try {
-		           def outcomes = []
-		           def failure = false
+            try {
+                   def outcomes = []
+                   def failure = false
                    def grailsInvocationCounter = 0
                    new File('apps').eachDir { appDir ->
-					
-		               properties.projectName = appDir.name
-					   // skip webtest based tests until plugin is fixed
-					   if(properties.projectName == 'HelloWorld') return
-					
+
+                       properties.projectName = appDir.name
+                       // skip webtest based tests until plugin is fixed
+                       if(properties.projectName == 'HelloWorld') return
+
                        // if the appToTest system property is set, then skip all other apps
-					   if(properties.appToTest && !properties.appToTest.equals(properties.projectName)) {
-					       ant.echo message: "Skipping app: ${properties.projectName}"
-					       return
-					   }
-					   def appName = ant.antProject.properties."test.app.name"
-					   if(appName && appName != appDir.name) return
+                       if(properties.appToTest && !properties.appToTest.equals(properties.projectName)) {
+                           ant.echo message: "Skipping app: ${properties.projectName}"
+                           return
+                       }
+                       def appName = ant.antProject.properties."test.app.name"
+                       if(appName && appName != appDir.name) return
 
 
                        // Clear any existing webtest and functional test plugins.
@@ -145,14 +146,14 @@
                            fileset(dir: appDir.path, includes: "**/functional-test-*/**/*")
                        }
 
-		               // First upgrade.
-		               ant.grails(command:"upgrade -force", projectName:properties.projectName, resultID:grailsInvocationCounter++)
-		               if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
-		                   outcomes << "Couldn't upgrade application ${properties.projectName}"
-		                   failure = true
-		               }
+                       // First upgrade.
+                       ant.grails(command:"upgrade -force", projectName:properties.projectName, resultID:grailsInvocationCounter++)
+                       if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
+                           outcomes << "Couldn't upgrade application ${properties.projectName}"
+                           failure = true
+                       }
 
-		               // Install the appropriate testing plugin, run the tests, and check the reportsDir
+                       // Install the appropriate testing plugin, run the tests, and check the reportsDir
                        if (new File(appDir, "test/functional").exists()) {
                            // Install the Functional Test plugin.
                            ant.grails(command:"install-plugin", args:"functional-test 1.2.7", projectName:properties.projectName, resultID:grailsInvocationCounter++)
@@ -160,16 +161,16 @@
                                outcomes << "Couldn't install functional-test plugin into application ${properties.projectName}"
                                failure = true
                            }
-                       
+
                            // Run the tests.
-		                   ant.grails(command:"test-app", args: "functional: --dev-mode", environment:"dev", projectName:properties.projectName, resultID:grailsInvocationCounter++)
-		                   outcomes << "Functional tests in application ${properties.projectName}: " +
-		                               ((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
-		
+                           ant.grails(command:"test-app", args: "functional: --dev-mode", environment:"dev", projectName:properties.projectName, resultID:grailsInvocationCounter++)
+                           outcomes << "Functional tests in application ${properties.projectName}: " +
+                                       ((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
+
                            if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
                                failure = true
                            }
-                           
+
                            // Copy reports
                            ant.mkdir(dir:"reports/${properties.projectName}")
                            ant.copy(todir:"reports/${properties.projectName}") {
@@ -177,14 +178,14 @@
                            }
 
                            // Run the WAR tests.
-		                   ant.grails(command:"functional-tests", environment:"dev", projectName:properties.projectName, resultID:grailsInvocationCounter++)
-		                   outcomes << "Functional tests in application ${properties.projectName}: " +
-		                               ((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
-		
+                           ant.grails(command:"functional-tests", environment:"dev", projectName:properties.projectName, resultID:grailsInvocationCounter++)
+                           outcomes << "Functional tests in application ${properties.projectName}: " +
+                                       ((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
+
                            if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
                                failure = true
                            }
-                           
+
                            // Copy reports
                            ant.mkdir(dir:"reports/${properties.projectName}_war")
                            ant.copy(todir:"reports/${properties.projectName}_war") {
@@ -199,39 +200,39 @@
                                outcomes << "Couldn't install webtest plugin into application ${properties.projectName}"
                                failure = true
                            }
-                       
+
                            // Run the tests.
-		                   ant.grails(command:"test-app", args: "functional:webtest", environment:"dev", projectName:properties.projectName, resultID:grailsInvocationCounter++)
-		                   outcomes << "Functional tests in application ${properties.projectName}: " +
-		                                ((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
-		
+                           ant.grails(command:"test-app", args: "functional:webtest", environment:"dev", projectName:properties.projectName, resultID:grailsInvocationCounter++)
+                           outcomes << "Functional tests in application ${properties.projectName}: " +
+                                        ((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
+
                            if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
                                failure = true
                            }
-                       
+
                            // Copy reports
                            ant.mkdir(dir:"reports/${properties.projectName}")
                            ant.copy(todir:"reports/${properties.projectName}") {
                                fileset(dir:"${properties.checkoutDir}/${properties.projectName}/target/test-reports")
                            }
                        }
-		           }
+                   }
 
-		           println "Grails Functional Test Results"
-		           println "======================================================"
-		           outcomes.each() {
-		               println it
-		           }
+                   println "Grails Functional Test Results"
+                   println "======================================================"
+                   outcomes.each() {
+                       println it
+                   }
 
-		           if (failure) ant.fail(message:"At least one of the tests failed")
+                   if (failure) ant.fail(message:"At least one of the tests failed")
 
-			}
-			catch(Exception e) {
-				println e.message
-				e.printStackTrace()
+            }
+            catch(Exception e) {
+                println e.message
+                e.printStackTrace()
 
-				ant.fail(message:"functional tests failed due to error")
-			}
+                ant.fail(message:"functional tests failed due to error")
+            }
             ]]>
         </groovy>
 
@@ -259,7 +260,7 @@
                     <touch file="${newWebApp.dir}/.kill-run-app"/>
                 </sequential>
             </parallel>
-	</target>
+    </target>
 
     <target name="clean" depends="clean-reports">
         <delete dir="reports" failonerror="false"/>
@@ -268,7 +269,45 @@
         <delete dir="checkout" failonerror="false"/>
     </target>
 
-	<target name="clean-reports">
-		<delete dir="reports" failonerror="false"/>
-	</target>
+    <target name="clean-reports">
+        <delete dir="reports" failonerror="false"/>
+    </target>
+
+    <target name="run-cli">
+
+        <property name='cli-classes' value='target/cli-classes' />
+        <property name='grails.lib' value='${grails.home}/lib' />
+
+        <delete dir="target" />
+        <mkdir dir="${cli-classes}" />
+
+        <taskdef name="groovyc" classname="org.codehaus.groovy.ant.Groovyc">
+             <classpath>
+                  <fileset dir="${grails.lib}" includes="groovy-all*.jar"/>
+             </classpath>
+        </taskdef>
+
+        <groovyc destdir="${cli-classes}"  encoding="UTF-8" srcdir='cli-tests'>
+            <classpath>
+                <fileset dir="${grails.lib}" includes="*.jar"/>
+                <path refid="classpath"/>
+            </classpath>
+
+            <javac deprecation="on" debug="yes" source="1.5" target="1.5" />
+        </groovyc>
+
+        <java classname="RunTests" fork="true" failonerror="true" maxmemory="256m" dir='cli-tests'>
+            <classpath>
+                <path refid="classpath"/>
+                <fileset dir="${grails.lib}" includes="junit*.jar"/>
+                <pathelement location="${cli-classes}"/>
+            </classpath>
+            <sysproperty key='grails.home' value='${grails.home}'/>
+            <sysproperty key='grails.version' value='${grails.version}'/>
+            <sysproperty key='cli.target.dir' value='../target'/>
+            <sysproperty key='cli.test.dir' value='.'/>
+        </java>
+
+    </target>
+
 </project>

@@ -5,12 +5,13 @@
  */
 
 cliTestPath = System.getProperty("cli.test.dir") ?: "cli-tests"
+cliWorkPath = System.getProperty("cli.target.dir") ?: "cli-tests/target"
 
 // Clear the temp and output directories and recreate. This avoids any
 // side-effects due to files left over from previous runs.
-def tmpDir = new File(cliTestPath, "tmp")
-def outDir = new File(cliTestPath, "output")
-def workDir = new File(cliTestPath, "work")
+def tmpDir = new File(cliWorkPath, "tmp")
+def outDir = new File(cliWorkPath, "output")
+def workDir = new File(cliWorkPath, "work")
 tmpDir.deleteDir()
 tmpDir.mkdirs()
 outDir.deleteDir()
@@ -20,9 +21,10 @@ workDir.deleteDir()
 // Configure the test cases via some system properties.
 System.setProperty("grails.work.dir", workDir.canonicalFile.absolutePath)
 System.setProperty("cli.test.dir", cliTestPath)
+System.setProperty("cli.target.dir", cliWorkPath)
 
 // Configure and run the tests. Note that the order is important!
-def tests = [ "Help", "ListPlugins", "CreateApp", "Compile", "War" ]
+def tests = [ "Help", "ListPlugins", "CreateApp", "Compile", "War", "CreateController", "InstallTemplates" ]
 
 def exitCode = 0
 tests.each {
@@ -47,7 +49,5 @@ private runTest(String testScript) {
     if (retval instanceof junit.framework.TestResult) {
         return retval.wasSuccessful() ? 0 : 1
     }
-    else {
-        return retval
-    }
+    return retval
 }

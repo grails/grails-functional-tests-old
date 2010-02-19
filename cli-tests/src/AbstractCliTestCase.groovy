@@ -22,9 +22,9 @@ abstract class AbstractCliTestCase extends GroovyTestCase {
     private String grailsVersion = System.getProperty("grails.version") ?:
             new File(grailsHome, "build.properties").withReader { def p = new Properties(); p.load(it); p.'grails.version' }
 
-    private File baseWorkDir = new File(System.getProperty("cli.test.dir") ?: "cli-tests", "tmp")
+    private File baseWorkDir = new File(System.getProperty("cli.target.dir") ?: "cli-tests", "tmp")
     private File workDir = baseWorkDir
-    private File outputDir = new File(System.getProperty("cli.test.dir") ?: "cli-tests", "output")
+    private File outputDir = new File(System.getProperty("cli.target.dir") ?: "cli-tests", "output")
     private Process process
     private boolean streamsProcessed
 
@@ -54,7 +54,7 @@ abstract class AbstractCliTestCase extends GroovyTestCase {
         pb.redirectErrorStream(true)
         pb.directory(workDir)
         pb.environment()["GRAILS_HOME"] = grailsHome
-        
+
         process = pb.start()
 
         // Read the process output on a separate thread. This is

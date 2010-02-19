@@ -8,7 +8,7 @@ class CreateAppTestCase extends AbstractCliTestCase {
         verifyHeader()
         verifyApp("app1")
         assertTrue output.contains("Application name not specified. Please enter:")
-        assertTrue output.contains("Created Grails Application at ${baseWorkDir.absolutePath}/app1")
+        assertTrue output.contains("Created Grails Application at ${baseWorkDir.canonicalPath}/app1")
     }
 
     void testWithAppName() {
@@ -19,28 +19,30 @@ class CreateAppTestCase extends AbstractCliTestCase {
         verifyHeader()
         verifyApp(appName)
         assertFalse output.contains("Application name not specified. Please enter:")
-        assertTrue output.contains("Created Grails Application at ${baseWorkDir.absolutePath}/${appName}")
+        assertTrue output.contains("Created Grails Application at ${baseWorkDir.canonicalPath}/${appName}")
     }
 
     private void verifyApp(String name) {
         final File appDir = new File(baseWorkDir, name)
 
         assertTrue appDir.exists()
-        assertTrue new File(appDir, "${name}.iml").exists()
-        assertTrue new File(appDir, "${name}.ipr").exists()
-        assertTrue new File(appDir, "${name}.iws").exists()
-        assertTrue new File(appDir, "${name}.launch").exists()
-        assertTrue new File(appDir, "${name}-test.launch").exists()
-        assertTrue new File(appDir, "${name}.tmproj").exists()
         assertTrue new File(appDir, "application.properties").exists()
-        assertTrue new File(appDir, "build.xml").exists()
-        assertTrue new File(appDir, "ivysettings.xml").exists()
-        assertTrue new File(appDir, "ivy.xml").exists()
         assertTrue new File(appDir, "grails-app").exists()
         assertTrue new File(appDir, "lib").exists()
         assertTrue new File(appDir, "scripts").exists()
         assertTrue new File(appDir, "src").exists()
         assertTrue new File(appDir, "test").exists()
         assertTrue new File(appDir, "web-app").exists()
+
+        assertFalse new File(appDir, "${name}.iml").exists()
+        assertFalse new File(appDir, "${name}.ipr").exists()
+        assertFalse new File(appDir, "${name}.iws").exists()
+        assertFalse new File(appDir, "${name}.launch").exists()
+        assertFalse new File(appDir, "${name}-test.launch").exists()
+        assertFalse new File(appDir, "${name}.tmproj").exists()
+        assertFalse new File(appDir, "build.xml").exists()
+        assertFalse new File(appDir, "ivysettings.xml").exists()
+        assertFalse new File(appDir, "ivy.xml").exists()
     }
 }
+
