@@ -24,7 +24,8 @@ System.setProperty("cli.test.dir", cliTestPath)
 System.setProperty("cli.target.dir", cliWorkPath)
 
 // Configure and run the tests. Note that the order is important!
-def tests = [ "Help", "ListPlugins", "CreateApp", "Compile", "War", "CreateController", "InstallTemplates" ]
+def tests = ["Help", "ListPlugins", "CreateApp", "Compile", "War", "CreateController",
+             "InstallTemplates", "ReInstallPlugin"]
 
 def exitCode = 0
 tests.each {

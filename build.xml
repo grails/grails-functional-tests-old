@@ -1,7 +1,7 @@
 <project name="grails-functional-test" default="functional-test">
 
     <!-- optional local properties -->
-    <property file='build.properties'/>
+    <property file='local.properties'/>
 
     <property environment="env"/>
     <property name="checkoutDir" location="apps"/>
@@ -306,6 +306,7 @@
             <sysproperty key='grails.version' value='${grails.version}'/>
             <sysproperty key='cli.target.dir' value='../target'/>
             <sysproperty key='cli.test.dir' value='.'/>
+            <sysproperty key='cli.plugin.dir' value='../in-place-plugins'/>
         </java>
 
     </target>
