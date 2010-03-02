@@ -5,4 +5,17 @@ class ForwardFunctionalTests extends functionaltestplugin.FunctionalTestCase {
         assertContentContains '<title>Simple GSP page</title>'
         assertContentContains 'params = bar'
     }
+
+	 void testForwardToAction() {
+		  get('/forward/forwardToAction')
+		  assertStatus 200
+		  assertContentContains 'toAction output'
+	 }
+
+	 void testForwardToOtherController() {
+		  get('/forward/forwardToOther')
+		  assertStatus 200
+		  assertContentContains 'OtherController page.gsp'
+	 }
 }
+
