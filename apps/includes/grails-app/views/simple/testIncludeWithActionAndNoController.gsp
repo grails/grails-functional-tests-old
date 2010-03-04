@@ -1,0 +1,1 @@
+<g:include action="index" params="[foo:'bar']"></g:include>
