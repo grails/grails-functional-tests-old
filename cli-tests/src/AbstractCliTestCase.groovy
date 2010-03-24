@@ -23,6 +23,8 @@ abstract class AbstractCliTestCase extends GroovyTestCase {
             new File(grailsHome, "build.properties").withReader { def p = new Properties(); p.load(it); p.'grails.version' }
 
     private File baseWorkDir = new File(System.getProperty("cli.test.dir") ?: "cli-tests", "tmp")
+    def cliTestsDir = new File(System.getProperty("cli.test.dir") ?: "")
+    private File baseWorkDir = new File(System.getProperty("cli.target.dir") ?: "cli-tests", "tmp")
     private File workDir = baseWorkDir
     private File outputDir = new File(System.getProperty("cli.test.dir") ?: "cli-tests", "output")
     private Process process
@@ -171,9 +173,8 @@ abstract class AbstractCliTestCase extends GroovyTestCase {
      * location of GRAILS_HOME.
      */
     protected final void verifyHeader() {
-        assertTrue output.startsWith("""Welcome to Grails ${grailsVersion} - http://grails.org/
+        assertEquals """Welcome to Grails ${grailsVersion} - http://grails.org/
 Licensed under Apache Standard License 2.0
-Grails home is set to: ${grailsHome}
-""")
+Grails home is set to: ${grailsHome}""", output.split("\n")[0..2].join("\n")
     }
 }
