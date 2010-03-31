@@ -2,11 +2,12 @@ package org.codehaus.groovy.grails.plugins.dbutil
 
 import java.sql.*
 import org.apache.commons.dbcp.*
+import javax.sql.*
 import org.apache.commons.dbutils.handlers.MapListHandler
 
 class DbUtilController {
 
-  BasicDataSource dataSource
+  DataSource dataSource
   /* Column metadata...
       COLUMN_NAME String => column name
       DATA_TYPE int => SQL type from java.sql.Types
