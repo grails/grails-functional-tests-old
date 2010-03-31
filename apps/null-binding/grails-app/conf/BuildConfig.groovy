@@ -1,5 +1,3 @@
-grails.plugin.location.'db-util' = "../../in-place-plugins/grails-db-util"
-grails.plugin.location.'resources-to-copy' = "../../in-place-plugins/resources-to-copy"
 grails.project.work.dir = "target/work"
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 grails.project.dependency.resolution = {
