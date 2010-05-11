@@ -247,6 +247,13 @@
             <grails projectName="${newWebApp}" command="create-app ${newWebApp}" dir="${target}" failonerror="true"/>
             <grails projectName="${newWebApp}" command="clean" dir="${newWebApp.dir}" failonerror="true"/>
             <grails projectName="${newWebApp}" command="compile" dir="${newWebApp.dir}" failonerror="true"/>
+            <groovy>
+            new File("${properties['newWebApp.dir']}/grails-app/domain/Blog.groovy").text = '''
+class Blog {
+    String title
+}
+'''
+            </groovy> 
             <grails projectName="${newWebApp}" command="generate-all blog" dir="${newWebApp.dir}" failonerror="true"/>
 
             <parallel>
