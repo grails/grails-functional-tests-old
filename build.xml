@@ -128,7 +128,7 @@
 
                        properties.projectName = appDir.name
                        // skip webtest based tests until plugin is fixed
-                       if(properties.projectName == 'HelloWorld') return
+                       if(properties.projectName == 'HelloWorld' || properties.projectName == 'webflow') return
 
                        // if the appToTest system property is set, then skip all other apps
                        if(properties.appToTest && !properties.appToTest.equals(properties.projectName)) {
