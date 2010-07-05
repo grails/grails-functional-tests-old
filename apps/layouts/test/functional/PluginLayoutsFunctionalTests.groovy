@@ -1,4 +1,17 @@
 class PluginLayoutsFunctionalTests extends functionaltestplugin.FunctionalTestCase {
+    
+    void testApplicationDefaultLayout() {
+        get '/demo'
+        assertStatus 200
+        assertContentContains '<h1>Default Application Layout</h1>'
+    }
+    
+    void testApplicationDefaultLayoutAppliedToViewNotRenderedFromController() {
+        get '/'
+        assertStatus 200
+        assertContentContains '<h1>Default Application Layout</h1>'
+    }
+    
     void testPluginLayoutFoundByPluginView() {
         // Here call get(uri) or post(uri) to start the session
         // and then use the custom assertXXXX calls etc to check the response
