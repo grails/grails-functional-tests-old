@@ -34,4 +34,25 @@ class TestFlowController {
 	}
 	
 	def getNextStep() { "one" }
+	
+	def shoppingCartFlow = {
+        start {
+            action {
+            }
+            on('success').to 'showCart'
+        }
+        
+        showCart {
+            on('finish').to 'submitOrder'
+        }
+        
+        submitOrder {
+            redirect action: 'list'
+        }
+    }
+    
+    def list = {
+        render 'this is the list action'
+    }
+    
 }
