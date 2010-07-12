@@ -29,7 +29,7 @@ def tests = ["Stats",
              "Help", 
 /*             "ListPlugins", */
              "CreateApp", 
-/*             "Compile", */
+             "Compile", 
 /*             "War", */
 /*             "CreateController",*/
 /*             "InstallTemplates", */
