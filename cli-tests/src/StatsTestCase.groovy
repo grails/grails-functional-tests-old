@@ -12,6 +12,7 @@ class StatsTestCase extends AbstractCliTestCase {
 	void testStats() {
 		execute([ "stats" ])
 		assertEquals 0, waitForProcess()
+		println "output: ${output}"
 		assertTrue output.contains('| Domain Classes       |     1 |     3 |')
 		assertTrue output.contains('| Services             |     1 |     3 |')
 		assertTrue output.contains('| Unit Tests           |     1 |     6 |')
