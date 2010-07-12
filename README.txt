@@ -1,6 +1,7 @@
 While running the functional test suite there are several system properties
 that may be set to control which tests are run:
 
+- skipCli may be set to skip all of the CLI tests
 - skipScripts may be set to skip all of the functional test scripts
 - skipGrailsBuild may be set to skip building Grails (Grails must already be built)
 - skipNewApp will skip all of the new app functional tests

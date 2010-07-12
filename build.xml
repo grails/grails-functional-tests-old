@@ -33,6 +33,7 @@
             depends="clean-reports,init,-testsWithNewApp">
 
         <mkdir dir="reports" />
+        <antcall target="run-cli" />
         <antcall target="-functional-test-apps" />
         <antcall target="-functional-test-scripts" />
         <antcall target="show-failures" />
@@ -257,7 +258,7 @@ class Blog {
         <delete dir="reports" failonerror="false"/>
     </target>
 
-    <target name="run-cli">
+    <target name="run-cli" unless="skipCli">
 
         <property name='cli-classes' value='target/cli-classes' />
         <property name='grails.lib' value='${grails.home}/lib' />
