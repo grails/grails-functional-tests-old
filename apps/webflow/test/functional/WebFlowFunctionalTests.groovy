@@ -26,4 +26,18 @@ class WebFlowFunctionalTests extends functionaltestplugin.FunctionalTestCase {
         assertContentContains 'Flow Ended'
 		
 	}
+	
+	void testRedirectWithoutSpecifyingController() {
+	    get '/testFlow/shoppingCart'
+	    
+	    assertStatus 200
+	    
+	    form('test') {
+	        click 'Complete Order'
+	    }
+	    
+	    assertStatus 200
+	    
+	    assertContentContains 'this is the list action'
+	}
 }
