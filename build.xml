@@ -30,12 +30,13 @@
 
     <target name="functional-test"
             description="Runs functional tests for one or more test applications from SVN"
-            depends="clean-reports,init,-testsWithNewApp">
+            depends="clean-reports,init">
 
         <mkdir dir="reports" />
         <antcall target="-functional-test-apps" />
         <antcall target="-functional-test-scripts" />
         <antcall target="run-cli" />
+        <antcall target="-testsWithNewApp" />
         <antcall target="show-failures" />
     </target>
 
