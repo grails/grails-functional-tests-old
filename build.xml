@@ -33,9 +33,9 @@
             depends="clean-reports,init,-testsWithNewApp">
 
         <mkdir dir="reports" />
-        <antcall target="run-cli" />
         <antcall target="-functional-test-apps" />
         <antcall target="-functional-test-scripts" />
+        <antcall target="run-cli" />
         <antcall target="show-failures" />
     </target>
 
