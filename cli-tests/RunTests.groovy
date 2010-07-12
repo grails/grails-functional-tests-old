@@ -30,7 +30,7 @@ def tests = ["Stats",
 /*             "ListPlugins", */
              "CreateApp", 
              "Compile", 
-/*             "War", */
+             "War", 
 /*             "CreateController",*/
 /*             "InstallTemplates", */
 /*             "ReInstallPlugin"*/
