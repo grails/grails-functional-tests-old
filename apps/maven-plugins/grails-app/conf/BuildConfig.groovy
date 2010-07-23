@@ -17,12 +17,15 @@ grails.project.dependency.resolution = {
         //mavenLocal()
         //mavenCentral()
         mavenRepo "http://snapshots.repository.codehaus.org"
+		grailsRepo "http://svn.codehaus.org/grails-plugins"
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
     }
 	plugins {
 		compile ':hibernate:1.3.3.BUILD-SNAPSHOT'
+		runtime ':jetty:1.2-SNAPSHOT'		
+		test ":functional-test:1.3-SNAPSHOT"
 	}
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
