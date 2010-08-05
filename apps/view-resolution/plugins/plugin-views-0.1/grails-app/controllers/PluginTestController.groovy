@@ -17,9 +17,9 @@ class PluginTestController {
 	}
 
 	// TODO: nested relative views not supported yet. See GRAILS-4204
-/*    def testNestedRelativeView = { 
+    def testNestedRelativeView = { 
 		render view:"local/simple", model:[foo:"bar"]
-	}*/
+	}
 	
 	def testNestedRelativeTemplate = {
 		
