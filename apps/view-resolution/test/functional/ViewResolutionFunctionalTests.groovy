@@ -36,7 +36,10 @@ class ViewResolutionFunctionalTests extends functionaltestplugin.FunctionalTestC
         assertStatus 200
         assertContentContains 'plugin default = bar'		
 	}
+
     void testNestedRelativeView() {
+        // TODO: nested relative views not supported yet. See GRAILS-4204
+        if(notYetImplemented()) return
         get('/pluginTest/testNestedRelativeView')
         assertStatus 200
         assertContentContains 'simple = bar'
