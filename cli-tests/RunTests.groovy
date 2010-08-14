@@ -25,7 +25,7 @@ System.setProperty("cli.target.dir", cliWorkPath)
 
 // Configure and run the tests. Note that the order is important!
 def tests = [
-             "Stats",
+/*             "Stats", */
              "Testing", 
              "Help", 
 /*             "ListPlugins", */
