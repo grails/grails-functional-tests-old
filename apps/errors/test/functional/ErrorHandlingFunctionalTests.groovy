@@ -114,23 +114,40 @@ class ErrorHandlingFunctionalTests extends functionaltestplugin.FunctionalTestCa
         assertContentContains 'not there'		
 	}
 
-	void testForwardingError() {
-		get('/home/index?preview=true')
+
+	/**
+	 * Test for GRAILS-6627
+	 *
+	 * The 'renderView' action renders the 'index' view directly. The
+	 * associated error page should be displayed ('errors/forwardError')
+	 * but the above bug means that an exception is thrown.
+	 */
+	void testForwardingErrorWithRenderView() {
+		get('/home/renderView')
 
 		assertStatus 500
 		assertContentContains "Something went wrong on the server!"
-		assertContentDoesNotContain "Hello world!"
-		assertContentDoesNotContain "Another msg"
-		assertContentDoesNotContain "preview"
 	}
 
-	void testForwardingErrorWithRenderView() {
-		get('/home/renderView?preview=true')
+	/**
+	 * Test for GRAILS-6628
+	 *
+	 * Check that URL parameters are not passed on to the error handler.
+	 */
+	void testWithUrlParameters() {
+		if (notYetImplemented()) return
+		get('/home/index?aabbccdd=true')
 
 		assertStatus 500
 		assertContentContains "Something went wrong on the server!"
-		assertContentDoesNotContain "Hello world!"
-		assertContentDoesNotContain "Another msg"
-		assertContentDoesNotContain "preview"
+		assertContentDoesNotContain "aabbccdd"
+	}
+
+	void testWithStaticGspContentInErrorPage() {
+		get('/home/renderError')
+
+		assertStatus 500
+		assertContentContains "Something went wrong on the server!"
+		assert byXPath('//h2[1]').textContent != "Hello world!"
 	}
 }
