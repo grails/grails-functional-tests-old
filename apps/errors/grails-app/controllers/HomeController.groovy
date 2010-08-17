@@ -5,4 +5,6 @@ class HomeController {
     def renderView = {
         render(view: 'index')
     }
+
+	def renderError = {}
 }
