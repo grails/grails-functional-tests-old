@@ -113,4 +113,24 @@ class ErrorHandlingFunctionalTests extends functionaltestplugin.FunctionalTestCa
         assertStatus 200		
         assertContentContains 'not there'		
 	}
+
+	void testForwardingError() {
+		get('/home/index?preview=true')
+
+		assertStatus 500
+		assertContentContains "Something went wrong on the server!"
+		assertContentDoesNotContain "Hello world!"
+		assertContentDoesNotContain "Another msg"
+		assertContentDoesNotContain "preview"
+	}
+
+	void testForwardingErrorWithRenderView() {
+		get('/home/renderView?preview=true')
+
+		assertStatus 500
+		assertContentContains "Something went wrong on the server!"
+		assertContentDoesNotContain "Hello world!"
+		assertContentDoesNotContain "Another msg"
+		assertContentDoesNotContain "preview"
+	}
 }

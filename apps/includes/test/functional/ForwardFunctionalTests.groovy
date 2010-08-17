@@ -13,9 +13,12 @@ class ForwardFunctionalTests extends functionaltestplugin.FunctionalTestCase {
 	 }
 
 	 void testForwardToOtherController() {
-		  get('/forward/forwardToOther')
+		  get('/forward/forwardToOther?dummy=test')
 		  assertStatus 200
 		  assertContentContains 'OtherController page.gsp'
+		  assertContentDoesNotContain 'forward'
+		  assertContentDoesNotContain 'dummy'
+		  assertContentDoesNotContain 'test'
 	 }
 }
 
