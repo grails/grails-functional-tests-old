@@ -1,7 +1,6 @@
 class BindingToNullableDateFunctionalTests extends functionaltestplugin.FunctionalTestCase {
     void testJeff() {
         // http://jira.codehaus.org/browse/GRAILS-6604
-        if(notYetImplemented()) return
         get('/widget/create')
         assertStatus 200
         assertContentContains '<title>Create Widget</title>'
