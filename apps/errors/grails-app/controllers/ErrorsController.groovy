@@ -52,4 +52,6 @@ class ErrorsController {
 		render "war=${grailsApplication.warDeployed}"
 	}
 	
+	def forwardError = {
+	}
 }
