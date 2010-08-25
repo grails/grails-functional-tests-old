@@ -145,7 +145,6 @@ class ErrorHandlingFunctionalTests extends functionaltestplugin.FunctionalTestCa
 	}
 
 	void testWithStaticGspContentInErrorPage() {
-		if (notYetImplemented()) return
 		get('/home/renderError')
 
 		assertStatus 500
