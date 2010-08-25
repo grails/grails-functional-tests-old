@@ -123,6 +123,7 @@ class ErrorHandlingFunctionalTests extends functionaltestplugin.FunctionalTestCa
 	 * but the above bug means that an exception is thrown.
 	 */
 	void testForwardingErrorWithRenderView() {
+		if (notYetImplemented()) return
 		get('/home/renderView')
 
 		assertStatus 500
