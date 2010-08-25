@@ -1,5 +1,5 @@
 class BindingToNullableDateFunctionalTests extends functionaltestplugin.FunctionalTestCase {
-    void testJeff() {
+    void testBindingToNullableDate() {
         // http://jira.codehaus.org/browse/GRAILS-6604
         get('/widget/create')
         assertStatus 200
