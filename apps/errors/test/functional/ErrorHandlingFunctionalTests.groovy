@@ -146,7 +146,6 @@ class ErrorHandlingFunctionalTests extends functionaltestplugin.FunctionalTestCa
 
 	void testWithStaticGspContentInErrorPage() {
 	    // GRAILS-6650
-		if (notYetImplemented()) return
 		get('/home/renderError')
 
 		assertStatus 500
