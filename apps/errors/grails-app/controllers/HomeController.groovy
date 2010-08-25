@@ -7,4 +7,6 @@ class HomeController {
     }
 
 	def renderError = {}
+
+	def throwUoe = {}
 }
