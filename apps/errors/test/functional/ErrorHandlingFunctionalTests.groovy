@@ -146,10 +146,17 @@ class ErrorHandlingFunctionalTests extends functionaltestplugin.FunctionalTestCa
 
 	void testWithStaticGspContentInErrorPage() {
 	    // GRAILS-6650
-		get('/home/renderError')
+		if (notYetImplemented()) return
 
+	    // this one throws a NullPointerException which is mapped in UrlMappings
+		get '/home/renderError'
 		assertStatus 500
-		assertContentContains "Something went wrong on the server!"
-		assert byXPath('//h2[1]').textContent != "Hello world!"
+      assertContentContains 'Something went wrong on the server!'
+		assertContentDoesNotContain '<h2>Hello world!</h2>'
+
+		// this one throws an UnsupportedOperationException which is not mapped in UrlMappings
+		get '/home/throwUoe'
+		assertStatus 500
+		assertContentDoesNotContain '<h2>Hello World</h2>'
 	}
 }
