@@ -19,6 +19,7 @@ class ForwardFunctionalTests extends functionaltestplugin.FunctionalTestCase {
           assertContentDoesNotContain 'forward'
           assertContentDoesNotContain 'dummy'
           assertContentDoesNotContain 'test'		  
+          assertContentContains 'explicitParam'
 	 }
 }
 

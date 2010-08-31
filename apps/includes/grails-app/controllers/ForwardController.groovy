@@ -18,6 +18,6 @@ class ForwardController {
     }
 
     def forwardToOther = {
-        forward controller: 'other', action: 'forwarded'
+        forward controller: 'other', action: 'forwarded', params: [explicitParam: "1"]
     }
 }
