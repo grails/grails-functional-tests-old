@@ -123,7 +123,6 @@ class ErrorHandlingFunctionalTests extends functionaltestplugin.FunctionalTestCa
 	 * but the above bug means that an exception is thrown.
 	 */
 	void testForwardingErrorWithRenderView() {
-		if (notYetImplemented()) return
 		get('/home/renderView')
 
 		assertStatus 500
@@ -145,13 +144,13 @@ class ErrorHandlingFunctionalTests extends functionaltestplugin.FunctionalTestCa
 	}
 
 	void testWithStaticGspContentInErrorPage() {
-	    // GRAILS-6650
+	   	// GRAILS-6650
 		if (notYetImplemented()) return
 
-	    // this one throws a NullPointerException which is mapped in UrlMappings
+	   	// this one throws a NullPointerException which is mapped in UrlMappings
 		get '/home/renderError'
 		assertStatus 500
-        assertContentContains 'Something went wrong on the server!'
+   		assertContentContains 'Something went wrong on the server!'
 		assertContentDoesNotContain '<h2>Hello world!</h2>'
 
 		// this one throws an UnsupportedOperationException which is not mapped in UrlMappings
