@@ -13,7 +13,7 @@ class ContentNegotiationFunctionalTests extends functionaltestplugin.FunctionalT
 
     }
 
-	void testFileExtensionWithFormat() {
+    void testFileExtensionWithFormat() {
         get('/requestFormat/testWithFormat')
         assertStatus 200
         assertContentContains 'request format html'
@@ -21,5 +21,5 @@ class ContentNegotiationFunctionalTests extends functionaltestplugin.FunctionalT
         get('/requestFormat/testWithFormat.xml')
         assertStatus 200
         assertContentContains 'request format xml'		
-	}
+    }
 }
