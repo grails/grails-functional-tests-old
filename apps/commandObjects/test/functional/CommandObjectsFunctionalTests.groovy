@@ -1,4 +1,9 @@
 class CommandObjectsFunctionalTests extends functionaltestplugin.FunctionalTestCase {
+	void testCommandObjectsWorkBeforeUsage() {
+		get('/test/createCommand')
+        assertStatus 200
+        assertContentContains 'good'		
+	}
     void testCommandObjects() {
          get('/test/testCommand?name=fred&age=45')
          assertStatus 200
