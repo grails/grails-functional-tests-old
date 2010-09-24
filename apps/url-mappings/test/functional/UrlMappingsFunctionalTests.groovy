@@ -34,4 +34,10 @@ class UrlMappingsFunctionalTests extends functionaltestplugin.FunctionalTestCase
         assertContentContains 'foo.bar'
 		
 	}
+	
+	void testDynamicVariables() {
+		get('/dynamic/variable?id=test')
+		assertStatus 200		
+        assertContentContains 'variable = test'		
+	}
 }

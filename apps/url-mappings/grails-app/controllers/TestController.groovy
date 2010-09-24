@@ -9,4 +9,8 @@ class TestController {
 	def testExtension = {
 		render "${params.file}.${params.ext}"
 	}
+	
+	def dynaVariable = {
+		render "variable = ${params.id}"
+	}
 }
