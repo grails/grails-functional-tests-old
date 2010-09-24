@@ -40,4 +40,10 @@ class UrlMappingsFunctionalTests extends functionaltestplugin.FunctionalTestCase
 		assertStatus 200		
         assertContentContains 'variable = test'		
 	}
+	
+	void testDeclaredParams() {
+		get('/declared/params')
+		assertStatus 200		
+        assertContentContains 'params = foo'		
+	}	
 }

@@ -12,6 +12,12 @@ class UrlMappings {
 			action = "dynaVariable"
 			id = { params.id }
 	  }
+	
+	  "/declared/params" {
+			controller = "test"
+			action = "declaredParams"		
+			var = 'foo'; var2='bar'
+	  }
       "/"(view:"/index")
 	  "500"(view:'/error')
 	}

@@ -13,4 +13,8 @@ class TestController {
 	def dynaVariable = {
 		render "variable = ${params.id}"
 	}
+	
+	def declaredParams = {
+		render "params = ${params.var}"
+	}
 }
