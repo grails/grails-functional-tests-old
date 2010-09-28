@@ -15,6 +15,12 @@ class TestController {
 		render "name: ${cmd.name.value}, age:${cmd.age}, nested.value: ${cmd.nested.value}"
 	}
 	
+    def multi = {
+        ACommand a, BCommand b, CCommand c, DCommand d ->
+
+
+        [ a: a, b: b, c: c, d: d ]
+    }	
 }
 
 class TestCommand {
@@ -25,4 +31,36 @@ class TestCommand {
 
 class Nested {
     String value
+}
+
+class ACommand {
+    String name
+
+    static constraints = {
+        name nullable: false
+    }
+}
+
+class BCommand {
+    String query
+
+    static constraints = {
+        query nullable: false
+    }
+}
+
+class CCommand {
+    String name
+
+    static constraints = {
+        name nullable: false
+    }
+}
+
+class DCommand {
+    String query
+
+    static constraints = {
+        query nullable: false
+    }
 }

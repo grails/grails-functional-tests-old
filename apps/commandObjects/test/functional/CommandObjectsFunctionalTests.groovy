@@ -31,4 +31,22 @@ class CommandObjectsFunctionalTests extends functionaltestplugin.FunctionalTestC
 
 	}	
 	
+	void testCommandObjectWithMultipleBinding() {
+		get('/test/multi')
+		
+		form("commandForm") {
+			delegate.'a.name' = "aaa"
+			delegate.'b.query' = "bbb"			
+			delegate.'c.name' = "ccc"						
+			delegate.'d.query' = "ddd"						
+			click "save"
+		}		
+		
+        assertStatus 200
+        assertContentContains '<input type="text" name="a.name" value="aaa" id="a.name" />'		
+        assertContentContains '<input type="text" name="b.query" value="bbb" id="b.query" />'		
+        assertContentContains '<input type="text" name="c.name" value="ccc" id="c.name" />'		
+        assertContentContains '<input type="text" name="d.query" value="ddd" id="d.query" />'				
+	}
+	
 }
