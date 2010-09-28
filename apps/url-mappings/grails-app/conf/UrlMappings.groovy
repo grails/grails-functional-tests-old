@@ -18,6 +18,8 @@ class UrlMappings {
 			action = "declaredParams"		
 			var = 'foo'; var2='bar'
 	  }
+	  "/decode/$myparam?"(controller:"test", action:"decode")
+	
       "/"(view:"/index")
 	  "500"(view:'/error')
 	}

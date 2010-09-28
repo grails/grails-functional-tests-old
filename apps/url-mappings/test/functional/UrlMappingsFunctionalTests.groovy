@@ -46,4 +46,20 @@ class UrlMappingsFunctionalTests extends functionaltestplugin.FunctionalTestCase
 		assertStatus 200		
         assertContentContains 'params = foo'		
 	}	
+	
+	void testDecodeParameters() {
+		get('/decode/Hello+World')
+		assertStatus 200		
+        assertContentContains 'decoded = Hello World'		
+
+		get('/decode/Hello World')
+		assertStatus 200		
+        assertContentContains 'decoded = Hello World'		
+
+
+		get('/decode/Hello%20World')
+		assertStatus 200		
+        assertContentContains 'decoded = Hello World'		
+		
+	}
 }

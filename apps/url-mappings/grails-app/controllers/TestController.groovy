@@ -17,4 +17,8 @@ class TestController {
 	def declaredParams = {
 		render "params = ${params.var}"
 	}
+	
+	def decode = {
+		render "decoded = ${params.myparam}"
+	}
 }
