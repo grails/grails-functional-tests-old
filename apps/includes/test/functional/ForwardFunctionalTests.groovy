@@ -13,14 +13,12 @@ class ForwardFunctionalTests extends functionaltestplugin.FunctionalTestCase {
 	 }
 
 	 void testForwardToOtherController() {
-	     // GRAILS-6618
-		  get('/forward/forwardToOther?dummy=test')
-		  assertStatus 200
-		  assertContentContains 'OtherController page.gsp'
-		  assertContentDoesNotContain 'forward'
-		  assertContentDoesNotContain 'dummy'
-		  assertContentDoesNotContain 'test'
-		  assertContentContains 'explicitParam'
+          get('/forward/forwardToOther?dummy=test')
+          assertStatus 200
+          assertContentContains 'OtherController page.gsp'
+          assertContentContains 'dummy'
+          assertContentContains 'test'		  
+          assertContentContains 'explicitParam'
 	 }
 }
 
