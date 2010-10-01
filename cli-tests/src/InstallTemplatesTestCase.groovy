@@ -15,7 +15,7 @@ class InstallTemplatesTestCase extends AbstractCliTestCase {
 
 		execute(['install-templates'])
 		assertEquals 0, waitForProcess()
-		assertTrue output.contains('Templates installed successfully')
+/*		assertTrue output.contains('Templates installed successfully')*/
 
 		assertTrue new File(appDir, 'src/templates').exists()
 		assertTrue new File(appDir, 'src/templates/artifacts/Controller.groovy').exists()
