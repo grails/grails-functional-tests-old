@@ -34,6 +34,7 @@ def tests = [
              "CreateIntegrationTest",
              "Compile", 
              "War", 
+             "DevWar",
              "CreateController",
              "InstallTemplates", 
 /*             "ReInstallPlugin"*/
