@@ -1,16 +1,16 @@
 import java.util.zip.ZipFile
 
-class WarTestCase extends AbstractCliTestCase {
+class DevWarTestCase extends AbstractCliTestCase {
     protected void setUp() {
         workDir = new File(baseWorkDir, "app1")
     }
 
     void testNoArgs() {
-        execute([ "war" ])
+        execute([ "dev", "war" ])
 
         assertEquals 0, waitForProcess()
         verifyHeader()
-        assertTrue output.contains("Environment set to production")
+        assertTrue output.contains("Environment set to development")
         assertTrue output.contains("[gspc] Compiling")
         assertTrue((output =~ /\[mkdir\] Created dir: \S+\/stage/) as Boolean)
         
@@ -30,8 +30,6 @@ class WarTestCase extends AbstractCliTestCase {
 
         assertTrue "aspectjweaver-1.6.8.jar file is missing from the WAR",
                    warEntries.contains("WEB-INF/lib/aspectjweaver-1.6.8.jar")
-        assertTrue "hibernate-core-3.3.1.jar file is missing from the WAR",
-                   warEntries.contains("WEB-INF/lib/hibernate-core-3.3.1.GA.jar")
         assertTrue "log4j-1.2.15.jar file is missing from the WAR",
                    warEntries.contains("WEB-INF/lib/log4j-1.2.16.jar")
         assertTrue "grails-bootstrap-${grailsVersion}.jar file is missing from the WAR",
