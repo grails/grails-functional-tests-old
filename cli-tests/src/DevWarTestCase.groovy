@@ -1,8 +1,25 @@
 import java.util.zip.ZipFile
 
 class DevWarTestCase extends AbstractCliTestCase {
+    File eventsScript
+
     protected void setUp() {
         workDir = new File(baseWorkDir, "app1")
+
+        // We add an events script that prints out the value of the grails.env
+        // system property so that we can check it is set correctly.
+        eventsScript = new File(workDir, "scripts/_Events.groovy")
+        assert !eventsScript.exists()
+
+        eventsScript << '''
+                eventWarStart = {
+                    println "grails.env = ${System.getProperty("grails.env")}"
+                }
+                '''.stripIndent()
+    }
+
+    protected void tearDown() {
+        eventsScript.delete()
     }
 
     void testNoArgs() {
@@ -11,6 +28,7 @@ class DevWarTestCase extends AbstractCliTestCase {
         assertEquals 0, waitForProcess()
         verifyHeader()
         assertTrue output.contains("Environment set to development")
+        assertTrue output.contains("grails.env = development")
         assertTrue output.contains("[gspc] Compiling")
         assertTrue((output =~ /\[mkdir\] Created dir: \S+\/stage/) as Boolean)
         
