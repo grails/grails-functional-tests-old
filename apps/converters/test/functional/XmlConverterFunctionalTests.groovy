@@ -11,4 +11,11 @@ class XmlConverterFunctionalTests extends functionaltestplugin.FunctionalTestCas
         assertStatus 200
         assertContentDoesNotContain 'javassist'
     }
+    
+    void testRenderErrorsAsXML() {
+        // GRAILS-6791
+        get('/err')
+        assertStatus 200
+        assertContentContains 'Property [title] of class [class Book] cannot be null'
+    }
 }
