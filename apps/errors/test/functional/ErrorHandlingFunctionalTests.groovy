@@ -5,10 +5,16 @@ class ErrorHandlingFunctionalTests extends functionaltestplugin.FunctionalTestCa
         //
         get('/errors/standard')
         assertStatus 500
+
+        // Check that the view is rendered.
         assertContentContains 'Grails Runtime Exception'
         assertContentContains '<strong>Class:</strong> ErrorsController'
         assertContentContains '<strong>At Line:</strong> [4]'
 		assertContentContains 'throw new Exception(&quot;bad&quot;)'
+
+        // Check that the layout is applied.
+        assertNotNull byId('spinner')
+        assertNotNull byXPath("//div[@class='logo']")
     }
 
 	void testDeclarativeExceptionHandling() {

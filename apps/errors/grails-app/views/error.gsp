@@ -1,6 +1,7 @@
 <html>
   <head>
 	  <title>Grails Runtime Exception</title>
+          <meta name="layout" content="main">
 	  <style type="text/css">
 	  		.message {
 	  			border: 1px solid black;
