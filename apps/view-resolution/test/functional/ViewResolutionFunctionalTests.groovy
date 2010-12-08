@@ -51,4 +51,10 @@ class ViewResolutionFunctionalTests extends functionaltestplugin.FunctionalTestC
 		assertContentContains 'Plugin index template'
 	}
 
+    void testUrlMappingToAViewWhenMultipleViewResolversArePresent() {
+        // GRAILS-6221
+        get '/'
+        assertStatus 200
+        assertContentContains 'Congratulations, you have successfully started your first Grails application!'
+    }
 }
