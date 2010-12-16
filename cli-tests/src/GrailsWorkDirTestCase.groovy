@@ -25,7 +25,7 @@ class GrailsWorkDirTestCase extends AbstractCliTestCase {
             commandsToRun.each { cmd ->
                 execute([ cmd ])
 
-                assertEquals 0, waitForProcess()
+                assertEquals "command failed: ${cmd}", 0, waitForProcess()
 
                 assertTrue "app work dir should exist after ${cmd}", new File(grailsWorkDirPath, "projects/$applicationName").exists()
                 assertFalse "bad work dir should not exist after ${cmd}", new File(grailsWorkDirPath, "projects/$dirName").exists()
@@ -37,15 +37,11 @@ class GrailsWorkDirTestCase extends AbstractCliTestCase {
 
     void testWorkDirIsNotBasedOnCurrentDirectoryNameWhenCreatingNewApp() {
         def grailsWorkDirPath = System.getProperty('grails.work.dir')
-        new File(grailsWorkDirPath, "projects/.core").delete()
-
-        assertFalse new File(grailsWorkDirPath, "${workDir.name}").exists()
-        assertFalse new File(grailsWorkDirPath, ".core").exists()
 
         execute([ "create-app" ])
         enterInput 'anothernewapp'
 
-        assertEquals 0, waitForProcess()
+        assertEquals "create-app failed", 0, waitForProcess()
         assertFalse new File(grailsWorkDirPath, "projects/${workDir.name}").exists()
         assertTrue new File(grailsWorkDirPath, "projects/.core").exists()
     }
