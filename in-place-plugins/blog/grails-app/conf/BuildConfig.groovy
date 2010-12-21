@@ -1,17 +1,15 @@
-grails.plugin.location.blog = "../../in-place-plugins/blog"
-grails.plugin.location.'db-util' = "../../in-place-plugins/grails-db-util"
-grails.plugin.location.'resources-to-copy' = "../../in-place-plugins/resources-to-copy"
-
-grails.project.work.dir = "target/work"
+grails.project.class.dir = "target/classes"
+grails.project.test.class.dir = "target/test-classes"
+grails.project.test.reports.dir = "target/test-reports"
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
-    inherits( "global" ) {
+    inherits("global") {
         // uncomment to disable ehcache
         // excludes 'ehcache'
     }
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
-    repositories {        
+    repositories {
         grailsPlugins()
         grailsHome()
         grailsCentral()
@@ -30,5 +28,4 @@ grails.project.dependency.resolution = {
 
         // runtime 'mysql:mysql-connector-java:5.1.5'
     }
-
 }
