@@ -6,6 +6,6 @@ class PluginDomainFunctionalTests extends functionaltestplugin.FunctionalTestCas
     void testPostIndex() {
         get "/customPost/index" 
         assertStatus 200
-        assertContentStrict "Number of posts: 5" 
+        assertContentStrict "Number of posts: 3" 
     }
 }
