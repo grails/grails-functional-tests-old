@@ -1,6 +1,6 @@
 package org.example.test
 
-import org.grails.blog.Post
+import org.example.blog.Post
 
 /**
  * This controller tests that the above import works.
