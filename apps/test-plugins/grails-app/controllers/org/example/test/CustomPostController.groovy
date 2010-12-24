@@ -8,7 +8,7 @@ import org.example.blog.Post
 class CustomPostController {
     def index =  {
         def posts = Post.withCriteria {
-            eq "userId", 1
+            eq "userId", 1l
         }
 
         render "Number of posts: ${posts.size()}"
