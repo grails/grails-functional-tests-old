@@ -44,14 +44,14 @@ class ViewResolutionFunctionalTests extends functionaltestplugin.FunctionalTestC
         assertStatus 200
         assertContentContains 'simple = bar'
     }
-    */
+
 	void testNestedRelativeTemplate() {
         get('/pluginTest/testNestedRelativeTemplate')
         assertStatus 200
         assertContentContains 'Rendered template'
 		assertContentContains 'Plugin index template'
 	}
-
+    */
     void testUrlMappingToAViewWhenMultipleViewResolversArePresent() {
         // GRAILS-6221
         get '/'
