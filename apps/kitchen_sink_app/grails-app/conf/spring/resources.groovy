@@ -5,7 +5,4 @@ beans = {
     javaService(JavaService) { bean ->
         bean.autowire = true
     }
-    localeChangeInterceptor(org.springframework.web.servlet.i18n.LocaleChangeInterceptor) {
-		paramName = 'language22'
-	}
 }

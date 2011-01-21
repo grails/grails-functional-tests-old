@@ -14,7 +14,7 @@ class MainI18nFunctionalTests extends functionaltestplugin.FunctionalTestCase {
         assertStatus 200
         assertTitleContains "The main page"
 
-        get "/mainI18n?language22=fr"
+        get "/mainI18n?lang=fr"
         assertStatus 200
         assertTitleContains "La page principale"
     }
