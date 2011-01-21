@@ -1,3 +1,5 @@
+package fileupload
+
 import functionaltestplugin.FunctionalTestCase
 
 class FileUploadFunctionalTests extends FunctionalTestCase {

@@ -1,3 +1,5 @@
+package fileupload
+
 class TheDomain {
 
 	String thename

@@ -1,3 +1,5 @@
+package fileupload
+
 class UploadController {
 
     def index = {}
