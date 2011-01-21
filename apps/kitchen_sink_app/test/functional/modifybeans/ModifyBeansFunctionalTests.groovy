@@ -1,4 +1,6 @@
-class MainFunctionalTests extends functionaltestplugin.FunctionalTestCase {
+package modifybeans
+
+class ModifyBeansFunctionalTests extends functionaltestplugin.FunctionalTestCase {
     void testSwitchLanguages() {
         // Here call get(uri) or post(uri) to start the session
         // and then use the custom assertXXXX calls etc to check the response
@@ -6,10 +8,10 @@ class MainFunctionalTests extends functionaltestplugin.FunctionalTestCase {
         // get('/something')
         // assertStatus 200
         // assertContentContains 'the expected text'
-        get "/"
+        get "/modifyBeans"
         assertContentContains "Welcome to Grails"
 
-        get "/?language22=fr"
+        get "/modifyBeans?language22=fr"
         assertContentContains "Bienvenue à Rails"
     }
 }
