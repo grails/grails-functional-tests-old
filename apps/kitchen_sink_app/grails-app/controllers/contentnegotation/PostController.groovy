@@ -1,3 +1,5 @@
+package contentnegotation
+
 class PostController {
     def index = {
         def post = new Post(params['post'])

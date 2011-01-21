@@ -1,3 +1,5 @@
+package contentnegotation
+
 class RequestFormatController {
 
 	def testFormat = {

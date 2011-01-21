@@ -1,28 +1,31 @@
 class UrlMappings {
 
-	static mappings = {
-		"/$controller/$action?/$id?"{
-			constraints {
-				// apply constraints here
-			}
-		}
-  	  "/path/$file.$ext"(controller:"urlMappingsTest", action:"testExtension")
+    static mappings = {
+        "/$controller/$action?/$id?"{
+            constraints {
+                // apply constraints here
+            }
+        }
+        "/path/$file.$ext"(controller:"urlMappingsTest", action:"testExtension")
 
-  	  "/dynamic/variable" {
-  			controller = "urlMappingsTest"
-  			action = "dynaVariable"
-  			id = { params.id }
-  	  }
+        "/dynamic/variable" {
+            controller = "urlMappingsTest"
+            action = "dynaVariable"
+            id = { params.id }
+        }
 
-  	  "/declared/params" {
-  			controller = "urlMappingsTest"
-  			action = "declaredParams"		
-  			var = 'foo'; var2='bar'
-  	  }
-  	  "/decode/$myparam?"(controller:"urlMappingsTest", action:"decode")
+        "/declared/params" {
+            controller = "urlMappingsTest"
+            action = "declaredParams"		
+            var = 'foo'; var2='bar'
+        }
+        "/decode/$myparam?"(controller:"urlMappingsTest", action:"decode")
+        "/post"(controller: "post", action: "index") {
+            parseRequest = true
+        }
 
-		"/"(view:"/index")
-		"500"(view:'/error')
-		"404"(controller: 'i18nError', action: 'pageNotFound')
-	}
+        "/"(view:"/index")
+        "500"(view:'/error')
+        "404"(controller: 'i18nError', action: 'pageNotFound')
+    }
 }

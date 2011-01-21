@@ -1,3 +1,5 @@
+package contentnegotiation
+
 import groovy.xml.MarkupBuilder
 
 /**

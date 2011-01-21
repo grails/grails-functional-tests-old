@@ -1,3 +1,5 @@
+package contentnegotiation
+
 class ContentNegotiationFunctionalTests extends functionaltestplugin.FunctionalTestCase {
     void testFileExtensionContentNegotiation() {
         // Here call get(uri) or post(uri) to start the session

@@ -1,3 +1,5 @@
+package contentnegotation
+
 class Post {
     String message
     String author
