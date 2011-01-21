@@ -1,3 +1,5 @@
+package includes
+
 class IncludesFunctionalTests extends functionaltestplugin.FunctionalTestCase {
 
     void testIncludeWithParams() {

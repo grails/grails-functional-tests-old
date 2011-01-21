@@ -1,3 +1,5 @@
+package includes
+
 class ForwardFunctionalTests extends functionaltestplugin.FunctionalTestCase {
     void testForwardWithParams() {
         get('/simple/testForwardWithParams')

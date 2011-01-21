@@ -1,3 +1,5 @@
+package includes
+
 class OtherController {
 
     def forwarded = {

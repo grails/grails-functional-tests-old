@@ -1,3 +1,5 @@
+package includes
+
 class ForwardController {
 
     def forwardToAction = {

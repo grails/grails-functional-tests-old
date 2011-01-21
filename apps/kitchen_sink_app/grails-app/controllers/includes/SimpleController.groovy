@@ -1,3 +1,5 @@
+package includes
+
 class SimpleController {
 
 	def index = {}
