@@ -23,5 +23,6 @@ class UrlMappings {
 
 		"/"(view:"/index")
 		"500"(view:'/error')
+		"404"(controller: 'i18nError', action: 'pageNotFound')
 	}
 }

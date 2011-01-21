@@ -1,4 +1,6 @@
-class MainFunctionalTests extends functionaltestplugin.FunctionalTestCase {
+package i18n
+
+class MainI18nFunctionalTests extends functionaltestplugin.FunctionalTestCase {
     /**
      * Tests that localised text is loaded from properties files that
      * reside in a package structure, i.e. in sub-directories of
@@ -8,11 +10,11 @@ class MainFunctionalTests extends functionaltestplugin.FunctionalTestCase {
         // Here call get(uri) or post(uri) to start the session
         // and then use the custom assertXXXX calls etc to check the response
         //
-        get "/main"
+        get "/mainI18n"
         assertStatus 200
         assertTitleContains "The main page"
 
-        get "/main?lang=fr"
+        get "/mainI18n?language22=fr"
         assertStatus 200
         assertTitleContains "La page principale"
     }
