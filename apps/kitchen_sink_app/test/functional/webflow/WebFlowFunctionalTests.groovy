@@ -1,3 +1,5 @@
+package webflow
+
 class WebFlowFunctionalTests extends functionaltestplugin.FunctionalTestCase {
     void testFlowMethodDispatch() {
         get('/testFlow/my')

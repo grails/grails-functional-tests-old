@@ -1,3 +1,5 @@
+package webflow
+
 class TestFlowController {
 
     def myFlow = { 
@@ -16,7 +18,7 @@ class TestFlowController {
 		end()
 	}
 	
-	def testService
+	def webFlowTestService
 	def secondFlow = {
 		first {
 			on("go").to "next"
@@ -24,7 +26,7 @@ class TestFlowController {
 		
 		next {
 			action {
-				def next = testService.getNextStep()
+				def next = webFlowTestService.getNextStep()
 				"$next"()
 			}
 			on("one").to "end"
