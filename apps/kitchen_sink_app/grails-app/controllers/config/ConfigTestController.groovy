@@ -1,6 +1,8 @@
+package config
+
 import org.codehaus.groovy.grails.commons.*
 
-class TestController {
+class ConfigTestController {
 
     def read = {
 		def one = grailsApplication.config.test.value1
