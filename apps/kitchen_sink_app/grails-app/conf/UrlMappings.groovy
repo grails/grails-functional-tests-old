@@ -6,6 +6,20 @@ class UrlMappings {
 				// apply constraints here
 			}
 		}
+  	  "/path/$file.$ext"(controller:"urlMappingsTest", action:"testExtension")
+
+  	  "/dynamic/variable" {
+  			controller = "urlMappingsTest"
+  			action = "dynaVariable"
+  			id = { params.id }
+  	  }
+
+  	  "/declared/params" {
+  			controller = "urlMappingsTest"
+  			action = "declaredParams"		
+  			var = 'foo'; var2='bar'
+  	  }
+  	  "/decode/$myparam?"(controller:"urlMappingsTest", action:"decode")
 
 		"/"(view:"/index")
 		"500"(view:'/error')

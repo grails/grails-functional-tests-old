@@ -1,4 +1,6 @@
-class TestController {
+package urlmappings
+
+class UrlMappingsTestController {
 
     def index = { 
 		render "working"
