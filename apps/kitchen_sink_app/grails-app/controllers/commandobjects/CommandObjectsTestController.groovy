@@ -1,4 +1,6 @@
-class TestController {
+package commandobjects
+
+class CommandObjectsTestController {
 
     def index = { }
 
