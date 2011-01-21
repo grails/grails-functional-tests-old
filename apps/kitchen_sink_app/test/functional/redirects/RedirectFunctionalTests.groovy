@@ -1,3 +1,5 @@
+package redirects
+
 class RedirectFunctionalTests extends functionaltestplugin.FunctionalTestCase {
     void testRedirectWithParams() {
         get('/redirect/form')

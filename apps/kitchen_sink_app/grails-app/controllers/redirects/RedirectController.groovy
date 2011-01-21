@@ -1,3 +1,5 @@
+package redirects
+
 class RedirectController {
 
 	def form = {
