@@ -155,9 +155,9 @@
                            ant.copy(todir:"reports/${properties.projectName}") {
                                fileset(dir:"${properties.checkoutDir}/${properties.projectName}/target/test-reports")
                            }
-/*
+
                            // Run the WAR tests.
-                           ant.grails(command:"functional-tests", environment:"dev", projectName:properties.projectName, resultID:grailsInvocationCounter++)
+                           ant.grails(command:"test-app", args: "-war functional: --dev-mode", environment:"dev", projectName:properties.projectName, resultID:grailsInvocationCounter++)
                            outcomes << "Functional tests in application ${properties.projectName}: " +
                                        ((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
 
@@ -170,7 +170,7 @@
                            ant.copy(todir:"reports/${properties.projectName}_war") {
                                fileset(dir:"${properties.checkoutDir}/${properties.projectName}/target/test-reports")
                            }
-*/
+
                        }
                        else {
                            // Install the WebTest plugin.
