@@ -1,3 +1,5 @@
+package layouts
+
 class LayoutController {
 
     def pluginView = { }
