@@ -1,4 +1,6 @@
-class DemoController {
+package filters
+
+class FilterDemoController {
     
     def index = {
         forward action: 'doit'
