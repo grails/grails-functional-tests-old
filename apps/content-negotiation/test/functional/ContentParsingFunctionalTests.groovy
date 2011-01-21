@@ -27,7 +27,7 @@ class ContentParsingFunctionalTests extends functionaltestplugin.FunctionalTestC
         post '/post', {
             headers.'Content-Type' = 'application/json'
             body {
-                new Post(message: 'JSON post!', author: 'Graeme Rocher') as grails.converters.JSON
+                '{"class":"Post","author":"Graeme Rocher","message":"JSON post!"}'
             }
         }
         assertStatus 200
