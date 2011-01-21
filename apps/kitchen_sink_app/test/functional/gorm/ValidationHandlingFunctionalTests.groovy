@@ -1,3 +1,5 @@
+package gorm
+
 class ValidationHandlingFunctionalTests extends functionaltestplugin.FunctionalTestCase {
     void testBindingErrorHandling() {
         get('/test/create')

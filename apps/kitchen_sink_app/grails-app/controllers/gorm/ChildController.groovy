@@ -1,3 +1,5 @@
+package gorm
+
 class ChildController {
 
 	def testLazyLoadInLayout = {
