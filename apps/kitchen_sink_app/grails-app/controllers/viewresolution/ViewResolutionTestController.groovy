@@ -1,11 +1,13 @@
-class TestController {
+package viewresolution
+
+class ViewResolutionTestController {
 
     def testRelativeView = { 
 		render view:"simple", model:[foo:"bar"]
 	}
 
     def testAbsoluteView = { 
-		render view:"/test/absolute", model:[foo:"bar"]
+		render view:"/viewResolutionTest/absolute", model:[foo:"bar"]
 	}
 
     def testDefaultView = { 

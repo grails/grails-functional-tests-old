@@ -1,19 +1,21 @@
+package viewresolution
+
 class ViewResolutionFunctionalTests extends functionaltestplugin.FunctionalTestCase {
     void testRelativeView() {
-        get('/test/testRelativeView')
+        get('/viewResolutionTest/testRelativeView')
         assertStatus 200
         assertContentContains 'simple = bar'
     }
 
     void testAbsoluteView() {
-        get('/test/testAbsoluteView')
+        get('/viewResolutionTest/testAbsoluteView')
         assertStatus 200
         assertContentContains 'absolute = bar'
     }
 
 
     void testDefaultView() {
-        get('/test/testDefaultView')
+        get('/viewResolutionTest/testDefaultView')
         assertStatus 200
         assertContentContains 'default = bar'
     }
