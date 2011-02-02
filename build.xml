@@ -157,7 +157,7 @@
                            }
 
                            // Run the WAR tests.
-                           ant.grails(command:"test-app", args: "-war functional: --dev-mode", environment:"dev", projectName:properties.projectName, resultID:grailsInvocationCounter++)
+                           ant.grails(command:"test-app", args: "-war functional: --dev-mode", environment:"test", projectName:properties.projectName, resultID:grailsInvocationCounter++)
                            outcomes << "Functional tests in application ${properties.projectName}: " +
                                        ((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
 
@@ -181,7 +181,7 @@
                            }
 
                            // Run the tests.
-                           ant.grails(command:"test-app", args: "functional:webtest", environment:"dev", projectName:properties.projectName, resultID:grailsInvocationCounter++)
+                           ant.grails(command:"test-app", args: "functional:webtest", environment:"test", projectName:properties.projectName, resultID:grailsInvocationCounter++)
                            outcomes << "Functional tests in application ${properties.projectName}: " +
                                         ((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
 
