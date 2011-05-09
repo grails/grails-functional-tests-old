@@ -17,7 +17,9 @@ class ConvertersSearchController {
         }
       }
     }
-    render XML.use("deep") {render results as XML}
+    render( XML.use("deep") {
+		render results as XML
+	})
   }
 
     def notCached = {
@@ -28,6 +30,8 @@ class ConvertersSearchController {
       
       setCacheable(false)
     }
-    render XML.use("deep") {render results as XML}
+    render( XML.use("deep") {
+		render results as XML
+		} )
   }
 }
