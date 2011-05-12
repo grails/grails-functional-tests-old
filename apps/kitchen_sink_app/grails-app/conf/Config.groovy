@@ -50,18 +50,6 @@ grails.logging.jul.usebridge = true
 grails.spring.bean.packages = []
 
 // set per-environment serverURL stem for creating absolute links
-environments {
-    production {
-        grails.serverURL = "http://www.changeme.com"
-    }
-    development {
-        grails.serverURL = "http://www.changeme.com"
-    }
-    test {
-        grails.serverURL = "http://www.changeme.com"
-    }
-
-}
 
 // log4j configuration
 log4j = {
