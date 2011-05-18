@@ -17,11 +17,14 @@ class PluginLayoutsFunctionalTests extends functionaltestplugin.FunctionalTestCa
     void testPluginLayoutFoundByPluginView() {
         // Here call get(uri) or post(uri) to start the session
         // and then use the custom assertXXXX calls etc to check the response
-        //
-        get('/dbUtil/data')
-        assertStatus 200
-		// test some content from the layout
-        assertContentContains '<a href="/kitchen_sink_app/dbUtil/data">Display Data</a>'
+        get('/layout/warDeployed')
+
+		if(response.contentAsString == 'true') {
+	        get('/dbUtil/data')
+	        assertStatus 200
+			// test some content from the layout
+	        assertContentContains '<a href="/kitchen_sink_app/dbUtil/data">Display Data</a>'			
+		}
     }
 
 	void testPluginLayoutFoundByApplicationView() {

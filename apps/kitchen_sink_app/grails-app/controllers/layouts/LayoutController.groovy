@@ -9,4 +9,8 @@ class LayoutController {
 	def testApplyLayoutPluginView = {}
 	
 	def testTwoLevelLayout = {}
+	
+	def warDeployed = {
+		render "${grailsApplication.warDeployed}"
+	}
 }
