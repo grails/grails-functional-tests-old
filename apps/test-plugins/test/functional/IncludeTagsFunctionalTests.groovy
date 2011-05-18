@@ -12,11 +12,11 @@ class IncludeTagsFunctionalTests extends functionaltestplugin.FunctionalTestCase
     void testWithPluginView() {
         get "/dbUtil/data" 
         assertStatus 200
-        assertContentContains '<link rel="stylesheet" href="/test-plugins/plugins/db-util-0.3/css/dbUtil.css"/>' 
-        assertContentContains '<link rel="stylesheet" href="/test-plugins/plugins/db-util-0.3/css/standard.css"/>' 
-        assertContentContains '<link rel="stylesheet" href="/test-plugins/plugins/db-util-0.3/css/oldstyle.css"/>' 
-        assertContentContains '<script src="/test-plugins/plugins/db-util-0.3/js/dojo.js"type="text/javascript" ></script>'
-        assertContentContains '<script src="/test-plugins/plugins/db-util-0.3/js/application.js"type="text/javascript" ></script>'
+        assertPath '//link[@rel="stylesheet" and @href="/test-plugins/plugins/db-util-0.3/css/dbUtil.css"]' 
+        assertPath '//link[@rel="stylesheet" and @href="/test-plugins/plugins/db-util-0.3/css/standard.css"]' 
+        assertPath '//link[@rel="stylesheet" and @href="/test-plugins/plugins/db-util-0.3/css/oldstyle.css"]' 
+        assertPath '//script[@src="/test-plugins/plugins/db-util-0.3/js/dojo.js"and @type="text/javascript"]'
+        assertPath '//script[@src="/test-plugins/plugins/db-util-0.3/js/application.js" and @type="text/javascript"]'
         assertEquals "/plugins/db-util-0.3", byId("pluginContext").textContent
     }
 
@@ -28,11 +28,11 @@ class IncludeTagsFunctionalTests extends functionaltestplugin.FunctionalTestCase
     void testWithOverriddenView() {
         get "/dbUtil/sql" 
         assertStatus 200
-        assertContentContains '<link rel="stylesheet" href="/test-plugins/css/main.css"/>'
-        assertContentContains '<link rel="stylesheet" href="/test-plugins/css/other.css" />'
-        assertContentContains '<script src="/test-plugins/js/app-layout.js" type="text/javascript"></script>'
-        assertContentContains '<script src="/test-plugins/js/app.js" type="text/javascript"></script>'
-        assertContentContains '<script src="/test-plugins/js/application.js" type="text/javascript"></script>'
+        assertPath '//link[@rel="stylesheet" and @href="/test-plugins/css/main.css"]'
+        assertPath '//link[@rel="stylesheet" and @href="/test-plugins/css/other.css"]'
+        assertPath '//script[@src="/test-plugins/js/app-layout.js" and @type="text/javascript"]'
+        assertPath '//script[@src="/test-plugins/js/app.js" and @type="text/javascript"]'
+        assertPath '//script[@src="/test-plugins/js/application.js" and @type="text/javascript"]'
     }
 
     /**
@@ -44,13 +44,13 @@ class IncludeTagsFunctionalTests extends functionaltestplugin.FunctionalTestCase
     void testWithPluginViewInApplicationLayout() {
         get "/dbUtil/info" 
         assertStatus 200
-        assertContentContains '<link rel="stylesheet" href="/test-plugins/css/main.css"/>'
-        assertContentContains '<link rel="stylesheet" href="/test-plugins/plugins/db-util-0.3/css/other.css" />'
-        assertContentContains '<link rel="stylesheet" href="/test-plugins/plugins/db-util-0.3/css/other-2.css" />'
-        assertContentContains '<link rel="stylesheet" href="/test-plugins/plugins/db-util-0.3/css/other-3.css" />'
-        assertContentContains '<script src="/test-plugins/js/app-layout.js" type="text/javascript"></script>'
-        assertContentContains '<script src="/test-plugins/js/application.js" type="text/javascript"></script>'
-        assertContentContains '<script src="/test-plugins/plugins/db-util-0.3/js/plugin-info.js" type="text/javascript"></script>'
+        assertPath '//link[@rel="stylesheet" and @href="/test-plugins/css/main.css"]'
+        assertPath '//link[@rel="stylesheet" and @href="/test-plugins/plugins/db-util-0.3/css/other.css"]'
+        assertPath '//link[@rel="stylesheet" and @href="/test-plugins/plugins/db-util-0.3/css/other-2.css"]'
+        assertPath '//link[@rel="stylesheet" and @href="/test-plugins/plugins/db-util-0.3/css/other-3.css"]'
+        assertPath '//script[@src="/test-plugins/js/app-layout.js" and @type="text/javascript"]'
+        assertPath '//script[@src="/test-plugins/js/application.js" and @type="text/javascript"]'
+        assertPath '//script[@src="/test-plugins/plugins/db-util-0.3/js/plugin-info.js" and @type="text/javascript"]'
     }
 
     /**
@@ -62,11 +62,16 @@ class IncludeTagsFunctionalTests extends functionaltestplugin.FunctionalTestCase
     void testWithOverriddenViewInPluginLayout() {
         get "/dbUtil/testWithPluginLayout" 
         assertStatus 200
-        assertContentContains '<link rel="stylesheet" href="/test-plugins/plugins/db-util-0.3/css/dbUtil.css"/>' 
-        assertContentContains '<link rel="stylesheet" href="/test-plugins/plugins/db-util-0.3/css/standard.css"/>' 
-        assertContentContains '<link rel="stylesheet" href="/test-plugins/plugins/db-util-0.3/css/oldstyle.css"/>' 
-        assertContentContains '<link rel="stylesheet" href="/test-plugins/css/other.css" />'
-        assertContentContains '<script src="/test-plugins/js/prototype/prototype.js" type="text/javascript"></script>'
-        assertContentContains '<script src="/test-plugins/plugins/db-util-0.3/js/application.js" type="text/javascript"></script>'
+        assertPath '//link[@rel="stylesheet" and @href="/test-plugins/plugins/db-util-0.3/css/dbUtil.css"]'
+        assertPath '//link[@rel="stylesheet" and @href="/test-plugins/plugins/db-util-0.3/css/standard.css"]'
+        assertPath '//link[@rel="stylesheet" and @href="/test-plugins/plugins/db-util-0.3/css/oldstyle.css"]'
+        assertPath '//link[@rel="stylesheet" and @href="/test-plugins/css/other.css"]'
+        assertPath '//script[@src="/test-plugins/js/prototype/prototype.js" and @type="text/javascript"]'
+        assertPath '//script[@src="/test-plugins/plugins/db-util-0.3/js/application.js" and @type="text/javascript"]'
+        assertPath '//script[@type="text/javascript" and @src="/test-plugins/plugins/db-util-0.3/js/application.js"]'
+    }
+    
+    private assertPath(xpath) {
+        assertNotNull byXPath(xpath)
     }
 }
