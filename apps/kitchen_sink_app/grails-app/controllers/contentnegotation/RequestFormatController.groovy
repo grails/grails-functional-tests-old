@@ -3,7 +3,7 @@ package contentnegotation
 class RequestFormatController {
 
 	def testFormat = {
-		render "request format = ${request.format}"
+		render "response format = ${response.format}"
 	}
 
 	def testWithFormat = {
