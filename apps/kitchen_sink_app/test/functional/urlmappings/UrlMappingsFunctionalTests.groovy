@@ -26,8 +26,8 @@ class UrlMappingsFunctionalTests extends functionaltestplugin.FunctionalTestCase
 	void testAbsoluteLinks() {
 		get('/urlMappingsTest/testAbsolutePaths')
 		assertStatus 200
-        assertContentContains 'image = http://localhost:8080/kitchen_sink_app/images/foo.jpg'
-        assertContentContains 'link = http://localhost:8080/kitchen_sink_app/test/index'        
+        assertContentContains "image = ${baseURL}images/foo.jpg"
+        assertContentContains "link = ${baseURL}test/index"        
 	}
 	
 	void testFileExtensions() {
