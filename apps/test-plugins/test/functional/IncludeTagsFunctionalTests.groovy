@@ -15,8 +15,8 @@ class IncludeTagsFunctionalTests extends functionaltestplugin.FunctionalTestCase
         assertContentContains '<link rel="stylesheet" href="/test-plugins/plugins/db-util-0.3/css/dbUtil.css"/>' 
         assertContentContains '<link rel="stylesheet" href="/test-plugins/plugins/db-util-0.3/css/standard.css"/>' 
         assertContentContains '<link rel="stylesheet" href="/test-plugins/plugins/db-util-0.3/css/oldstyle.css"/>' 
-        assertContentContains '<script type="text/javascript" src="/test-plugins/plugins/db-util-0.3/js/dojo.js"></script>'
-        assertContentContains '<script type="text/javascript" src="/test-plugins/plugins/db-util-0.3/js/application.js"></script>'
+        assertContentContains '<script src="/test-plugins/plugins/db-util-0.3/js/dojo.js"type="text/javascript" ></script>'
+        assertContentContains '<script src="/test-plugins/plugins/db-util-0.3/js/application.js"type="text/javascript" ></script>'
         assertEquals "/plugins/db-util-0.3", byId("pluginContext").textContent
     }
 
@@ -30,9 +30,9 @@ class IncludeTagsFunctionalTests extends functionaltestplugin.FunctionalTestCase
         assertStatus 200
         assertContentContains '<link rel="stylesheet" href="/test-plugins/css/main.css"/>'
         assertContentContains '<link rel="stylesheet" href="/test-plugins/css/other.css" />'
-        assertContentContains '<script type="text/javascript" src="/test-plugins/js/app-layout.js"></script>'
-        assertContentContains '<script type="text/javascript" src="/test-plugins/js/app.js"></script>'
-        assertContentContains '<script type="text/javascript" src="/test-plugins/js/application.js"></script>'
+        assertContentContains '<script src="/test-plugins/js/app-layout.js" type="text/javascript"></script>'
+        assertContentContains '<script src="/test-plugins/js/app.js" type="text/javascript"></script>'
+        assertContentContains '<script src="/test-plugins/js/application.js" type="text/javascript"></script>'
     }
 
     /**
@@ -48,9 +48,9 @@ class IncludeTagsFunctionalTests extends functionaltestplugin.FunctionalTestCase
         assertContentContains '<link rel="stylesheet" href="/test-plugins/plugins/db-util-0.3/css/other.css" />'
         assertContentContains '<link rel="stylesheet" href="/test-plugins/plugins/db-util-0.3/css/other-2.css" />'
         assertContentContains '<link rel="stylesheet" href="/test-plugins/plugins/db-util-0.3/css/other-3.css" />'
-        assertContentContains '<script type="text/javascript" src="/test-plugins/js/app-layout.js"></script>'
-        assertContentContains '<script type="text/javascript" src="/test-plugins/js/application.js"></script>'
-        assertContentContains '<script type="text/javascript" src="/test-plugins/plugins/db-util-0.3/js/plugin-info.js"></script>'
+        assertContentContains '<script src="/test-plugins/js/app-layout.js" type="text/javascript"></script>'
+        assertContentContains '<script src="/test-plugins/js/application.js" type="text/javascript"></script>'
+        assertContentContains '<script src="/test-plugins/plugins/db-util-0.3/js/plugin-info.js" type="text/javascript"></script>'
     }
 
     /**
@@ -66,7 +66,7 @@ class IncludeTagsFunctionalTests extends functionaltestplugin.FunctionalTestCase
         assertContentContains '<link rel="stylesheet" href="/test-plugins/plugins/db-util-0.3/css/standard.css"/>' 
         assertContentContains '<link rel="stylesheet" href="/test-plugins/plugins/db-util-0.3/css/oldstyle.css"/>' 
         assertContentContains '<link rel="stylesheet" href="/test-plugins/css/other.css" />'
-        assertContentContains '<script type="text/javascript" src="/test-plugins/js/prototype/prototype.js"></script>'
-        assertContentContains '<script type="text/javascript" src="/test-plugins/plugins/db-util-0.3/js/application.js"></script>'
+        assertContentContains '<script src="/test-plugins/js/prototype/prototype.js" type="text/javascript"></script>'
+        assertContentContains '<script src="/test-plugins/plugins/db-util-0.3/js/application.js" type="text/javascript"></script>'
     }
 }
