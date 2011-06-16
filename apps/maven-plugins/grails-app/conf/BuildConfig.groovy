@@ -23,7 +23,7 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.jboss.com/maven2/"
     }
 	plugins {
-		compile ':hibernate:1.3.3.BUILD-SNAPSHOT'
+		compile ':hibernate:1.4.0.BUILD-SNAPSHOT'
 		runtime ':jetty:1.2-SNAPSHOT'		
 		test ":functional-test:1.3-SNAPSHOT"
 	}
