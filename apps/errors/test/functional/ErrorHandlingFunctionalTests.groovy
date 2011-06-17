@@ -39,8 +39,7 @@ class ErrorHandlingFunctionalTests extends functionaltestplugin.FunctionalTestCa
         assertContentContains 'Grails Runtime Exception'
         assertContentContains '<strong>Class:</strong> MyTagLib'
         assertContentContains '<strong>Exception Message:</strong> No such property: fooo for class: MyTagLib'
-        assertContentContains '<strong>At Line:</strong> [6]'
-        assertContentContains 'out &lt;&lt; &quot;some foo ${fooo}&quot;'
+        assertContentContains '<strong>At Line:</strong>'
     }
 
     void testErrorFromTagExpression() {
