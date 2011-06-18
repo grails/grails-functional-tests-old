@@ -1,22 +1,22 @@
 class TestingTestCase extends AbstractCliTestCase {
 
-	def appSource = new File(cliTestsDir, "testing-app")
-	def app = new File(baseWorkDir, "testing-app")
-	
-	TestingTestCase() {
+	private appSource = new File(cliTestsDir, "testing-app")
+	private app = new File(baseWorkDir, "testing-app")
+
+	protected void setUp() {
+		super.setUp()
 		copyDir(appSource, app)
 		workDir = app
 		execute(["upgrade", "-force"])
 		assertEquals("upgrade failed", 0, waitForProcess())
 	}
-	
+
 	void testRunAllTestsThatShouldPass() {
 		execute([ "test-app" ])
 		assertEquals 0, waitForProcess()
-		println output
 	}
 
-	def copyDir(source, destination) {
+	private void copyDir(source, destination) {
 		if (source.directory) {
 			if (!destination.exists()) {
 				assert destination.mkdir() : "making $destination"
@@ -28,3 +28,4 @@ class TestingTestCase extends AbstractCliTestCase {
 		}
 	}
 }
+

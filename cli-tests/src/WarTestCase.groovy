@@ -11,8 +11,7 @@ class WarTestCase extends AbstractCliTestCase {
         assertEquals 0, waitForProcess()
         verifyHeader()
         assertTrue output.contains("Environment set to production")
-        assertTrue output.contains("[gspc] Compiling")
-        assertTrue((output =~ /\[mkdir\] Created dir: \S+\/stage/) as Boolean)
+        assertTrue output.contains("Compiling 3 GSP files for package [app1]")
         
         // Check that the WAR file exists.
         def warFile = new File(workDir, "target/app1-0.1.war")

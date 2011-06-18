@@ -174,6 +174,7 @@ abstract class AbstractCliTestCase extends GroovyTestCase {
     protected final void verifyHeader() {
         assertEquals """Welcome to Grails ${grailsVersion} - http://grails.org/
 Licensed under Apache Standard License 2.0
-Grails home is set to: ${grailsHome}""", output.split("\n")[0..2].join("\n")
+Grails home is set to: ${grailsHome}""", output.trim().split("\n")[1..3]*.trim().join("\n")
     }
 }
+

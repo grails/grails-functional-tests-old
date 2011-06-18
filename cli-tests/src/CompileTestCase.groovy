@@ -8,7 +8,7 @@ class CompileTestCase extends AbstractCliTestCase {
 
         assertEquals 0, waitForProcess()
         verifyHeader()
-        assertTrue output.contains("[groovyc] Compiling")
+        assertTrue output.contains("Compiling")
     }
 }
 
