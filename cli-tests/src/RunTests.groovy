@@ -36,7 +36,7 @@ def tests = [
              "War", 
              "DevWar",
              "CreateController",
-             "InstallTemplates", 
+//             "InstallTemplates", 
              "GrailsWorkDir"
 /*             "ReInstallPlugin"*/
              ]
@@ -55,8 +55,7 @@ System.exit(exitCode)
  */
 private runTest(String testScript) {
     println "Running test '$testScript'"
-    def shell = new GroovyShell()
-    def retval = shell.run(new File(cliTestPath, "src/${testScript}TestCase.groovy"), [])
+    def retval = new GroovyShell().run(new File(cliTestPath, "src/${testScript}TestCase.groovy"), [])
 
     // GroovyTestCase appears to return a TestResult after execution.
     // We're not really interested in that and just want a 0 for a
@@ -66,3 +65,4 @@ private runTest(String testScript) {
     }
     return retval
 }
+
