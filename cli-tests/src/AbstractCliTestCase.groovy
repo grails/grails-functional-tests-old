@@ -29,6 +29,8 @@ abstract class AbstractCliTestCase extends GroovyTestCase {
     private Process process
     private boolean streamsProcessed
 
+    long timeout = 2 * 60 * 1000 // min * sec/min * ms/sec
+
     /**
      * Executes a Grails command. The path to the Grails script is
      * inserted at the front, so the first element of <tt>command</tt>
@@ -123,8 +125,42 @@ abstract class AbstractCliTestCase extends GroovyTestCase {
      * debugging.
      */
     int waitForProcess() {
+        // Interrupt the main thread if we hit the timeout.
+        final monitor = "monitor"
+        final mainThread = Thread.currentThread()
+        final timeout = this.timeout
+        final timeoutThread = Thread.startDaemon {
+            try {
+                Thread.sleep(timeout)
+
+                // Timed out. Interrupt the main thread.
+                mainThread.interrupt()
+            }
+            catch (InterruptedException ex) {
+                // We're expecting this interruption.
+            }
+        }
+
         // First wait for the process to finish.
-        int code = process.waitFor()
+        int code
+        try {
+            code = process.waitFor()
+
+            // Process completed normally, so kill the timeout thread.
+            timeoutThread.interrupt()
+        }
+        catch (InterruptedException ex) {
+            code = 111
+
+            // The process won't finish, so we shouldn't wait for the
+            // output stream to be processed.
+            lock.lock()
+            streamsProcessed = true
+            lock.unlock()
+
+            // Now kill the process since it appears to be stuck.
+            process.destroy()
+        }
 
         // Now wait for the stream reader threads to finish.
         lock.lock()
