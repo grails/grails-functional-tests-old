@@ -204,13 +204,10 @@ abstract class AbstractCliTestCase extends GroovyTestCase {
 
     /**
      * Checks that the output of the current command starts with the
-     * expected header, which includes the Grails version and the
-     * location of GRAILS_HOME.
+     * expected header, which includes the Grails version.
      */
-    protected final void verifyHeader() {
-        assertEquals """Welcome to Grails ${grailsVersion} - http://grails.org/
-Licensed under Apache Standard License 2.0
-Grails home is set to: ${grailsHome}""", output.trim().split("\n")[1..3]*.trim().join("\n")
+    protected void verifyHeader() {
+        assertEquals "Loading Grails  ${grailsVersion}", output.trim().split("\n")[0].trim()
     }
 }
 
