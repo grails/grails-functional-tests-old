@@ -207,7 +207,7 @@ abstract class AbstractCliTestCase extends GroovyTestCase {
      * expected header, which includes the Grails version.
      */
     protected void verifyHeader() {
-        assertEquals "Loading Grails ${grailsVersion}", output.trim().split("\n")[0].trim()
+        assertEquals "| Loading Grails ${grailsVersion}", output.trim().split("\n")[0].trim()
     }
 }
 
