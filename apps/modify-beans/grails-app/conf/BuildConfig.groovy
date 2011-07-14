@@ -10,11 +10,13 @@ grails.project.dependency.resolution = {
         // uncomment to disable ehcache
         // excludes 'ehcache'
     }
+    cacheDir "target/ivy-cache"
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     repositories {
         grailsPlugins()
         grailsHome()
         grailsCentral()
+        mavenCentral()
 
         // uncomment the below to enable remote dependency resolution
         // from public Maven repositories
