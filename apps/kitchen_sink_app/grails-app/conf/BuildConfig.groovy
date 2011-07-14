@@ -13,6 +13,7 @@ grails.project.dependency.resolution = {
         // excludes 'ehcache'
     }
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    cacheDir "target/ivy-cache"
     repositories {
         grailsPlugins()
         grailsHome()
@@ -28,7 +29,7 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.jboss.com/maven2/"
     }
     plugins {
-		runtime ":webflow:1.4.0.BUILD-SNAPSHOT"
+		runtime ":webflow:2.0.0.BUILD-SNAPSHOT"
 	}
     
     dependencies {
