@@ -22,7 +22,15 @@ class CommandObjectsTestController {
 
 
         [ a: a, b: b, c: c, d: d ]
-    }	
+    }
+    
+    def closureActionWithCommandObjectDefinedUnderSrcGroovy = { CommandObjectClassDefinedUnderSrcGroovy cmd ->
+        render "name: ${cmd.name}, has errors?: ${cmd.hasErrors()}"
+    }   
+    
+    def methodActionWithCommandObjectDefinedUnderSrcGroovy(CommandObjectClassDefinedUnderSrcGroovy cmd) {
+        render "name: ${cmd.name}, has errors?: ${cmd.hasErrors()}"
+    }   
 }
 
 class TestCommand {

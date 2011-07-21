@@ -1,6 +1,24 @@
 package commandobjects
 
 class CommandObjectsFunctionalTests extends functionaltestplugin.FunctionalTestCase {
+    void testCommandObjectDefinedUnderSrcGroovy() {
+        get '/commandObjectsTest/closureActionWithCommandObjectDefinedUnderSrcGroovy/?name=Hank'
+        assertStatus 200
+        assertContentContains 'name: Hank, has errors?: false'
+        
+        get '/commandObjectsTest/closureActionWithCommandObjectDefinedUnderSrcGroovy/?name=2112'
+        assertStatus 200
+        assertContentContains 'name: 2112, has errors?: true'
+        
+        get '/commandObjectsTest/methodActionWithCommandObjectDefinedUnderSrcGroovy/?name=Hank'
+        assertStatus 200
+        assertContentContains 'name: Hank, has errors?: false'
+        
+        get '/commandObjectsTest/methodActionWithCommandObjectDefinedUnderSrcGroovy/?name=2112'
+        assertStatus 200
+        assertContentContains 'name: 2112, has errors?: true'
+    }
+    
 	void testCommandObjectsWorkBeforeUsage() {
 		get('/commandObjectsTest/createCommand')
         assertStatus 200
