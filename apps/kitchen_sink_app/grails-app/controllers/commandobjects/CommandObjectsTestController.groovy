@@ -31,6 +31,14 @@ class CommandObjectsTestController {
     def methodActionWithCommandObjectDefinedUnderSrcGroovy(CommandObjectClassDefinedUnderSrcGroovy cmd) {
         render "name: ${cmd.name}, has errors?: ${cmd.hasErrors()}"
     }   
+    
+    def closureActionWithDomainClassAsCommandObject = { Gadget cmd ->
+        render "name: ${cmd.name}, has errors?: ${cmd.hasErrors()}"
+    }   
+    
+    def methodActionWithDomainClassAsCommandObject(Gadget cmd) {
+        render "name: ${cmd.name}, has errors?: ${cmd.hasErrors()}"
+    }   
 }
 
 class TestCommand {
