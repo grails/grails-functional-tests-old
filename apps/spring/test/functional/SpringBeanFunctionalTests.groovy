@@ -44,11 +44,4 @@ class SpringBeanFunctionalTests extends functionaltestplugin.FunctionalTestCase 
         assertStatus 200
         assertContentContains 'Resolver class = org.springframework.web.servlet.i18n.FixedLocaleResolver'
     }
-	
-	void testSpringConfiguredValidateable() {
-		get('/test/testScannedValidateable')
-        assertStatus 200
-        assertContentContains 'valid = true'
-		
-	}
 }
