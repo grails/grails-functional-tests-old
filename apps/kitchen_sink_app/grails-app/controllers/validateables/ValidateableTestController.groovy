@@ -28,4 +28,12 @@ class ValidateableTestController {
         
         render msg
     }
+    
+    def validateableWithAMixinApplied = {
+        def v = new SomeValidateableWithAMixinApplied(title: params.title)
+        v.validate()
+        
+        def msg = "Error Count: ${v.errors?.errorCount}"
+        render msg
+    }
 }

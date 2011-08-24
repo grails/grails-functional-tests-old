@@ -37,4 +37,14 @@ class ValidateableFunctionalTests extends functionaltestplugin.FunctionalTestCas
         assertStatus 200
         assertContentContains 'First Error Count: 1, Second Error Count: 1'
     }
+    
+    void testValidateableWithAMixinApplied() {
+        get '/validateableTest/validateableWithAMixinApplied?title=captain'
+        assertStatus 200
+        assertContentContains 'Error Count: 1'
+        
+        get '/validateableTest/validateableWithAMixinApplied?title=Captain'
+        assertStatus 200
+        assertContentContains 'Error Count: 0'
+    }
 }
