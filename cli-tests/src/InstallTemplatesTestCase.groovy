@@ -32,6 +32,13 @@ class InstallTemplatesTestCase extends AbstractCliTestCase {
 		assertTrue new File(appDir, 'src/templates/scaffolding/list.gsp').exists()
 		assertTrue new File(appDir, 'src/templates/scaffolding/renderEditor.template').exists()
 		assertTrue new File(appDir, 'src/templates/scaffolding/show.gsp').exists()
+		assertTrue new File(appDir, 'src/templates/testing/Controller.groovy').exists()
+		assertTrue new File(appDir, 'src/templates/testing/DomainClass.groovy').exists()
+		assertTrue new File(appDir, 'src/templates/testing/Filters.groovy').exists()
+		assertTrue new File(appDir, 'src/templates/testing/Generic.groovy').exists()
+		assertTrue new File(appDir, 'src/templates/testing/Service.groovy').exists()
+		assertTrue new File(appDir, 'src/templates/testing/TagLib.groovy').exists()
+		assertTrue new File(appDir, 'src/templates/testing/UnitTest.groovy').exists()
 		assertTrue new File(appDir, 'src/templates/war/web.xml').exists()
 	}
 

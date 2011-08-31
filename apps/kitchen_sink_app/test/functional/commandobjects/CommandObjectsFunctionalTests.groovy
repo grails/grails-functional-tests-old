@@ -24,6 +24,25 @@ class CommandObjectsFunctionalTests extends functionaltestplugin.FunctionalTestC
         assertStatus 200
         assertContentContains 'good'		
 	}
+
+	void testDomainClassAsCommandObject() {
+        get '/commandObjectsTest/closureActionWithDomainClassAsCommandObject?name=Jon'
+        assertStatus 200
+        assertContentContains 'name: Jon, has errors?: true'
+
+        get '/commandObjectsTest/methodActionWithDomainClassAsCommandObject?name=Jon'
+        assertStatus 200
+        assertContentContains 'name: Jon, has errors?: true'
+
+        get '/commandObjectsTest/closureActionWithDomainClassAsCommandObject?name=JON'
+        assertStatus 200
+        assertContentContains 'name: JON, has errors?: false'
+
+        get '/commandObjectsTest/methodActionWithDomainClassAsCommandObject?name=JON'
+        assertStatus 200
+        assertContentContains 'name: JON, has errors?: false'
+	}
+
     void testCommandObjects() {
          get('/commandObjectsTest/testCommand?name=fred&age=45')
          assertStatus 200

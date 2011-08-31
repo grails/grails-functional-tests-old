@@ -37,7 +37,7 @@ def tests = [
              "War", 
              "DevWar",
              "CreateController",
-//             "InstallTemplates", 
+            "InstallTemplates",
              "GrailsWorkDir"
 /*             "ReInstallPlugin"*/
              ]
