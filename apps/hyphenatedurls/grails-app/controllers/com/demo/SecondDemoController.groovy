@@ -15,4 +15,8 @@ class SecondDemoController {
     def someClosureAction = {
         render 'SecondDemoController someClosureAction action'
     }
+    
+    def renderSomeView() {
+    
+    }
 }
