@@ -1,5 +1,7 @@
 <html>
+<head>
 <meta name="layout" content="main"/>
+</head>
 <body>
 <p>
 Click <g:link controller="secondDemo">here</g:link> To execute the default action in SecondDemoController.
