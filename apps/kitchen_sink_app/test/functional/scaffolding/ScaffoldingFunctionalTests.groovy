@@ -11,6 +11,30 @@ class ScaffoldingFunctionalTests extends functionaltestplugin.FunctionalTestCase
         	assertEquals 1, countMatches(response.contentAsString, /<h1>Book List<\/h1>/)
     }
 
+    void testDefaultActionProperty() {
+		get '/scaffoldingTest'
+		assertStatus 200
+		assertContentContains 'rendered by the actionTwo method action'
+    }
+    
+    void testActionsDefinedInDynamicallyScaffoldedController() {
+        get '/scaffoldingTest/actionOne'
+        assertStatus 200
+        assertContentContains 'rendered by the actionOne closure action'
+        get '/scaffoldingTest/actionTwo'
+        assertStatus 200
+        assertContentContains 'rendered by the actionTwo method action'
+    }
+    
+    void testScaffoldedActionsInControllerWhichDefinesSomeAdditionalActions() {
+        get '/scaffoldingTest/list'
+        assertStatus 200
+        assertContentContains 'Book List'
+        get '/scaffoldingTest/create'
+        assertStatus 200
+        assertContentContains 'Create Book'
+    }
+
     def countMatches(str, regex) {
         def matcher = (str =~ regex)
         def count=0
