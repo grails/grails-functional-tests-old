@@ -1,6 +1,31 @@
 package commandobjects
 
 class CommandObjectsFunctionalTests extends functionaltestplugin.FunctionalTestCase {
+    
+    void testMethodActionWithSharedConstraintCommandObject() {
+        // GRAILS-8136
+        if(notYetImplemented()) return
+        get '/commandObjectsTest/methodActionWithSharedConstraintCommandObject/?name=John'
+        assertStatus 200
+        assertContentContains 'name: John, has errors?: false'
+        
+        get '/commandObjectsTest/methodActionWithSharedConstraintCommandObject/?name=George'
+        assertStatus 200
+        assertContentContains 'name: George, has errors?: true'
+    }
+
+    void testClosureActionWithSharedConstraintCommandObject() {
+        // GRAILS-8136
+        if(notYetImplemented()) return
+        get '/commandObjectsTest/closureActionWithSharedConstraintCommandObject/?name=John'
+        assertStatus 200
+        assertContentContains 'name: John, has errors?: false'
+        
+        get '/commandObjectsTest/closureActionWithSharedConstraintCommandObject/?name=George'
+        assertStatus 200
+        assertContentContains 'name: George, has errors?: true'
+    }
+
     void testCommandObjectDefinedUnderSrcGroovy() {
         get '/commandObjectsTest/closureActionWithCommandObjectDefinedUnderSrcGroovy/?name=Hank'
         assertStatus 200

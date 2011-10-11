@@ -39,6 +39,14 @@ class CommandObjectsTestController {
     def methodActionWithDomainClassAsCommandObject(Gadget cmd) {
         render "name: ${cmd.name}, has errors?: ${cmd.hasErrors()}"
     }   
+    
+    def methodActionWithSharedConstraintCommandObject(JCommand cmd) {
+        render "name: ${cmd.name}, has errors?: ${cmd.hasErrors()}"
+    }   
+    
+    def closureActionWithSharedConstraintCommandObject = { JCommand cmd ->
+        render "name: ${cmd.name}, has errors?: ${cmd.hasErrors()}"
+    }   
 }
 
 class TestCommand {
@@ -80,5 +88,12 @@ class DCommand {
 
     static constraints = {
         query nullable: false
+    }
+}
+
+class JCommand {
+    String name
+    static constraints = {
+        name shared: 'beginsWithUpperCaseJ'
     }
 }
