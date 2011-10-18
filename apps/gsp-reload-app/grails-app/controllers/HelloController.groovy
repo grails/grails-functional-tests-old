@@ -1,0 +1,3 @@
+class HelloController {
+    def index = { }
+}
