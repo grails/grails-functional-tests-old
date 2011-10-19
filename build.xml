@@ -109,6 +109,9 @@
 					properties.projectName = appDir.name
 					// skip webtest based tests until plugin is fixed
 					if (properties.projectName == 'HelloWorld') return
+					
+					// skip gsp-reload-app for now
+					if (properties.projectName == 'gsp-reload-app') return
 
 					// if the appToTest system property is set, then skip all other apps
 					if (properties.appToTest && !properties.appToTest.equals(properties.projectName)) {
