@@ -3,8 +3,6 @@ package commandobjects
 class CommandObjectsFunctionalTests extends functionaltestplugin.FunctionalTestCase {
     
     void testMethodActionWithSharedConstraintCommandObject() {
-        // GRAILS-8136
-        if(notYetImplemented()) return
         get '/commandObjectsTest/methodActionWithSharedConstraintCommandObject/?name=John'
         assertStatus 200
         assertContentContains 'name: John, has errors?: false'
@@ -15,8 +13,6 @@ class CommandObjectsFunctionalTests extends functionaltestplugin.FunctionalTestC
     }
 
     void testClosureActionWithSharedConstraintCommandObject() {
-        // GRAILS-8136
-        if(notYetImplemented()) return
         get '/commandObjectsTest/closureActionWithSharedConstraintCommandObject/?name=John'
         assertStatus 200
         assertContentContains 'name: John, has errors?: false'
