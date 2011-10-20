@@ -44,7 +44,7 @@ class ReloadGSPTests extends GebReportingTest {
         
         File layoutFile = new File("target/work/war/WEB-INF/grails-app/views/layouts/main.gsp")
         def layoutContent = layoutFile.text
-        layoutFile.text = layoutContext + "<!--LAYOUT UPDATED-->"
+        layoutFile.text = layoutContent + "<!--LAYOUT UPDATED-->"
         // wait 2 * default timeout
         Thread.sleep(10000L)
         to HelloPage
