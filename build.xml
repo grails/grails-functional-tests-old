@@ -110,9 +110,6 @@
 					// skip webtest based tests until plugin is fixed
 					if (properties.projectName == 'HelloWorld') return
 					
-					// skip gsp-reload-app for now
-					if (properties.projectName == 'gsp-reload-app') return
-
 					// if the appToTest system property is set, then skip all other apps
 					if (properties.appToTest && !properties.appToTest.equals(properties.projectName)) {
 						ant.echo message: "Skipping app: ${properties.projectName}"
@@ -137,30 +134,42 @@
 
 					// Install the appropriate testing plugin, run the tests, and check the reportsDir
 					if (new File(appDir, "test/functional").exists()) {
-						// Install the Functional Test plugin.
-						ant.grails(command:"install-plugin", args:"functional-test 1.2.7", projectName:properties.projectName, resultID:grailsInvocationCounter++)
-						if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
-							outcomes << "Couldn't install functional-test plugin into application ${properties.projectName}"
-							failure = true
+						if(!(properties.projectName in ['gsp-reload-app'])) {
+							// Install the Functional Test plugin.
+							ant.grails(command:"install-plugin", args:"functional-test 1.2.7", projectName:properties.projectName, resultID:grailsInvocationCounter++)
+							if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
+								outcomes << "Couldn't install functional-test plugin into application ${properties.projectName}"
+								failure = true
+							}
+						} else {
+							// Workaround for GRAILS-8189 
+							ant.grails(command:'compile', projectName:properties.projectName, resultID:grailsInvocationCounter++)
 						}
-
-						// Run the tests.
-						ant.grails(command:"test-app", args: "functional: --dev-mode", environment:"dev", projectName:properties.projectName, resultID:grailsInvocationCounter++)
-						outcomes << "Functional tests in application ${properties.projectName}: " +
-									((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
-
-						if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
-							failure = true
-						}
-
-						// Copy reports
-						ant.mkdir(dir:"reports/${properties.projectName}")
-						ant.copy(todir:"reports/${properties.projectName}") {
-							fileset(dir:"${properties.checkoutDir}/${properties.projectName}/target/test-reports")
+						
+						if(!(properties.projectName in ['gsp-reload-app'])) {
+							// Run the tests.
+							ant.grails(command:"test-app", args: "functional: --dev-mode", environment:"dev", projectName:properties.projectName, resultID:grailsInvocationCounter++)
+							outcomes << "Functional tests in application ${properties.projectName}: " +
+										((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
+	
+							if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
+								failure = true
+							}
+	
+							// Copy reports
+							ant.mkdir(dir:"reports/${properties.projectName}")
+							ant.copy(todir:"reports/${properties.projectName}") {
+								fileset(dir:"${properties.checkoutDir}/${properties.projectName}/target/test-reports")
+							}
 						}
 
 						// Run the WAR tests.
-						ant.grails(command:"test-app", args: "-war functional: --dev-mode", environment:"test", projectName:properties.projectName, resultID:grailsInvocationCounter++)
+						def grailsWarTestCmdArgs = [command:"test-app", args: "-war functional: --dev-mode", environment:"test", projectName:properties.projectName, resultID:grailsInvocationCounter++]
+						if(properties.projectName in ['gsp-reload-app']) {
+							grailsWarTestCmdArgs.args='functional: -war'
+							grailsWarTestCmdArgs.environment='production'
+						}
+						ant.grails(grailsWarTestCmdArgs)
 						outcomes << "Functional tests in application ${properties.projectName}: " +
 									((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
 

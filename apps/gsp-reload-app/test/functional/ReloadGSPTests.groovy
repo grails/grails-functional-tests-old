@@ -3,6 +3,7 @@ import org.junit.Test
 import static org.junit.Assert.*
 import java.io.File
 import grails.util.Environment
+import grails.util.BuildSettingsHolder
 
 class ReloadGSPTests extends GebReportingTest {
     @Test
@@ -12,7 +13,9 @@ class ReloadGSPTests extends GebReportingTest {
         assert heading == 'Hello'
         assert message == 'Hello world'
         
-        File gspFile = new File("target/work/war/WEB-INF/grails-app/views/hello/index.gsp")
+        File warDir = new File(BuildSettingsHolder.settings.projectWorkDir, 'war')
+        
+        File gspFile = new File(warDir, "WEB-INF/grails-app/views/hello/index.gsp")
         def oldContent = gspFile.text
         def newContent = '''<html>
 <head><title>Hello</title></head>
@@ -42,7 +45,7 @@ class ReloadGSPTests extends GebReportingTest {
         assert heading == 'Hello layout'
         assert message == 'Hello world with layout'
         
-        File layoutFile = new File("target/work/war/WEB-INF/grails-app/views/layouts/main.gsp")
+        File layoutFile = new File(warDir, "WEB-INF/grails-app/views/layouts/main.gsp")
         def layoutContent = layoutFile.text
         layoutFile.text = layoutContent + "<!--LAYOUT UPDATED-->"
         // wait 2 * default timeout
