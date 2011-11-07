@@ -46,7 +46,11 @@ class CommandObjectsTestController {
     
     def closureActionWithSharedConstraintCommandObject = { JCommand cmd ->
         render "name: ${cmd.name}, has errors?: ${cmd.hasErrors()}"
-    }   
+    }
+    
+    def testConstraintsProperty() {
+        render "Matches: ${CommandObjectClassDefinedUnderSrcGroovy.constraints.name.matches}"
+    }
 }
 
 class TestCommand {
