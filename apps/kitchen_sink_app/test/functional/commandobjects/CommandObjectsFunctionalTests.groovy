@@ -2,6 +2,12 @@ package commandobjects
 
 class CommandObjectsFunctionalTests extends functionaltestplugin.FunctionalTestCase {
     
+    void testConstraintsProperty() {
+        get '/commandObjectsTest/testConstraintsProperty'
+        assertStatus 200
+        assertContentContains 'Matches: [A-Za-z]*'
+    }
+
     void testMethodActionWithSharedConstraintCommandObject() {
         get '/commandObjectsTest/methodActionWithSharedConstraintCommandObject/?name=John'
         assertStatus 200
