@@ -2,7 +2,6 @@ package com.demo
 
 class AdminManageControllerFunctionalTests extends functionaltestplugin.FunctionalTestCase {
     void testReverseUrlMapping() {
-        if(notYetImplemented()) return
         get '/admin/manage/index'
         assertStatus 200
         assertTitle 'Admin Manage Controller'
