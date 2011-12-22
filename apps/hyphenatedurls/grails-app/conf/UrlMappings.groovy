@@ -6,6 +6,7 @@ class UrlMappings {
 				// apply constraints here
 			}
 		}
+        "/admin/manage/$action?"(controller:'adminManage')
 
 		"/"(view:"/index")
 		"500"(view:'/error')
