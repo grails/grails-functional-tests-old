@@ -272,21 +272,21 @@ class Blog {
 
 		<property name='cli-classes' value='target/cli-classes' />
 		<property name='grails.lib' value='${grails.home}/lib' />
-		<property name="groovy.lib" value="${grails.lib}/org.codehaus.groovy/groovy-all/jars" />
+		<property name="groovy.lib" value="${grails.lib}/org.codehaus.groovy/groovy-all/" />
 
 		<delete dir="target" />
 		<mkdir dir="${cli-classes}" />
 
 		<taskdef name="groovyc" classname="org.codehaus.groovy.ant.Groovyc">
 			<classpath>
-				<fileset dir="${groovy.lib}" includes="*.jar"/>
+				<fileset dir="${groovy.lib}" includes="*/jar/*.jar"/>
 			</classpath>
 		</taskdef>
 
 		<groovyc destdir="${cli-classes}" encoding="UTF-8" srcdir='cli-tests/src'>
 			<classpath>
 				<fileset dir="${groovy.lib}" includes="*.jar"/>
-				<fileset dir="${grails.lib}/junit/junit/jars" includes="junit*.jar"/>
+				<fileset dir="${grails.lib}/junit/junit/" includes="*/jar/junit*.jar"/>
 
 				<path refid="classpath"/>
 			</classpath>
@@ -298,7 +298,7 @@ class Blog {
 		<java classname="RunTests" fork="true" failonerror="true" maxmemory="256m" dir='cli-tests'>
 			<classpath>
 				<path refid="classpath"/>
-				<fileset dir="${grails.lib}/junit/junit/jars" includes="junit*.jar"/>
+				<fileset dir="${grails.lib}/junit/junit/" includes="*/jar/junit*.jar"/>
 				<pathelement location="${cli-classes}"/>
 			</classpath>
 			<sysproperty key='grails.home' value='${grails.home}'/>
