@@ -7,7 +7,7 @@ class ContentNegotiationFunctionalTests extends functionaltestplugin.FunctionalT
         //
         get('/requestFormat/testFormat')
         assertStatus 200
-        assertContentContains 'response format = html'
+        assertContentContains 'response format = all'
 
         get('/requestFormat/testFormat.xml')
         assertStatus 200
@@ -23,5 +23,11 @@ class ContentNegotiationFunctionalTests extends functionaltestplugin.FunctionalT
         get('/requestFormat/testWithFormat.xml')
         assertStatus 200
         assertContentContains 'request format xml'		
+    }
+
+    void testWithFormatGRAILS8341() {
+        get('/requestFormat/testWithFormatGRAILS8341')
+        assertStatus 200
+        assertContentContains 'request format json'
     }
 }
