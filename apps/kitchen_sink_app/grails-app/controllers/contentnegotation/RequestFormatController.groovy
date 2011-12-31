@@ -16,4 +16,15 @@ class RequestFormatController {
 			}
 		}
 	}
+
+	def testWithFormatGRAILS8341 = {
+		withFormat {
+			json {
+				render "request format json"
+			}
+			xml {
+				render "request format xml"
+			}
+		}
+	}
 }
