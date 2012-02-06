@@ -1,5 +1,6 @@
 package commandobjects
 
+@grails.validation.Validateable
 class CommandObjectClassDefinedUnderSrcGroovy {
     String name
     
