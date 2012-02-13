@@ -29,7 +29,7 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.jboss.com/maven2/"
     }
     plugins {
-		runtime ":webflow:$grailsVersion"
+		runtime ":webflow:2.0.0"
 	}
     
     dependencies {
