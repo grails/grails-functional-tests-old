@@ -16,7 +16,6 @@ class DatabindingController {
         def person = new PersonWithInjectedBeanProperty(params)
         render "Name: ${person.name}, Widget Name: ${person.widget?.name}, State: ${person.state}, Zip: ${person.zip}"
     }
-    def foo2(){}
 }
 
 class MyCommandObject {
