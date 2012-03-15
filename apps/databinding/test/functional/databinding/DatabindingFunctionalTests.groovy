@@ -8,7 +8,6 @@ class DatabindingFunctionalTests extends functionaltestplugin.FunctionalTestCase
  	}
 
     void testCtorBindingToOverrideDomainObjectPropertiesInInjectedBean() {
-        if(notYetImplemented()) return
         get '/databinding/testCtorDataBindingOnDomainWithInjectedBeanProperty?name=My Name&widget.name=Bad+Name&state=Missouri&zip=12345'
         assertStatus 200
         assertContentContains 'Name: My Name, Widget Name: Good Name, State: Missouri, Zip: 12345'       
