@@ -10,6 +10,20 @@ class CommandObjectsFunctionalTests extends functionaltestplugin.FunctionalTestC
          assertContentContains 'name: fred, age:45'
     }
 
+    void testCommandObjectUsingBeanForValidation() {
+         get('/test/commandUsingBeanForValidation?value=9')
+         assertStatus 200
+         assertContentContains 'Valid?: false'
+         
+         get('/test/commandUsingBeanForValidation?value=100')
+         assertStatus 200
+         assertContentContains 'Valid?: true'
+         
+         get('/test/commandUsingBeanForValidation?value=1')
+         assertStatus 200
+         assertContentContains 'Valid?: false'
+    }
+
 	void testCommandObjectsAdditionalParams() {
         get('/test/testCommand?name=fred&age=45&x=23&y=343')
         assertStatus 200
