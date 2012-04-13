@@ -114,5 +114,18 @@ class CommandObjectsFunctionalTests extends functionaltestplugin.FunctionalTestC
         assertContentContains '<input type="text" name="c.name" value="ccc" id="c.name" />'		
         assertContentContains '<input type="text" name="d.query" value="ddd" id="d.query" />'				
 	}
-	
+
+	void testCommandObjectUsingBeanForValidation() {
+         get('/commandObjectsTest/commandUsingBeanForValidation?value=9')
+         assertStatus 200
+         assertContentContains 'Valid?: false'
+         
+         get('/commandObjectsTest/commandUsingBeanForValidation?value=100')
+         assertStatus 200
+         assertContentContains 'Valid?: true'
+         
+         get('/commandObjectsTest/commandUsingBeanForValidation?value=1')
+         assertStatus 200
+         assertContentContains 'Valid?: false'
+    }
 }

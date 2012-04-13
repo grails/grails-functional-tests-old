@@ -51,6 +51,20 @@ class CommandObjectsTestController {
     def testConstraintsProperty() {
         render "Matches: ${CommandObjectClassDefinedUnderSrcGroovy.constraints.name.matches}"
     }
+    def commandUsingBeanForValidation(CommandUsingBeanForValidation co) {
+        render "Valid?: ${!co.hasErrors()}"
+    }
+}
+
+class CommandUsingBeanForValidation {
+    Integer value
+    def myValidationHelper
+
+    static constraints = {
+        value validator: { val, obj ->
+            val >= obj.myValidationHelper.minimumValidValue
+        }
+    }
 }
 
 class TestCommand {
