@@ -10,4 +10,8 @@ beans = {
     widget(Widget) {
         name = 'Good Name'
     }
+    
+    myValidationHelper(commandobjects.MyValidationHelper) {
+        minimumValidValue = 42
+    }
 }
