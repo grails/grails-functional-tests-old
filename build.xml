@@ -183,7 +183,7 @@
 							fileset(dir:"${properties.checkoutDir}/${properties.projectName}/target/test-reports")
 						}
 					}
-					else {
+					else if (new File(appDir, "webtest").exists()) {
 						// Install the WebTest plugin.
 						ant.grails(command:"install-plugin", args: "webtest", projectName:properties.projectName, resultID:grailsInvocationCounter++)
 						if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
@@ -194,6 +194,21 @@
 						// Run the tests.
 						ant.grails(command:"test-app", args: "functional:webtest", environment:"test", projectName:properties.projectName, resultID:grailsInvocationCounter++)
 						outcomes << "Functional tests in application ${properties.projectName}: " +
+										((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
+
+						if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
+							failure = true
+						}
+
+						// Copy reports
+						ant.mkdir(dir:"reports/${properties.projectName}")
+						ant.copy(todir:"reports/${properties.projectName}") {
+							fileset(dir:"${properties.checkoutDir}/${properties.projectName}/target/test-reports")
+						}
+					} else {
+						// Run unit & integration tests.
+						ant.grails(command:"test-app", args: "", environment:"test", projectName:properties.projectName, resultID:grailsInvocationCounter++)
+						outcomes << "Integration/unit tests in application ${properties.projectName}: " +
 										((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
 
 						if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
