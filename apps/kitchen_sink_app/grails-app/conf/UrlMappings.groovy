@@ -24,6 +24,7 @@ class UrlMappings {
             parseRequest = true
         }
 
+        "/containsBean/$beanName"(controller: 'namespaceInspector', action: 'containsBean')
         "/"(view:"/index")
         "500"(view:'/error')
         "404"(controller: 'i18nError', action: 'pageNotFound')
