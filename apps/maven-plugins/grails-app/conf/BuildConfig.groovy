@@ -19,6 +19,7 @@ grails.project.dependency.resolution = {
         mavenRepo "http://snapshots.repository.codehaus.org"
 		grailsRepo "http://svn.codehaus.org/grails-plugins"
 		grailsCentral()
+        mavenCentral()
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
