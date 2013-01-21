@@ -11,6 +11,7 @@ grails.project.dependency.resolution = {
         // excludes 'ehcache'
     }
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    useOrigin true
     repositories {
         grailsPlugins()
         grailsHome()
@@ -30,6 +31,8 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.13'
+        build "org.grails:grails-plugin-tomcat:$grailsVersion"
+        runtime "org.grails:grails-plugin-hibernate:$grailsVersion" 
         runtime 'hsqldb:hsqldb:1.8.0.10'
     }
 }

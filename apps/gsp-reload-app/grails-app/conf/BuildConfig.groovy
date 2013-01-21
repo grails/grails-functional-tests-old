@@ -39,9 +39,11 @@ grails.project.dependency.resolution = {
     dependencies {	
         test("org.seleniumhq.selenium:selenium-htmlunit-driver:$seleniumVersion") {
     	    exclude "xml-apis"
-	}
+	   }
         test "org.codehaus.geb:geb-junit4:$gebVersion"
         test 'org.w3c.css:sac:1.3'
+        build "org.grails:grails-plugin-tomcat:$grailsVersion"   
+        runtime "org.grails:grails-plugin-hibernate:$grailsVersion"        
     }
 
     plugins {
