@@ -30,4 +30,13 @@ class ContentNegotiationFunctionalTests extends functionaltestplugin.FunctionalT
         assertStatus 200
         assertContentContains 'request format json'
     }
+
+    void testAcceptHeaderWithFormat() {
+        get('/requestFormat/testWithFormatGRAILS8341') {
+            headers.'Accept' = "application/xml"
+        }
+
+        assertStatus 200
+        assertContentContains 'request format xml'
+    }
 }
