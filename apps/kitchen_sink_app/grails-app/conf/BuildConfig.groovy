@@ -8,7 +8,7 @@ grails.plugin.location.'namespace-one' = "${basedir}/plugins/namespace-one"
 grails.plugin.location.'namespace-two' = "${basedir}/plugins/namespace-two"
 
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
-grails.project.fork.run=true
+// grails.project.fork.run=true
 grails.project.dependency.resolver = "maven"
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
