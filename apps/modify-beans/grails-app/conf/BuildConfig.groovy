@@ -4,13 +4,13 @@ grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
 
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
+grails.project.dependency.resolver = "maven"
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
     inherits("global") {
         // uncomment to disable ehcache
         // excludes 'ehcache'
     }
-    cacheDir "target/ivy-cache"
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     repositories {
         grailsPlugins()
@@ -33,7 +33,10 @@ grails.project.dependency.resolution = {
 
         // runtime 'mysql:mysql-connector-java:5.1.13'
         runtime 'hsqldb:hsqldb:1.8.0.10'
-       build "org.grails:grails-plugin-tomcat:$grailsVersion"
+        build "org.grails:grails-plugin-tomcat:$grailsVersion"
         runtime "org.grails:grails-plugin-hibernate:$grailsVersion"        
+    }
+    plugins {
+        test ':functional-test:1.3-RC1'
     }
 }
