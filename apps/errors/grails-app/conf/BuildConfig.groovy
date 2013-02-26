@@ -35,5 +35,32 @@ grails.project.dependency.resolution = {
         build "org.grails:grails-plugin-tomcat:$grailsVersion"
         runtime "org.grails:grails-plugin-hibernate:$grailsVersion" 
         runtime 'hsqldb:hsqldb:1.8.0.10'
+        test( 'commons-codec:commons-codec:1.6') {
+            excludes 'xml-apis', 'xerces'
+        }
+        test( 'net.sourceforge.nekohtml:nekohtml:1.9.16') {
+            excludes 'xml-apis', 'xerces'
+        }
+        test( 'net.sourceforge.cssparser:cssparser:0.9.7') {
+            excludes 'xml-apis', 'xerces'
+        }
+        test( 'xalan:serializer:2.7.1') {
+            excludes 'xml-apis', 'xerces'
+        }
+        test( 'xalan:xalan:2.7.1') {
+            excludes 'xml-apis', 'xerces'
+        }
+/*
+        test( 'xercesImpl:xercesImpl:2.9.1') {
+            excludes 'xml-apis'
+        }
+*/
+
+        test( 'org.w3c.css:sac:1.3') {
+            excludes 'xml-apis', 'xerces'
+        }
+    }
+    plugins {
+        test ':functional-test:2.0.RC1'
     }
 }
