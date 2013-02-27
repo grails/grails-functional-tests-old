@@ -31,5 +31,7 @@ grails.project.dependency.resolution = {
         build "org.grails:grails-plugin-tomcat:$grailsVersion"
         runtime "org.grails:grails-plugin-hibernate:$grailsVersion"                
     }
-
+    plugins {
+        test ':functional-test:1.3-RC1'
+    }
 }

@@ -134,14 +134,7 @@
 
 					// Install the appropriate testing plugin, run the tests, and check the reportsDir
 					if (new File(appDir, "test/functional").exists()) {
-						if(!(properties.projectName in ['gsp-reload-app'])) {
-							// Install the Functional Test plugin.
-							ant.grails(command:"install-plugin", args:"functional-test 1.2.7", projectName:properties.projectName, resultID:grailsInvocationCounter++)
-							if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
-								outcomes << "Couldn't install functional-test plugin into application ${properties.projectName}"
-								failure = true
-							}
-						} else {
+						if((properties.projectName in ['gsp-reload-app'])) {
 							// Workaround for GRAILS-8189 
 							ant.grails(command:'compile', projectName:properties.projectName, resultID:grailsInvocationCounter++)
 						}

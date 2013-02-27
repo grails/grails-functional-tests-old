@@ -6,7 +6,7 @@ grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 grails.project.work.dir="target/work"
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
-grails.project.fork.run = false
+grails.project.fork.run = [debug:true]
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
     inherits("global") {
