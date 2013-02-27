@@ -51,7 +51,7 @@ grails.project.dependency.resolution = {
         compile ":freemarker:0.3"
         
         compile ":jquery:1.8.3"
-        compile ":resources:1.1.2"
+        compile ":resources:1.1.6"
 
         runtime ":database-migration:1.0"
         
