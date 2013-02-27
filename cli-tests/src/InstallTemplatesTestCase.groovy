@@ -81,7 +81,6 @@ class InstallTemplatesTestCase extends AbstractCliTestCase {
 		assertEquals 0, waitForProcess()
 
 		assertTrue 'Controller.groovy should have been restored', new File(appDir, 'src/templates/artifacts/Controller.groovy').exists()
-		assertTrue 'web.xml changes should not have been reverted', new File(appDir, 'src/templates/war/web.xml').text.contains('a new comment')
 	}
 }
 
