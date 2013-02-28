@@ -35,7 +35,7 @@ class WebFlowFunctionalTests extends functionaltestplugin.FunctionalTestCase {
 	    assertStatus 200
 	    
 	    form('test') {
-	        click 'Complete Order'
+	        click '_eventId_finish'
 	    }
 	    
 	    assertStatus 200

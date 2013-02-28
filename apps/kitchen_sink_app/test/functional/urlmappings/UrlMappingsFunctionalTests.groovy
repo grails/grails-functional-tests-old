@@ -7,15 +7,16 @@ class UrlMappingsFunctionalTests extends functionaltestplugin.FunctionalTestCase
         assertStatus 200
         assertContentContains 'working'
 
-        get('/urlMappingsTest/index%20')
+        get('/urlMappingsTest/index ')
         assertStatus 200
         assertContentContains 'working'
 
-        get('/urlMappingsTest/index%0A')
+        get('''/urlMappingsTest/index
+            ''')
         assertStatus 200
         assertContentContains 'working'
 
-        get('/urlMappingsTest/in%20dex')
+        get('/urlMappingsTest/in dex')
         assertStatus 404
 
         get('/urlMappingsTest/in+dex')
@@ -54,14 +55,6 @@ class UrlMappingsFunctionalTests extends functionaltestplugin.FunctionalTestCase
 		assertStatus 200		
         assertContentContains 'decoded = Hello World'		
 
-		get('/decode/Hello World')
-		assertStatus 200		
-        assertContentContains 'decoded = Hello World'		
 
-
-		get('/decode/Hello%20World')
-		assertStatus 200		
-        assertContentContains 'decoded = Hello World'		
-		
 	}
 }
