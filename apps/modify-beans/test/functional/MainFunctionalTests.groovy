@@ -10,6 +10,6 @@ class MainFunctionalTests extends functionaltestplugin.FunctionalTestCase {
         assertContentContains "Welcome to Grails"
 
         get "/?language22=fr"
-        assertContentContains "Bienvenue à Rails"
+        assertContentContains "Bienvenue à Grails"
     }
 }
