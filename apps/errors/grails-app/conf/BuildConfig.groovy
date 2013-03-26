@@ -15,6 +15,7 @@ grails.project.dependency.resolution = {
         grailsHome()
         grailsCentral()
         mavenRepo "http://repo.grails.org/grails/core"
+        mavenCentral()
     }
     
     dependencies {

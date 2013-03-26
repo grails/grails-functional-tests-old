@@ -9,18 +9,11 @@ grails.project.dependency.resolution = {
     }
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     repositories {
-
-        // uncomment the below to enable remote dependency resolution
-        // from public Maven repositories
-        //mavenLocal()
-        //mavenCentral()
+        grailsCentral()
         mavenRepo "http://snapshots.repository.codehaus.org"
         mavenRepo "http://repo.grails.org/grails/core"
         mavenRepo 'http://maven.springframework.org/milestone'
-        grailsCentral()
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
+        mavenCentral()
     }
     plugins {
         runtime ':cloud-foundry:1.2.3'
