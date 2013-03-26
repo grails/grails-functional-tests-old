@@ -1,9 +1,6 @@
 import geb.junit4.GebReportingTest
 import org.junit.Test
-import static org.junit.Assert.*
-import java.io.File
 import grails.util.Environment
-import grails.util.BuildSettingsHolder
 
 class ReloadGSPTests extends GebReportingTest {
     @Test
@@ -12,10 +9,8 @@ class ReloadGSPTests extends GebReportingTest {
         to HelloPage
         assert heading == 'Hello'
         assert message == 'Hello world'
-        
-        File warDir = new File(BuildSettingsHolder.settings.projectWorkDir, 'war')
-        
-        File gspFile = new File(warDir, "WEB-INF/grails-app/views/hello/index.gsp")
+
+        File gspFile = new File('target/reload/hello/index.gsp')
         def oldContent = gspFile.text
         def newContent = '''<html>
 <head><title>Hello</title></head>
@@ -30,22 +25,22 @@ class ReloadGSPTests extends GebReportingTest {
         to HelloPage
         assert heading == 'Reloaded Hello'
         assert message == 'Hello new world'
-                
+
         def newContentWithLayout = '''<html>
         <head><meta name="layout" content="main"/><title>Hello</title></head>
         <body>
         <h1>Hello layout</h1>
         <div class="message">Hello world with layout</div>
         </body>
-        </html>'''        
+        </html>'''
         gspFile.text = newContentWithLayout
         // wait 2 * default timeout
         Thread.sleep(10000L)
         to HelloPage
         assert heading == 'Hello layout'
         assert message == 'Hello world with layout'
-        
-        File layoutFile = new File(warDir, "WEB-INF/grails-app/views/layouts/main.gsp")
+
+        File layoutFile = new File('target/reload/layouts/main.gsp')
         def layoutContent = layoutFile.text
         layoutFile.text = layoutContent + "<!--LAYOUT UPDATED-->"
         // wait 2 * default timeout
@@ -57,9 +52,9 @@ class ReloadGSPTests extends GebReportingTest {
 
 class HelloPage extends geb.Page {
     static url = "hello/index"
-    
+
     static content = {
         heading { $("h1").text() }
-	message { $("div.message").text() }
+        message { $("div.message").text() }
     }
 }

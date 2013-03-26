@@ -1,8 +1,4 @@
 grails.servlet.version = "2.5" // Change depending on target container compliance (2.5 or 3.0)
-grails.project.class.dir = "target/classes"
-grails.project.test.class.dir = "target/test-classes"
-grails.project.test.reports.dir = "target/test-reports"
-//grails.project.war.file = "target/${appName}-${appVersion}.war"
 grails.project.work.dir="target/work"
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
@@ -32,16 +28,17 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.16'
-        build "org.grails:grails-plugin-tomcat:$grailsVersion"
-        runtime "org.grails:grails-plugin-hibernate:$grailsVersion"        
     }
 
     plugins {
+        runtime ":hibernate:3.6.10.BUILD-SNAPSHOT"
+        build ":tomcat:7.0.37.BUILD-SNAPSHOT"
+
         compile ":jquery:1.8.3"
         compile ":resources:1.1.2"
 
         runtime ":database-migration:1.0"
-        
-        test ':functional-test:1.3-RC1'
+
+        test ':functional-test:2.0.RC1'
     }
 }

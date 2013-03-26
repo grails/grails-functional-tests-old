@@ -10,7 +10,6 @@ grails.project.source.level = 1.6
 //]
 
 grails.project.dependency.resolution = {
-    def usingGroovy2 = usingGroovy2()
 
     // inherit Grails' default dependencies
     inherits("global") {
@@ -31,6 +30,8 @@ grails.project.dependency.resolution = {
         mavenLocal()
         mavenCentral()
 
+        mavenRepo "http://repo.grails.org/grails/core"
+
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
         //mavenRepo "http://snapshots.repository.codehaus.org"
         //mavenRepo "http://repository.codehaus.org"
@@ -40,37 +41,21 @@ grails.project.dependency.resolution = {
 
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
-        if (usingGroovy2) {
-            test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
-        }
+        test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
     }
 
     plugins {
-        runtime ":hibernate:$grailsVersion"
+
+        runtime ":hibernate:3.6.10.BUILD-SNAPSHOT"
+        build ":tomcat:7.0.37.BUILD-SNAPSHOT"
+
         runtime ":jquery:1.8.3"
         runtime ":resources:1.1.6"
         
-        if (usingGroovy2) {
-            test ":spock:0.7", {
-                excludes "spock-grails-support"
-            }
+        test ":spock:0.7", {
+            excludes "spock-grails-support"
         }
-        else {
-            test ":spock:0.7"
-        }
-
-        build ":tomcat:$grailsVersion"
 
         compile ':cache:1.0.1'
-    }
-}
-
-private boolean usingGroovy2() {
-    try {
-        getClass().classLoader.loadClass("groovy.transform.TypeChecked")
-        return true
-    }
-    catch (ClassNotFoundException ex) {
-        return false
     }
 }

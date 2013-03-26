@@ -7,8 +7,7 @@ class TestingTestCase extends AbstractCliTestCase {
 		super.setUp()
 		copyDir(appSource, app)
 		workDir = app
-		execute(["upgrade", "-force --non-interactive"])
-		assertEquals("upgrade failed", 0, waitForProcess())
+		upgrade()
 	}
 
 	void testRunAllTestsThatShouldPass() {

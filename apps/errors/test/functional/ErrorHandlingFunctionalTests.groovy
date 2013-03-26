@@ -69,7 +69,7 @@ class ErrorHandlingFunctionalTests extends functionaltestplugin.FunctionalTestCa
             assertContentContains 'Grails Runtime Exception'
             assertContentContains 'regularExpressionError.gsp '
             assertContentContains '<strong>Exception Message:</strong> No signature of method: org.codehaus.groovy.grails.commons.DefaultGrailsControllerClass.dummy() is applicable for argument types: () values: []'
-            assertContentContains '<strong>Caused by:</strong> Error evaluating expression [c.dummy()] on line [15]: groovy.lang.MissingMethodException: No signature of method: org.codehaus.groovy.grails.commons.DefaultGrailsControllerClass.dummy() is applicable for argument types: () values: []'
+            assertContentContains '<strong>Caused by:</strong> Error evaluating expression [c.dummy()] on line [15]: No signature of method: org.codehaus.groovy.grails.commons.DefaultGrailsControllerClass.dummy() is applicable for argument types: () values: []'
             assertContentContains '<strong>At Line:</strong> [15]'
             assertContentContains '&lt;li class=&quot;controller&quot;&gt;This will throw MPE ${c.dummy()}&lt;/li&gt;'
         }

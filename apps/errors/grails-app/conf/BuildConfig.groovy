@@ -1,7 +1,4 @@
 grails.project.work.dir = "target/work"
-grails.project.class.dir = "target/classes"
-grails.project.test.class.dir = "target/test-classes"
-grails.project.test.reports.dir = "target/test-reports"
 
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 grails.project.dependency.resolver = "maven"
@@ -32,8 +29,7 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.13'
-        build "org.grails:grails-plugin-tomcat:$grailsVersion"
-        runtime "org.grails:grails-plugin-hibernate:$grailsVersion" 
+
         runtime 'hsqldb:hsqldb:1.8.0.10'
         test( 'commons-codec:commons-codec:1.6') {
             excludes 'xml-apis', 'xerces'
@@ -61,6 +57,8 @@ grails.project.dependency.resolution = {
         }
     }
     plugins {
+        runtime ":hibernate:3.6.10.BUILD-SNAPSHOT"
+        build ":tomcat:7.0.37.BUILD-SNAPSHOT"
         test ':functional-test:2.0.RC1'
     }
 }

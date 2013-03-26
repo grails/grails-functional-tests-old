@@ -23,8 +23,7 @@ class CreateUnitTestTestCase extends AbstractCliTestCase {
         copyDir appSource, app
         workDir = app
 
-        execute(["upgrade", "-non-interactive"])
-        assertEquals "upgrade failed", 0, waitForProcess()
+        upgrade()
 
         // Make sure the plugin is installed and compiled.
         execute([ "compile" ])

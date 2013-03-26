@@ -31,6 +31,11 @@ abstract class AbstractCliTestCase extends GroovyTestCase {
 
     long timeout = 2 * 60 * 1000 // min * sec/min * ms/sec
 
+    protected void upgrade() {
+        execute(["upgrade", "--non-interactive", "--force"])
+        assertEquals("upgrade failed", 0, waitForProcess())
+    }
+
     /**
      * Executes a Grails command. The path to the Grails script is
      * inserted at the front, so the first element of <tt>command</tt>
@@ -39,20 +44,16 @@ abstract class AbstractCliTestCase extends GroovyTestCase {
      * @param a list of command arguments (minus the Grails script/executable).
      */
     protected void execute(List<String> command) {
-        // Make sure the working and output directories exist before
-        // running the command.
+        // Make sure the working and output directories exist before running the command.
         baseWorkDir.mkdirs()
         outputDir.mkdirs()
 
         // Add the path to the Grails script as the first element of
         // the command. Note that we use an absolute path.
-        def cmd = new ArrayList<String>(command.size() + 2)
-        cmd.add "${grailsHome}/bin/grails".toString()
-        cmd.add "-Dgrails.work.dir=${System.getProperty('grails.work.dir')}".toString()
+        def cmd = [grailsHome + '/bin/grails', '-Dgrails.work.dir=' + System.getProperty('grails.work.dir')]
         cmd.addAll command
 
-        // Prepare to execute Grails as a separate process in the
-        // configured working directory.
+        // Prepare to execute Grails as a separate process in the configured working directory.
         def pb = new ProcessBuilder(cmd)
         pb.redirectErrorStream(true)
         pb.directory(workDir)
@@ -67,8 +68,7 @@ abstract class AbstractCliTestCase extends GroovyTestCase {
         Thread.startDaemon {
             output = currProcess.in.text
 
-            // Once we've finished reading the process output, signal
-            // the main thread.
+            // Once we've finished reading the process output, signal the main thread.
             signalDone()
         }
     }
@@ -210,4 +210,3 @@ abstract class AbstractCliTestCase extends GroovyTestCase {
         assertEquals "| Loading Grails ${grailsVersion}", output.trim().split("\n")[0].trim()
     }
 }
-

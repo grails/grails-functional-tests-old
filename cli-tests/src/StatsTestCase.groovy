@@ -1,14 +1,14 @@
 class StatsTestCase extends AbstractCliTestCase {
 	def appSource = new File(cliTestsDir, "testing-app")
 	def app = new File(baseWorkDir, "stats-testing-app")
-	
-	StatsTestCase() {
+
+	protected void setUp() {
+		super.setUp()
 		copyDir(appSource, app)
 		workDir = app
-		execute(["upgrade", "-non-interactive"])
-		assertEquals("upgrade failed", 0, waitForProcess())
+		upgrade()
 	}
-	
+
 	void testStats() {
 		execute([ "stats" ])
 		assertEquals 0, waitForProcess()

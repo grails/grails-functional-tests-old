@@ -1,8 +1,5 @@
 grails.project.work.dir = "target/work"
-grails.project.class.dir = "target/classes"
-grails.project.test.class.dir = "target/test-classes"
-grails.project.test.reports.dir = "target/test-reports"
-//grails.project.war.file = "target/${appName}-${appVersion}.war"
+
 grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
@@ -28,12 +25,11 @@ grails.project.dependency.resolution = {
 	plugins {
 		runtime ':cloud-foundry:1.2.3'		
 		test ":functional-test:1.3-RC1"
+        runtime ":hibernate:3.6.10.BUILD-SNAPSHOT"
+        build ":tomcat:7.0.37.BUILD-SNAPSHOT"
 	}
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
         runtime 'hsqldb:hsqldb:1.8.0.10'
-        build "org.grails:grails-plugin-tomcat:$grailsVersion"
-        runtime "org.grails:grails-plugin-hibernate:$grailsVersion"
-
     }
 }

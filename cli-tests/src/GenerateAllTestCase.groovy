@@ -1,11 +1,11 @@
 class GenerateAllTestCase extends AbstractCliTestCase {
 	
-	GenerateAllTestCase() {
+	protected void setUp() {
+		super.setUp()
     	def appSource = new File(cliTestsDir, "testing-app")
     	workDir = new File(baseWorkDir, "generate-all-testing-app")
 		copyDir(appSource, workDir)
-		execute(["upgrade", "-non-interactive"])
-		assertEquals("upgrade failed", 0, waitForProcess())
+		upgrade()
 	}
 	
     void testGenerateAllForDomainInRootPackage() {
