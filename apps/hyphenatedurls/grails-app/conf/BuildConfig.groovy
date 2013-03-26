@@ -15,6 +15,7 @@ grails.project.dependency.resolution = {
         grailsHome()
         grailsCentral()
         mavenCentral()
+        mavenRepo "http://repo.grails.org/grails/core"
 
         // uncomment these to enable remote dependency resolution from public Maven repositories
         //mavenCentral()
