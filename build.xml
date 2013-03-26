@@ -51,26 +51,29 @@
 	<target name="show-failures">
 		<groovy>
 			def reportsDir = new File('reports')
-			if (reportsDir.exists()) {
-				reportsDir.eachDir { dir ->
-					def reportFile = new File("$dir/TESTS-TestSuites.xml")
+			if (!reportsDir.exists()) {
+				return
+			}
 
-					if (reportFile.exists()) {
-						def xml = new XmlSlurper().parse(reportFile)
-						def errors = xml.testsuite.@errors.text()
-						if (errors) {
-							errors = errors.toInteger()
-							if (errors > 0) {
-								println "$dir.name has $errors errors"
-							}
-						}
-						def failures = xml.testsuite.@failures.text()
-						if (failures) {
-							failures = failures.toInteger()
-							if (failures > 0) {
-								println "$dir.name has $failures failures"
-							}
-						}
+			reportsDir.eachDir { dir ->
+				def reportFile = new File("$dir/TESTS-TestSuites.xml")
+				if (!reportFile.exists()) {
+					return
+				}
+
+				def xml = new XmlSlurper().parse(reportFile)
+				def errors = xml.testsuite.@errors.text()
+				if (errors) {
+					errors = errors.toInteger()
+					if (errors > 0) {
+						println "$dir.name has $errors errors"
+					}
+				}
+				def failures = xml.testsuite.@failures.text()
+				if (failures) {
+					failures = failures.toInteger()
+					if (failures > 0) {
+						println "$dir.name has $failures failures"
 					}
 				}
 			}
@@ -80,8 +83,7 @@
 	<target name="-functional-test-scripts" unless="skipScripts">
 		<delete dir="target/scripts" failonerror="false" />
 		<mkdir dir="target/scripts" />
-		<groovy>
-<![CDATA[
+		<groovy><![CDATA[
 			String scriptName = ant.antProject.properties."test.script.name"
 			def scriptFiles = new File("scripts").listFiles().findAll {
 				it.name.endsWith('.xml')
@@ -94,34 +96,31 @@
 					ant.ant(antfile:file, inheritRefs:true)
 				}
 			}
-			]]>
-		</groovy>
+		]]></groovy>
 	</target>
 
 	<target name="-functional-test-apps" unless="skipApps">
 		<groovy><![CDATA[
 			try {
 				def outcomes = []
-				def failure = false
-				def grailsInvocationCounter = 0
+				boolean failure = false
+				int grailsInvocationCounter = 0
 				new File('apps').eachDir { appDir ->
 
 					properties.projectName = appDir.name
-					// skip webtest based tests until plugin is fixed
-					if (properties.projectName == 'HelloWorld') return
-					
+
 					// if the appToTest system property is set, then skip all other apps
 					if (properties.appToTest && !properties.appToTest.equals(properties.projectName)) {
 						ant.echo message: "Skipping app: ${properties.projectName}"
 						return
 					}
-					def appName = ant.antProject.properties."test.app.name"
+
+					String appName = ant.antProject.properties."test.app.name"
 					if (appName && appName != appDir.name) return
 
-					// Clear any existing webtest and functional test plugins.
-					ant.echo message: "Delete existing webtest/functional test plugins"
+					// Clear any existing functional test plugins.
+					ant.echo message: "Delete existing functional test plugins"
 					ant.delete(includeemptydirs: true) {
-						fileset(dir: appDir.path, includes: "**/webtest-*/**/*")
 						fileset(dir: appDir.path, includes: "**/functional-test-*/**/*")
 					}
 
@@ -134,21 +133,21 @@
 
 					// Install the appropriate testing plugin, run the tests, and check the reportsDir
 					if (new File(appDir, "test/functional").exists()) {
-						if((properties.projectName in ['gsp-reload-app'])) {
-							// Workaround for GRAILS-8189 
+						if ((properties.projectName in ['gsp-reload-app'])) {
+							// Workaround for GRAILS-8189
 							ant.grails(command:'compile', projectName:properties.projectName, resultID:grailsInvocationCounter++)
 						}
-						
-						if(!(properties.projectName in ['gsp-reload-app'])) {
+
+						if (!(properties.projectName in ['gsp-reload-app'])) {
 							// Run the tests.
 							ant.grails(command:"test-app", args: "functional: --dev-mode", environment:"dev", projectName:properties.projectName, resultID:grailsInvocationCounter++)
 							outcomes << "Functional tests in application ${properties.projectName}: " +
 										((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
-	
+
 							if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
 								failure = true
 							}
-	
+
 							// Copy reports
 							ant.mkdir(dir:"reports/${properties.projectName}")
 							ant.copy(todir:"reports/${properties.projectName}") {
@@ -158,7 +157,7 @@
 
 						// Run the WAR tests.
 						def grailsWarTestCmdArgs = [command:"test-app", args: "-war functional: --dev-mode", environment:"test", projectName:properties.projectName, resultID:grailsInvocationCounter++]
-						if(properties.projectName in ['gsp-reload-app']) {
+						if (properties.projectName in ['gsp-reload-app']) {
 							grailsWarTestCmdArgs.args='functional: -war'
 							grailsWarTestCmdArgs.environment='production'
 						}
@@ -176,29 +175,7 @@
 							fileset(dir:"${properties.checkoutDir}/${properties.projectName}/target/test-reports")
 						}
 					}
-					else if (new File(appDir, "webtest").exists()) {
-						// Install the WebTest plugin.
-						ant.grails(command:"install-plugin", args: "webtest", projectName:properties.projectName, resultID:grailsInvocationCounter++)
-						if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
-							outcomes << "Couldn't install webtest plugin into application ${properties.projectName}"
-							failure = true
-						}
-
-						// Run the tests.
-						ant.grails(command:"test-app", args: "functional:webtest", environment:"test", projectName:properties.projectName, resultID:grailsInvocationCounter++)
-						outcomes << "Functional tests in application ${properties.projectName}: " +
-										((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
-
-						if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
-							failure = true
-						}
-
-						// Copy reports
-						ant.mkdir(dir:"reports/${properties.projectName}")
-						ant.copy(todir:"reports/${properties.projectName}") {
-							fileset(dir:"${properties.checkoutDir}/${properties.projectName}/target/test-reports")
-						}
-					} else {
+					else {
 						// Run unit & integration tests.
 						ant.grails(command:"test-app", args: "", environment:"test", projectName:properties.projectName, resultID:grailsInvocationCounter++)
 						outcomes << "Integration/unit tests in application ${properties.projectName}: " +
@@ -249,7 +226,7 @@ class Blog {
 	String title
 }
 '''
-			</groovy> 
+			</groovy>
 			<grails projectName="${newWebApp}" command="generate-all blog" dir="${newWebApp.dir}" failonerror="true"/>
 
 			<parallel>
