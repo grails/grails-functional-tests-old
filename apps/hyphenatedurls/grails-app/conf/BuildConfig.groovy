@@ -37,6 +37,7 @@ grails.project.dependency.resolution = {
 
         compile ":jquery:1.8.3"
         compile ":resources:1.1.2"
+        compile ':scaffolding:1.0.BUILD-SNAPSHOT'
 
         runtime ":database-migration:1.0"
 
