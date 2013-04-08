@@ -42,5 +42,7 @@ grails.project.dependency.resolution = {
         runtime ":database-migration:1.0"
 
         test ':functional-test:2.0.RC1'
+
+        compile ':scaffolding:1.0.BUILD-SNAPSHOT'
     }
 }

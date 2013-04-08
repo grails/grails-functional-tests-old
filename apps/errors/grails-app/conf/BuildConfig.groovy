@@ -53,5 +53,6 @@ grails.project.dependency.resolution = {
         runtime ":hibernate:3.6.10.BUILD-SNAPSHOT"
         build ":tomcat:7.0.37.BUILD-SNAPSHOT"
         test ':functional-test:2.0.RC1'
+        compile ':scaffolding:1.0.BUILD-SNAPSHOT'
     }
 }
