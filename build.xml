@@ -62,19 +62,13 @@
 				}
 
 				def xml = new XmlSlurper().parse(reportFile)
-				def errors = xml.testsuite.@errors.text()
+				int errors = ([0] + xml.testsuite.@errors.collect { (it.text() ?: '0').toInteger() }).sum()
 				if (errors) {
-					errors = errors.toInteger()
-					if (errors > 0) {
-						println "$dir.name has $errors errors"
-					}
+					println "$dir.name has $errors errors"
 				}
-				def failures = xml.testsuite.@failures.text()
-				if (failures) {
-					failures = failures.toInteger()
-					if (failures > 0) {
-						println "$dir.name has $failures failures"
-					}
+				int failures = ([0] + xml.testsuite.@failures.collect { (it.text() ?: '0').toInteger() }).sum()
+				if (failures > 0) {
+					println "$dir.name has $failures failures"
 				}
 			}
 		</groovy>
