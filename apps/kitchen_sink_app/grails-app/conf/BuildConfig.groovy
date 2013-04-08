@@ -23,9 +23,7 @@ grails.project.dependency.resolution = {
         mavenCentral()
     }
     dependencies {
-        // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-
-        // runtime 'mysql:mysql-connector-java:5.1.16'
+        runtime "org.grails:grails-test:$grailsVersion"
     }
 
     plugins {
