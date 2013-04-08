@@ -107,11 +107,6 @@
 				int grailsInvocationCounter = 0
 				new File('apps').eachDir { appDir ->
 
-					if (appDir.name == 'kitchen_sink_app') {
-						// temporarily ignoring this app due to NoClassDefFound errors
-						return
-					}
-
 					properties.projectName = appDir.name
 
 					// if the appToTest system property is set, then skip all other apps
