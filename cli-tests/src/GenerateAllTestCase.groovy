@@ -6,6 +6,7 @@ class GenerateAllTestCase extends AbstractCliTestCase {
     	workDir = new File(baseWorkDir, "generate-all-testing-app")
 		copyDir(appSource, workDir)
 		upgrade()
+		execute([ 'compile' ])
 	}
 	
     void testGenerateAllForDomainInRootPackage() {

@@ -34,6 +34,8 @@ abstract class AbstractCliTestCase extends GroovyTestCase {
     protected void upgrade() {
         execute(["upgrade", "--non-interactive", "--force"])
         assertEquals("upgrade failed", 0, waitForProcess())
+        execute(["compile", "--non-interactive"])
+        assertEquals("compile failed", 0, waitForProcess())
     }
 
     /**

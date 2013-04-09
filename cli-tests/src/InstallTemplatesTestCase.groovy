@@ -13,6 +13,9 @@ class InstallTemplatesTestCase extends AbstractCliTestCase {
 		assertTrue appDir.exists()
 		assertFalse new File(appDir, 'src/templates').exists()
 
+		execute(['compile'])
+		assertEquals 0, waitForProcess()
+
 		execute(['install-templates'])
 		assertEquals 0, waitForProcess()
 /*		assertTrue output.contains('Templates installed successfully')*/
