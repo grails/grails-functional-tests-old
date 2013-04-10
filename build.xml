@@ -99,6 +99,42 @@
 				def outcomes = []
 				boolean failure = false
 				int grailsInvocationCounter = 0
+
+				def failed = { boolean tests = true ->
+					boolean ok = properties["testResult_${grailsInvocationCounter - 1}"].toInteger() == 0
+					if (ok && tests) {
+						int totalErrors = 0
+						int totalFailures = 0
+						for (reportsDir in [new File('reports', properties.projectName), new File('reports', properties.projectName + '_war')]) {
+							if (reportsDir.exists()) {
+								def reportFile = new File(reportsDir, "TESTS-TestSuites.xml")
+								if (reportFile.exists()) {
+									def xml = new XmlSlurper().parse(reportFile)
+									totalErrors += ([0] + xml.testsuite.@errors.collect { (it.text() ?: '0').toInteger() }).sum()
+									totalFailures += ([0] + xml.testsuite.@failures.collect { (it.text() ?: '0').toInteger() }).sum()
+								}
+							}
+						}
+						if (totalErrors > 0 || totalFailures > 0) ok = false
+					}
+					if (!ok) failure = true
+					!ok
+				}
+
+				def runGrails = { String command, String args = '', String environment = 'development' ->
+					ant.grails(command: command, args: args, environment: environment,
+					           projectName: properties.projectName, resultID: grailsInvocationCounter++)
+				}
+
+				def copyReports = { boolean war ->
+					String dir = "reports/${properties.projectName}"
+					if (war) dir += '_war'
+					ant.mkdir(dir: dir)
+					ant.copy(todir: dir) {
+						fileset(dir:"${properties.checkoutDir}/${properties.projectName}/target/test-reports")
+					}
+				}
+
 				new File('apps').eachDir { appDir ->
 
 					properties.projectName = appDir.name
@@ -119,71 +155,42 @@
 					}
 
 					// First upgrade.
-					ant.grails(command:"upgrade -force", projectName:properties.projectName, resultID:grailsInvocationCounter++)
-					if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
+					runGrails("upgrade -force")
+					if (failed(false)) {
 						outcomes << "Couldn't upgrade application ${properties.projectName}"
-						failure = true
 					}
 
 					// Install the appropriate testing plugin, run the tests, and check the reportsDir
 					if (new File(appDir, "test/functional").exists()) {
 						if ((properties.projectName in ['gsp-reload-app'])) {
 							// Workaround for GRAILS-8189
-							ant.grails(command:'compile', projectName:properties.projectName, resultID:grailsInvocationCounter++)
+							runGrails('compile')
 						}
 
 						if (!(properties.projectName in ['gsp-reload-app'])) {
 							// Run the tests.
-							ant.grails(command:"test-app", args: "functional: --dev-mode", environment:"dev", projectName:properties.projectName, resultID:grailsInvocationCounter++)
-							outcomes << "Functional tests in application ${properties.projectName}: " +
-										((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
-
-							if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
-								failure = true
-							}
-
-							// Copy reports
-							ant.mkdir(dir:"reports/${properties.projectName}")
-							ant.copy(todir:"reports/${properties.projectName}") {
-								fileset(dir:"${properties.checkoutDir}/${properties.projectName}/target/test-reports")
-							}
+							runGrails("test-app", "functional: --dev-mode", "dev")
+							copyReports(false)
+							outcomes << "Functional tests in application ${properties.projectName}: " + (failed() ? "Failed" : "OK")
 						}
 
 						// Run the WAR tests.
-						def grailsWarTestCmdArgs = [command:"test-app", args: "-war functional: --dev-mode", environment:"test", projectName:properties.projectName, resultID:grailsInvocationCounter++]
+						String warArgs = "-war functional: --dev-mode"
+						String warEnv = "test"
 						if (properties.projectName in ['gsp-reload-app']) {
-							grailsWarTestCmdArgs.args='functional: -war'
-							grailsWarTestCmdArgs.environment='production'
-						}
-						ant.grails(grailsWarTestCmdArgs)
-						outcomes << "Functional tests in application ${properties.projectName}: " +
-									((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
-
-						if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
-							failure = true
+							warArgs = 'functional: -war'
+							warEnv ='production'
 						}
 
-						// Copy reports
-						ant.mkdir(dir:"reports/${properties.projectName}_war")
-						ant.copy(todir:"reports/${properties.projectName}_war") {
-							fileset(dir:"${properties.checkoutDir}/${properties.projectName}/target/test-reports")
-						}
+						runGrails("test-app", warArgs, warEnv)
+						copyReports(true)
+						outcomes << "Functional tests in application ${properties.projectName}: " + (failed() ? "Failed" : "OK")
 					}
 					else {
 						// Run unit & integration tests.
-						ant.grails(command:"test-app", args: "", environment:"test", projectName:properties.projectName, resultID:grailsInvocationCounter++)
-						outcomes << "Integration/unit tests in application ${properties.projectName}: " +
-										((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
-
-						if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
-							failure = true
-						}
-
-						// Copy reports
-						ant.mkdir(dir:"reports/${properties.projectName}")
-						ant.copy(todir:"reports/${properties.projectName}") {
-							fileset(dir:"${properties.checkoutDir}/${properties.projectName}/target/test-reports")
-						}
+						runGrails("test-app", "",  "test")
+						copyReports(false)
+						outcomes << "Integration/unit tests in application ${properties.projectName}: " + (failed() ? "Failed" : "OK")
 					}
 				}
 
@@ -215,7 +222,7 @@
 			<grails projectName="${newWebApp}" command="clean" dir="${newWebApp.dir}" failonerror="true"/>
 			<grails projectName="${newWebApp}" command="compile" dir="${newWebApp.dir}" failonerror="true"/>
 			<groovy>
-			new File("${properties['newWebApp.dir']}/grails-app/domain/Blog.groovy").text = '''
+			new File(properties['newWebApp.dir'], "grails-app/domain/Blog.groovy").text = '''
 class Blog {
 	String title
 }
