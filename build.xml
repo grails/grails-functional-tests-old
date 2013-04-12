@@ -137,11 +137,6 @@
 
 				new File('apps').eachDir { appDir ->
 
-                    // temporary as we debug CI server issues
-                    if('spring' != appDir.name) {
-                        return
-                    }
-
 					properties.projectName = appDir.name
 
 					// if the appToTest system property is set, then skip all other apps
