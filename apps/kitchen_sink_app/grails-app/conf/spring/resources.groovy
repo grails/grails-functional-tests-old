@@ -16,4 +16,6 @@ beans = {
     }
 
     addressConverter databinding.converters.AddressValueConverter
+    formattedAddressConverter databinding.converters.FormattedAddressValueConverter
+    formattedStringConverter databinding.converters.FormattedStringValueConverter
 }

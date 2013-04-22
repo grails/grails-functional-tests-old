@@ -28,6 +28,23 @@ class DatabindingController {
         def fmt = new java.text.SimpleDateFormat("'Month:' MM ', Date:' dd', Year:' yyyy")
         render fmt.format(person.birthDate)
     }
+
+    def testCustomAddressBindingFormat() {
+        def person = new PersonWithInjectedBeanProperty(params)
+
+        def sb = new StringBuffer()
+        sb << "Home City: ${person.homeAddress?.city}, Home State: ${person.homeAddress?.state}<br/>"
+        sb << "Work City: ${person.workAddress?.city}, Work State: ${person.workAddress?.state}<br/>"
+        sb << "Vacation City: ${person.vacationAddress?.city}, Vacation State: ${person.vacationAddress?.state}"
+
+        render sb.toString()
+    }
+
+    def testCustomStringBindingFormat() {
+        def person = new PersonWithInjectedBeanProperty(params)
+
+        render "${person.name} is a ${person.title}"
+    }
 }
 
 class MyCommandObject {
