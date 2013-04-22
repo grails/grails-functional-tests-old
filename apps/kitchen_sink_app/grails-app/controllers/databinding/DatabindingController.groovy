@@ -17,6 +17,11 @@ class DatabindingController {
         render "Name: ${person.name}, Widget Name: ${person.widget?.name}, State: ${person.state}, Zip: ${person.zip}"
     }
     def foo2(){}
+
+    def testCustomBindingConverter() {
+        def person = new PersonWithInjectedBeanProperty(params)
+        render "City: ${person.homeAddress?.city}, State: ${person.homeAddress?.state}"
+    }
 }
 
 class MyCommandObject {

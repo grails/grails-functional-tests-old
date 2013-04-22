@@ -6,6 +6,7 @@ class PersonWithInjectedBeanProperty {
     String zip
     // spring injected bean...
     Widget widget
+    Address homeAddress
     
     static transients = ['widget']
     

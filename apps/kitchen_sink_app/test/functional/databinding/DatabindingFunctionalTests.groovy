@@ -18,4 +18,9 @@ class DatabindingFunctionalTests extends functionaltestplugin.FunctionalTestCase
         assertStatus 200
         assertContentContains 'Name: My Name, Widget Name: Good Name, State: null, Zip: 12345'       
     }
+
+    void testBindingWithCustomValueConverter() {
+        get '/databinding/testCustomBindingConverter?homeAddress=OFallon:Missouri'
+        assertContentContains 'city: OFallon, State: Missouri'
+    }
 }

@@ -14,4 +14,6 @@ beans = {
     myValidationHelper(commandobjects.MyValidationHelper) {
         minimumValidValue = 42
     }
+
+    addressConverter databinding.converters.AddressValueConverter
 }
