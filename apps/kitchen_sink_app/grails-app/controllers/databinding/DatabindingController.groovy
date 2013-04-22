@@ -22,6 +22,12 @@ class DatabindingController {
         def person = new PersonWithInjectedBeanProperty(params)
         render "City: ${person.homeAddress?.city}, State: ${person.homeAddress?.state}"
     }
+
+    def testCustomDateBindingFormat() {
+        def person = new PersonWithInjectedBeanProperty(params)
+        def fmt = new java.text.SimpleDateFormat("'Month:' MM ', Date:' dd', Year:' yyyy")
+        render fmt.format(person.birthDate)
+    }
 }
 
 class MyCommandObject {

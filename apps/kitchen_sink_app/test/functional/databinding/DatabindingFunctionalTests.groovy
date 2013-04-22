@@ -23,4 +23,9 @@ class DatabindingFunctionalTests extends functionaltestplugin.FunctionalTestCase
         get '/databinding/testCustomBindingConverter?homeAddress=OFallon:Missouri'
         assertContentContains 'city: OFallon, State: Missouri'
     }
+
+    void testCustomDateBindingFormat() {
+        get '/databinding/testCustomDateBindingFormat?birthDate=11151969'
+        assertContentContains 'Month: 11, Date: 15, Year: 1969'
+    }
 }
