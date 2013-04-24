@@ -40,4 +40,35 @@ class DatabindingFunctionalTests extends functionaltestplugin.FunctionalTestCase
         get '/databinding/testCustomStringBindingFormat?name=Jeff&title=Engineer'
         assertContentContainsStrict 'Jeff is a ENGINEER'
     }
+
+    void testBindingStringToSetOfInteger() {
+        /*
+        this test simulates the steps described in http://jira.grails.org/browse/GRAILS-8991 to duplicate the problem
+         */
+        get '/numberParent/create'
+        assertStatus 200
+        assertTitle 'Create Parent'
+
+        form {
+            selects['child.someOtherIds'].select '3'
+            selects['someIds'].select '3'
+            click 'create'
+        }
+
+        assertStatus 200
+        assertTitle 'Show Parent'
+
+        click 'Edit'
+        form {
+            selects['child.someOtherIds'].deselect '3'
+            selects['child.someOtherIds'].select '4'
+            selects['someIds'].deselect '3'
+            selects['someIds'].select '5'
+            click '_action_update'
+        }
+        assertStatus 200
+        assertTitle 'Show Parent'
+        assertContentContains 'Parent 1 updated'
+        assertContentContains 'NumberChild Ids: [4]'
+    }
 }
