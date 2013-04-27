@@ -1,5 +1,6 @@
 <project name="grails-functional-test" default="functional-test">
 
+
 	<!-- optional local properties -->
 	<property file='local.properties'/>
 
