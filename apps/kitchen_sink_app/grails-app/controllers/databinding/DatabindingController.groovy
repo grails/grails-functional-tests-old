@@ -1,5 +1,7 @@
 package databinding
 
+import org.grails.databinding.BindUsing
+
 class DatabindingController {
     
     def coTest(MyCommandObject co) {
@@ -45,6 +47,17 @@ class DatabindingController {
 
         render "${person.name} is a ${person.title}"
     }
+
+    def bindCommaSeparatedList(Band band) {
+        [band: band]
+    }
+}
+
+class Band {
+    @BindUsing({ object, source ->
+        source['members'].split(',')
+    })
+    List<String> members
 }
 
 class MyCommandObject {

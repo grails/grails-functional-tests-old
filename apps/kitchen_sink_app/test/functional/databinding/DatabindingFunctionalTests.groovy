@@ -71,4 +71,15 @@ class DatabindingFunctionalTests extends functionaltestplugin.FunctionalTestCase
         assertContentContains 'Parent 1 updated'
         assertContentContains 'NumberChild Ids: [4]'
     }
+
+    void testBindingCommaSeparatedListToList() {
+        get '/databinding/bindCommaSeparatedList?members=Harris,Dickinson,McBrain,Smith,Murray'
+        assertStatus 200
+
+        assertContentContains '<li>Harris</li>'
+        assertContentContains '<li>Dickinson</li>'
+        assertContentContains '<li>McBrain</li>'
+        assertContentContains '<li>Smith</li>'
+        assertContentContains '<li>Murray</li>'
+    }
 }
