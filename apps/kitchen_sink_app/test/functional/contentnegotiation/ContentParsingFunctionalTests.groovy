@@ -35,4 +35,17 @@ class ContentParsingFunctionalTests extends functionaltestplugin.FunctionalTestC
         assertStatus 200
         assertContentContains 'JSON post! by Graeme Rocher'
     }
+
+    void testBindingNestedJsonProperties() {
+        post '/post/displayPostAndPerson', {
+            headers.'Content-Type' = 'application/json'
+            body {
+                '{"author":"Jeff Scott Brown","message":"King Crimson Rocks","person":{"name":"Robert Fripp"}}'
+            }
+        }
+        assertStatus 200
+        assertContentContains 'Message: King Crimson Rocks'
+        assertContentContains 'Author: Jeff Scott Brown'
+        assertContentContains 'Person Name: Robert Fripp'
+    }
 }
