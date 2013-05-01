@@ -82,4 +82,25 @@ class DatabindingFunctionalTests extends functionaltestplugin.FunctionalTestCase
         assertContentContains '<li>Smith</li>'
         assertContentContains '<li>Murray</li>'
     }
+
+    void testAutoGrowCollectionLimitSetInConfig() {
+        def paramString = new StringBuffer('?name=Pivotal')
+        10.times {
+            paramString << "&addresses[${it}].city=City${it}&addresses[${it}].state=State${it}"
+        }
+        get "/business/createBusiness${paramString}"
+        assertStatus 200
+
+        assertContentContains '<h2>Business name: Pivotal</h2>'
+        assertContentContains '<h2>Number Of Addresses: 8</h2>'
+        assertContentContains '<li>City0, State0</li>'
+        assertContentContains '<li>City1, State1</li>'
+        assertContentContains '<li>City2, State2</li>'
+        assertContentContains '<li>City3, State3</li>'
+        assertContentContains '<li>City4, State4</li>'
+        assertContentContains '<li>City5, State5</li>'
+        assertContentContains '<li>City6, State6</li>'
+        assertContentContains '<li>City7, State7</li>'
+
+    }
 }
