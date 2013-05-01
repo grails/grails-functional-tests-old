@@ -139,10 +139,8 @@ class ErrorHandlingFunctionalTests extends functionaltestplugin.FunctionalTestCa
         assertContentDoesNotContain "aabbccdd"
     }
 
+    // GRAILS-6650
     void testWithStaticGspContentInErrorPage() {
-           // GRAILS-6650
-        if (notYetImplemented()) return
-
            // this one throws a NullPointerException which is mapped in UrlMappings
         get '/home/renderError'
         assertStatus 500
