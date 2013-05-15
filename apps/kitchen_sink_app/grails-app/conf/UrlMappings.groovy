@@ -25,6 +25,23 @@ class UrlMappings {
         }
 
         "/containsBean/$beanName"(controller: 'namespaceInspector', action: 'containsBean')
+
+        "/$controllerNamespace/$controller/$action?"()
+
+        "/invokePrimaryController" {
+            controller = 'namespaced'
+            controllerNamespace = 'primary'
+        }
+
+        "/invokeSecondaryController" {
+            controller = 'namespaced'
+            controllerNamespace = 'secondary'
+        }
+
+        "/nonNamespacedController/$action?" {
+            controller = 'namespaced'
+        }
+
         "/"(view:"/index")
         "500"(view:'/error')
         "404"(controller: 'i18nError', action: 'pageNotFound')
