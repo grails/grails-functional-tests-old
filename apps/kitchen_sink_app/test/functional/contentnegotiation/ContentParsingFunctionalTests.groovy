@@ -30,10 +30,64 @@ class ContentParsingFunctionalTests extends functionaltestplugin.FunctionalTestC
             headers.'Content-Type' = 'application/json'
             body {
                 '{"class":"Post","author":"Graeme Rocher","message":"JSON post!"}'
-            }
+            } 
         }
         assertStatus 200
         assertContentContains 'JSON post! by Graeme Rocher'
+    }
+
+    void testXmlCommandObjectBinding() {
+        def sw = new StringWriter()
+        def mkb = new MarkupBuilder(sw)
+        mkb.post {
+            delegate.width '8'
+            delegate.height '7'
+        }
+
+        post '/post/createWidget', {
+            headers.'Content-Type' = 'application/xml'
+            body {
+                sw.toString()
+            }
+        }
+        assertStatus 200
+        assertContentContains 'Something went wrong'
+
+        sw = new StringWriter()
+        mkb = new MarkupBuilder(sw)
+        mkb.post {
+            delegate.width '8'
+            delegate.height '6'
+        }
+
+        post '/post/createWidget', {
+            headers.'Content-Type' = 'application/xml'
+            body {
+                sw.toString()
+            }
+        }
+        assertStatus 200
+        assertContentContains 'Area is 48'
+    }
+
+    void testJsonCommandObjectBinding() {
+        post '/post/createWidget', {
+            headers.'Content-Type' = 'application/json'
+            body {
+                '{"width":8,"height":3}'
+            } 
+        }
+        assertStatus 200
+        assertContentContains 'Something went wrong'
+
+        post '/post/createWidget', {
+            headers.'Content-Type' = 'application/json'
+            body {
+                '{"width":8,"height":4}'
+            } 
+        }
+        assertStatus 200
+        assertContentContains 'Area is 32'
     }
 
     void testBindingNestedJsonProperties() {
