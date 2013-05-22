@@ -54,5 +54,19 @@ class NamespacedControllerFunctionalTests extends functionaltestplugin.Functiona
         assertStatus 200
         assertContentContains 'Rendered by the demo action in the namespace.gamma.NamespacedController controller'
     }
+
+    void testRedirectToNamespacedControllers() {
+        get '/namespaceInspector/redirectToPrimary'
+        assertStatus 200
+        assertContentContains 'Rendered by the index action in the namespace.alpha.NamespacedController controller'
+
+        get '/namespaceInspector/redirectToSecondary'
+        assertStatus 200
+        assertContentContains 'Rendered by the index action in the namespace.beta.NamespacedController controller'
+
+        get '/namespaceInspector/redirectToNonNamespaced'
+        assertStatus 200
+        assertContentContains 'Rendered by the index action in the namespace.gamma.NamespacedController controller'
+    }
 }
 
