@@ -11,6 +11,20 @@ class NamespacedControllerFunctionalTests extends functionaltestplugin.Functiona
         assertContentContains '<a href="/kitchen_sink_app/nonNamespacedController/index">Click to visit the controller that does not specify a namespace</a>'
     }
 
+    void testControllerNamespaceWithNamedArgumentsInMapping() {
+        get '/anotherRouteToPrimaryController'
+        assertStatus 200
+        assertContentContains 'Rendered by the index action in the namespace.alpha.NamespacedController controller'
+
+        get '/anotherRouteToSecondaryController'
+        assertStatus 200
+        assertContentContains 'Rendered by the index action in the namespace.beta.NamespacedController controller'
+
+        get '/anotherRouteToNonNamespacedController'
+        assertStatus 200
+        assertContentContains 'Rendered by the index action in the namespace.gamma.NamespacedController controller'
+    }
+
     void testControllerNamespaceAsVariableInUrlMapping() {
         get '/primary/namespaced'
         assertStatus 200

@@ -33,14 +33,20 @@ class UrlMappings {
             namespace = 'primary'
         }
 
+        "/anotherRouteToPrimaryController"(controller: 'namespaced', namespace: 'primary')
+
         "/invokeSecondaryController" {
             controller = 'namespaced'
             namespace = 'secondary'
         }
 
+        "/anotherRouteToSecondaryController"(controller: 'namespaced', namespace: 'secondary')
+
         "/nonNamespacedController/$action?" {
             controller = 'namespaced'
         }
+
+        "/anotherRouteToNonNamespacedController"(controller: 'namespaced')
 
         "/"(view:"/index")
         "500"(view:'/error')
