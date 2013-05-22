@@ -2,14 +2,16 @@ package namespace
 
 class NamespacedControllerFunctionalTests extends functionaltestplugin.FunctionalTestCase {
 
-    void testNamespacedControllers() {
+    void testReverseUrlMappingsForNamespacedControllers() {
         get '/namespaceInspector/generateLinksToNamespacedControllers'
         assertStatus 200
 
         assertContentContains '<a href="/kitchen_sink_app/invokePrimaryController">Click to visit the controller in the primary namespace</a>'
         assertContentContains '<a href="/kitchen_sink_app/invokeSecondaryController">Click to visit the controller in the secondary namespace</a>'
         assertContentContains '<a href="/kitchen_sink_app/nonNamespacedController/index">Click to visit the controller that does not specify a namespace</a>'
+    }
 
+    void testControllerNamespaceAsVariableInUrlMapping() {
         get '/primary/namespaced'
         assertStatus 200
         assertContentContains 'Rendered by the index action in the namespace.alpha.NamespacedController controller'
@@ -25,7 +27,9 @@ class NamespacedControllerFunctionalTests extends functionaltestplugin.Functiona
         get '/secondary/namespaced/demo'
         assertStatus 200
         assertContentContains 'Rendered by the demo action in the namespace.beta.NamespacedController controller'
+    }
 
+    void testControllerNamespaceWithHardcodedNamespaceInUrlMapping() {
         get '/invokePrimaryController'
         assertStatus 200
         assertContentContains 'Rendered by the index action in the namespace.alpha.NamespacedController controller'
@@ -33,7 +37,9 @@ class NamespacedControllerFunctionalTests extends functionaltestplugin.Functiona
         get '/invokeSecondaryController'
         assertStatus 200
         assertContentContains 'Rendered by the index action in the namespace.beta.NamespacedController controller'
+    }
 
+    void testNonNamespacedControllerWithSameNameAsNamespacedControllers() {
         get '/nonNamespacedController'
         assertStatus 200
         assertContentContains 'Rendered by the index action in the namespace.gamma.NamespacedController controller'
