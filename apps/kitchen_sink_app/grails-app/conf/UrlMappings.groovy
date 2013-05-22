@@ -26,16 +26,16 @@ class UrlMappings {
 
         "/containsBean/$beanName"(controller: 'namespaceInspector', action: 'containsBean')
 
-        "/$controllerNamespace/$controller/$action?"()
+        "/$namespace/$controller/$action?"()
 
         "/invokePrimaryController" {
             controller = 'namespaced'
-            controllerNamespace = 'primary'
+            namespace = 'primary'
         }
 
         "/invokeSecondaryController" {
             controller = 'namespaced'
-            controllerNamespace = 'secondary'
+            namespace = 'secondary'
         }
 
         "/nonNamespacedController/$action?" {
