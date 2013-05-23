@@ -1,6 +1,49 @@
 package commandobjects
 
+import groovy.xml.MarkupBuilder
+
 class CommandObjectsFunctionalTests extends functionaltestplugin.FunctionalTestCase {
+
+    void testRetrievingCommandObjectFromDatabase() {
+        get '/commandObjectsTest/createGadget?name=ALPHA&age=42'
+        assertStatus 200
+        assertContentContains 'Create succeeded. id: 1, name: ALPHA, age: 42'
+
+        get '/commandObjectsTest/updateGadget?id=1&name=BETA'
+        assertStatus 200
+        assertContentContains 'Gadget was loaded. id: 1, name: BETA, age: 42'
+
+        post '/commandObjectsTest/updateGadget', {
+            headers.'Content-Type' = 'application/json'
+            body {
+                '{"id": "1", "name":"GAMMA"}'
+            }
+        }
+        assertStatus 200
+        assertContentContains 'Gadget was loaded. id: 1, name: GAMMA, age: 42'
+
+        def sw = new StringWriter()
+        def mkb = new MarkupBuilder(sw)
+        mkb.post {
+            delegate.id '1'
+            delegate.name 'DELTA'
+        }
+
+        post '/commandObjectsTest/updateGadget', {
+            headers.'Content-Type' = 'application/xml'
+            body {
+                sw.toString()
+            }
+        }
+        assertStatus 200
+        assertContentContains 'Gadget was loaded. id: 1, name: DELTA, age: 42'
+    }
+
+    void testCommandObjectIdNotFound() {
+        get '/commandObjectsTest/updateGadget?id=2112&name=BETA'
+        assertStatus 200
+        assertContentContains 'gadget is null'
+    }
     
     void testConstraintsProperty() {
         get '/commandObjectsTest/testConstraintsProperty'
