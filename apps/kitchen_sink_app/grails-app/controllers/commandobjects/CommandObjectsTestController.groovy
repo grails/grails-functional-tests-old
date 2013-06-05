@@ -54,6 +54,22 @@ class CommandObjectsTestController {
     def commandUsingBeanForValidation(CommandUsingBeanForValidation co) {
         render "Valid?: ${!co.hasErrors()}"
     }
+
+    def updateGadget(Gadget gadget) {
+        if(gadget == null) {
+            render 'gadget is null'
+        } else {
+            render "Gadget was loaded.  id: ${gadget.id}, name: ${gadget.name}, age: ${gadget.age}"
+        }
+    }
+ 
+    def createGadget(Gadget gadget) {
+        if(gadget.save()) {
+            render "Create succeeded. id: ${gadget.id}, name: ${gadget.name}, age: ${gadget.age}"
+        } else {
+            render 'something went wrong'
+        }
+    }
 }
 
 class CommandUsingBeanForValidation {
