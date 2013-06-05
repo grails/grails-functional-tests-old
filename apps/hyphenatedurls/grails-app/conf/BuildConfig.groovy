@@ -1,5 +1,6 @@
 grails.servlet.version = "2.5" // Change depending on target container compliance (2.5 or 3.0)
 grails.project.work.dir="target/work"
+grails.project.dependency.resolver="maven"
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
     inherits("global") {
@@ -14,8 +15,8 @@ grails.project.dependency.resolution = {
         grailsPlugins()
         grailsHome()
         grailsCentral()
+        mavenLocal()
         mavenCentral()
-        mavenRepo "http://repo.grails.org/grails/core"
 
         // uncomment these to enable remote dependency resolution from public Maven repositories
         //mavenCentral()
@@ -32,17 +33,16 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        runtime ":hibernate:3.6.10.BUILD-SNAPSHOT"
-        build ":tomcat:7.0.37.BUILD-SNAPSHOT"
+        runtime ":hibernate:3.6.10.M3" // or ":hibernate4:4.1.11.BUILD-SNAPSHOT"
+        build ":tomcat:7.0.40"
+
 
         compile ":jquery:1.8.3"
         compile ":resources:1.1.2"
-        compile ':scaffolding:1.0.BUILD-SNAPSHOT'
+        compile ':scaffolding:1.0.0'
 
         runtime ":database-migration:1.0"
 
         test ':functional-test:2.0.RC1'
-
-        compile ':scaffolding:1.0.BUILD-SNAPSHOT'
     }
 }
