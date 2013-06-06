@@ -51,8 +51,8 @@ class CreateUnitTestTestCase extends AbstractCliTestCase {
         
         def appDir = new File(baseWorkDir, 'app1')
         
-        assertTrue 'unit test case was not created', new File(appDir, 'test/unit/com/demo/unit/DemoTests.groovy').exists()
-        assertFalse 'test with wrong name was created', new File(appDir, 'test/unit/com/demo/unit/DemoTestsTests.groovy').exists()
+        assertTrue 'unit test case was not created', new File(appDir, 'test/unit/com/demo/unit/DemoSpec.groovy').exists()
+        assertFalse 'test with wrong name was created', new File(appDir, 'test/unit/com/demo/unit/DemoSpecSpec.groovy').exists()
     }
 
     private copyDir(source, destination) {
