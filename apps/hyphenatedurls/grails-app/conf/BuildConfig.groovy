@@ -30,11 +30,18 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.16'
+        test 'net.sourceforge.htmlunit:htmlunit:2.12', {
+            // excludes 'xalan', 'xercesImpl'
+        }
+
     }
 
     plugins {
         runtime ":hibernate:3.6.10.M3" // or ":hibernate4:4.1.11.BUILD-SNAPSHOT"
-        build ":tomcat:7.0.40"
+        build ":tomcat:7.0.40.1", {
+            // exclude "tomcat-embed-logging-juli"
+            // exclude "org.apache.tomcat:tomcat-catalina-ant"
+        }
 
 
         compile ":jquery:1.8.3"
@@ -43,6 +50,8 @@ grails.project.dependency.resolution = {
 
         runtime ":database-migration:1.0"
 
-        test ':functional-test:2.0.RC1'
+        test ':functional-test:2.0.RC1', {
+            excludes 'htmlunit'
+        }
     }
 }
