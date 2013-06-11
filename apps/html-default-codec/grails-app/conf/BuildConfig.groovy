@@ -34,6 +34,9 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.16'
+        test 'net.sourceforge.htmlunit:htmlunit:2.12', {
+            // excludes 'xalan', 'xercesImpl'
+        }        
     }
 
     plugins {
@@ -45,6 +48,9 @@ grails.project.dependency.resolution = {
 
         runtime ":database-migration:1.0"
         
-        test ':functional-test:2.0.RC1'
+        test ':functional-test:2.0.RC1', {
+            excludes 'htmlunit'
+        }
+
     }
 }
