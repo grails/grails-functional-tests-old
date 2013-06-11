@@ -32,7 +32,7 @@ class InstallTemplatesTestCase extends AbstractCliTestCase {
 		assertTrue new File(appDir, 'src/templates/scaffolding/Controller.groovy').exists()
 		assertTrue new File(appDir, 'src/templates/scaffolding/create.gsp').exists()
 		assertTrue new File(appDir, 'src/templates/scaffolding/edit.gsp').exists()
-		assertTrue new File(appDir, 'src/templates/scaffolding/list.gsp').exists()
+		assertTrue new File(appDir, 'src/templates/scaffolding/index.gsp').exists()
 		assertTrue new File(appDir, 'src/templates/scaffolding/renderEditor.template').exists()
 		assertTrue new File(appDir, 'src/templates/scaffolding/show.gsp').exists()
 		assertTrue new File(appDir, 'src/templates/testing/Controller.groovy').exists()
