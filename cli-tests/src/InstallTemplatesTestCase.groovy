@@ -43,15 +43,20 @@ class InstallTemplatesTestCase extends AbstractCliTestCase {
 		assertTrue new File(appDir, 'src/templates/testing/TagLib.groovy').exists()
 		assertTrue new File(appDir, 'src/templates/testing/UnitTest.groovy').exists()
 		assertTrue new File(appDir, 'src/templates/war/web.xml').exists()
+
+		verifyInstallTemplatesOverwriteTrue()
+		verifyInstallTemplatesOverwriteFalse()
 	}
 
-	void testInstallTemplatesOverwriteTrue() {
+	private void verifyInstallTemplatesOverwriteTrue() {
 
 		workDir = appDir
 
+
 		File file = new File(appDir, 'src/templates/artifacts/Controller.groovy')
-		assertTrue file.delete()
-		assertFalse file.exists()
+		assert file.exists()
+		assert file.delete()
+		assert !file.exists()
 
 		file = new File(appDir, 'src/templates/war/web.xml')
 		assertFalse file.text.contains('a new comment')
@@ -66,11 +71,13 @@ class InstallTemplatesTestCase extends AbstractCliTestCase {
 		assertFalse 'web.xml changes should have been reverted', new File(appDir, 'src/templates/war/web.xml').text.contains('a new comment')
 	}
 
-	void testInstallTemplatesOverwriteFalse() {
+	private void verifyInstallTemplatesOverwriteFalse() {
 
 		workDir = appDir
 
+
 		File file = new File(appDir, 'src/templates/artifacts/Controller.groovy')
+		assert file.exists()
 		assertTrue file.delete()
 		assertFalse file.exists()
 

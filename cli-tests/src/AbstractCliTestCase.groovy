@@ -23,9 +23,9 @@ abstract class AbstractCliTestCase extends GroovyTestCase {
             new File(grailsHome, "build.properties").withReader { def p = new Properties(); p.load(it); p.'grails.version' }
 
     def cliTestsDir = new File(System.getProperty("cli.test.dir") ?: "")
-    private File baseWorkDir = new File(System.getProperty("cli.target.dir") ?: "cli-tests", "tmp")
+    private File baseWorkDir = new File( new File(System.getProperty("cli.target.dir") ?: "cli-tests").canonicalFile, "tmp")
     private File workDir = baseWorkDir
-    private File outputDir = new File(System.getProperty("cli.target.dir") ?: "cli-tests", "output")
+    private File outputDir = new File( new File(System.getProperty("cli.target.dir") ?: "cli-tests").canonicalFile, "output")
     private Process process
     private boolean streamsProcessed
 
