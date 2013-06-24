@@ -19,6 +19,16 @@ class PostController {
             render "Area is ${widget.height * widget.width}"
         }
     }
+
+    def createWidgetFromRequest() {
+        def widget = new Widget()
+        widget.properties = request
+        if(widget.hasErrors()) {
+            render 'Something went wrong'
+        } else {
+            render "Area is ${widget.height * widget.width}"
+        }
+    }
 }
 
 class Widget {

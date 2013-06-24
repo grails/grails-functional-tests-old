@@ -90,6 +90,17 @@ class ContentParsingFunctionalTests extends functionaltestplugin.FunctionalTestC
         assertContentContains 'Area is 32'
     }
 
+    void testCustomBindingSourceHelper() {
+        post '/post/createWidgetFromRequest', {
+            headers.'Content-Type' = 'text/custom+demo+csv'
+            body {
+                'width:8,height:6'
+            }
+        }
+        assertStatus 200
+        assertContentContains 'Area is 48'
+    }
+
     void testBindingNestedJsonProperties() {
         post '/post/displayPostAndPerson', {
             headers.'Content-Type' = 'application/json'
