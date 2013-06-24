@@ -2,7 +2,8 @@ package contentnegotation
 
 class PostController {
     def index = {
-        def post = new Post(params['post'])
+        def post = new Post()
+        post.properties = request
         render "${post.message} by ${post.author}"
     }
 
