@@ -6,13 +6,13 @@ import org.grails.databinding.SimpleMapDataBindingSource
 import org.grails.databinding.bindingsource.AbstractRequestBodyDataBindingSourceCreator
 
 /**
- * A custom DataBindingSourceHelper capable of parsing key value pairs out of
+ * A custom DataBindingSourceCreator capable of parsing key value pairs out of
  * a request body containing a comma separated list of key:value pairs like:
  *
  * name:Herman,age:99,town:STL
  *
  */
-class MyCustomDataBindingSourceHelper extends AbstractRequestBodyDataBindingSourceCreator {
+class MyCustomDataBindingSourceCreator extends AbstractRequestBodyDataBindingSourceCreator {
 
     @Override
     public MimeType[] getMimeTypes() {

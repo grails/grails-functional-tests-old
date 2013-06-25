@@ -1,5 +1,5 @@
 import databinding.Widget
-import databinding.bindingsource.MyCustomDataBindingSourceHelper
+import databinding.bindingsource.MyCustomDataBindingSourceCreator
 import transactions.JavaService
 
 // Place your Spring DSL code here
@@ -20,5 +20,5 @@ beans = {
     formattedAddressConverter databinding.converters.FormattedAddressValueConverter
     formattedStringConverter databinding.converters.FormattedStringValueConverter
 
-    myCustomBindingSourceHelper MyCustomDataBindingSourceHelper
+    myCustomBindingSourceCreator MyCustomDataBindingSourceCreator
 }
