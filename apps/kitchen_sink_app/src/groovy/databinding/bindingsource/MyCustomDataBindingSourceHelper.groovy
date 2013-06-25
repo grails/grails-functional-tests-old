@@ -3,7 +3,7 @@ package databinding.bindingsource
 import org.codehaus.groovy.grails.web.mime.MimeType
 import org.grails.databinding.DataBindingSource
 import org.grails.databinding.SimpleMapDataBindingSource
-import org.grails.databinding.bindingsource.AbstractRequestBodyDataBindingSourceHelper
+import org.grails.databinding.bindingsource.AbstractRequestBodyDataBindingSourceCreator
 
 /**
  * A custom DataBindingSourceHelper capable of parsing key value pairs out of
@@ -12,7 +12,7 @@ import org.grails.databinding.bindingsource.AbstractRequestBodyDataBindingSource
  * name:Herman,age:99,town:STL
  *
  */
-class MyCustomDataBindingSourceHelper extends AbstractRequestBodyDataBindingSourceHelper {
+class MyCustomDataBindingSourceHelper extends AbstractRequestBodyDataBindingSourceCreator {
 
     @Override
     public MimeType[] getMimeTypes() {
