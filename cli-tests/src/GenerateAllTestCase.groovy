@@ -11,24 +11,24 @@ class GenerateAllTestCase extends AbstractCliTestCase {
 	
     void testGenerateAllForDomainInRootPackage() {
         assertFalse 'Person controller test case should not have existed but it did', new File(workDir, 'grails-app/controllers/PersonController.groovy').exists()
-        assertFalse 'Person controller should not have existed but it did', new File(workDir, 'test/unit/PersonControllerTests.groovy').exists()
+        assertFalse 'Person controller should not have existed but it did', new File(workDir, 'test/unit/PersonControllerSpec.groovy').exists()
         execute([ 'generate-all', 'Person' ])
         assertEquals 'generate-all Person failed', 0, waitForProcess()
-        assertTrue 'Person controller test case was not created', new File(workDir, 'test/unit/PersonControllerTests.groovy').exists()
+        assertTrue 'Person controller test case was not created', new File(workDir, 'test/unit/PersonControllerSpec.groovy').exists()
         assertTrue 'Person controller was not created', new File(workDir, 'grails-app/controllers/PersonController.groovy').exists()
     
         assertFalse 'Artist controller test case should not have existed but it did', new File(workDir, 'grails-app/controllers/com/demo/ArtistController.groovy').exists()
-        assertFalse 'Artist controller should not have existed but it did', new File(workDir, 'test/unit/com/demo/ArtistControllerTests.groovy').exists()
+        assertFalse 'Artist controller should not have existed but it did', new File(workDir, 'test/unit/com/demo/ArtistControllerSpec.groovy').exists()
         execute([ 'generate-all', 'com.demo.Artist' ])
         assertEquals 'generate-all com.demo.Artist failed', 0, waitForProcess()
-        assertTrue 'Artist controller test case was not created', new File(workDir, 'test/unit/com/demo/ArtistControllerTests.groovy').exists()
+        assertTrue 'Artist controller test case was not created', new File(workDir, 'test/unit/com/demo/ArtistControllerSpec.groovy').exists()
         assertTrue 'Artist controller was not created', new File(workDir, 'grails-app/controllers/com/demo/ArtistController.groovy').exists()
 
         assertFalse 'Widget controller test case should not have existed but it did', new File(workDir, 'grails-app/controllers/WidgetController.groovy').exists()
-        assertFalse 'Widget controller should not have existed but it did', new File(workDir, 'test/unit/WidgetControllerTests.groovy').exists()
+        assertFalse 'Widget controller should not have existed but it did', new File(workDir, 'test/unit/WidgetControllerSpec.groovy').exists()
         execute([ 'generate-all', '.widget' ])
         assertEquals 'generate-all .widget failed', 0, waitForProcess()
-        assertTrue 'Widget controller test case was not created', new File(workDir, 'test/unit/WidgetControllerTests.groovy').exists()
+        assertTrue 'Widget controller test case was not created', new File(workDir, 'test/unit/WidgetControllerSpec.groovy').exists()
         assertTrue 'Widget controller was not created', new File(workDir, 'grails-app/controllers/WidgetController.groovy').exists()
     }
 
