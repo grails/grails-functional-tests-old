@@ -9,7 +9,7 @@ class CommandObjectsFunctionalTests extends functionaltestplugin.FunctionalTestC
         assertStatus 200
         assertContentContains 'Create succeeded. id: 1, name: ALPHA, age: 42'
 
-        get '/commandObjectsTest/updateGadget?id=1&name=BETA'
+        post '/commandObjectsTest/updateGadget?id=1&name=BETA'
         assertStatus 200
         assertContentContains 'Gadget was loaded. id: 1, name: BETA, age: 42'
 
