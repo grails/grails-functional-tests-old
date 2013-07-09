@@ -20,10 +20,8 @@ class MyCustomDataBindingSourceCreator extends AbstractRequestBodyDataBindingSou
     }
 
     @Override
-    protected DataBindingSource createBindingSource(InputStream inputStream) {
+    protected DataBindingSource createBindingSource(Reader reader) {
         def map = [:]
-        
-        def reader = new InputStreamReader(inputStream)
         
         // this is an obviously naive parser and is intended
         // for demonstration purposes only.
