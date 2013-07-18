@@ -1,6 +1,7 @@
 package databinding.bindingsource
 
 import org.codehaus.groovy.grails.web.mime.MimeType
+import org.grails.databinding.CollectionDataBindingSource
 import org.grails.databinding.DataBindingSource
 import org.grails.databinding.SimpleMapDataBindingSource
 import org.grails.databinding.bindingsource.AbstractRequestBodyDataBindingSourceCreator
@@ -40,6 +41,12 @@ class MyCustomDataBindingSourceCreator extends AbstractRequestBodyDataBindingSou
         
         // create and return a DataBindingSource which contains the parsed data
         new SimpleMapDataBindingSource(map)
+    }
+
+
+    @Override
+    protected CollectionDataBindingSource createCollectionBindingSource(Reader reader) {
+        throw new UnsupportedOperationException()
     }
 }
 
