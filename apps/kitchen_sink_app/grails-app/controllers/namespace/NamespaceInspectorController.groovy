@@ -20,4 +20,8 @@ class NamespaceInspectorController {
     def redirectToNonNamespaced() {
         redirect controller: 'namespaced'
     }
+
+    def showBeanType(String beanName) {
+        render "The ${beanName} bean is an instance of ${grailsApplication.mainContext.getBean(beanName).getClass().name}"
+    }
 }

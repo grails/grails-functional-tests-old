@@ -1,0 +1,4 @@
+package namespace
+
+class SomeBean {}
+

@@ -39,4 +39,11 @@ class NamespaceServiceFunctionalTests extends functionaltestplugin.FunctionalTes
         assertStatus 200
         assertContentContains "Contains bean 'namespaceTwoFidgetService'? true"
     }
+
+    @groovy.transform.NotYetImplemented
+    void testExpectedBeanTypes() {
+        get '/showBeanType/someBeanService'
+        assertStatus 200
+        assertContentContains 'The someBeanService bean is an instance of namespace.SomeBean'
+    }
 }

@@ -21,4 +21,6 @@ beans = {
     formattedStringConverter databinding.converters.FormattedStringValueConverter
 
     myCustomBindingSourceCreator MyCustomDataBindingSourceCreator
+
+    someBeanService namespace.SomeBean
 }
