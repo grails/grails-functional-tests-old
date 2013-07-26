@@ -49,6 +49,12 @@ class UrlMappings {
 
         "/anotherRouteToNonNamespacedController"(controller: 'namespaced')
 
+        "/numberOne"(redirect: [controller: 'redirect', action: 'one'])
+        "/numberTwo"(redirect: [controller: 'redirect', action: 'two'])
+        "/anotherNumberOne"(redirect: [uri: '/redirect/one'])
+        "/anotherNumberTwo"(redirect: '/redirect/two')
+        "/redirectToOutput"(redirect: [controller: 'redirect', action: 'output'])
+
         "/"(view:"/index")
         "500"(view:'/error')
         "404"(controller: 'i18nError', action: 'pageNotFound')

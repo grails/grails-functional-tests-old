@@ -22,4 +22,11 @@ class RedirectController {
 		render "query = ${params.q}"
 	}
 
+    def one() {
+        render 'Uno'
+    }
+
+    def two() {
+        render 'Dos'
+    }
 }

@@ -8,6 +8,9 @@ class UrlMappings {
 		}
         "/admin/manage/$action?"(controller:'adminManage')
 
+        "/toFirstDemo"(redirect: [controller: 'firstDemo', action: 'index'])
+        "/toSecondDemo"(redirect: '/second-demo')
+
 		"/"(view:"/index")
 		"500"(view:'/error')
 	}
