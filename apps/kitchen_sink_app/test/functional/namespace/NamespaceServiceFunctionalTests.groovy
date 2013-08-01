@@ -44,5 +44,13 @@ class NamespaceServiceFunctionalTests extends functionaltestplugin.FunctionalTes
         get '/showBeanType/someBeanService'
         assertStatus 200
         assertContentContains 'The someBeanService bean is an instance of namespace.SomeBean'
+
+        get '/showBeanType/gadgetService'
+        assertStatus 200
+        assertContentContains 'The gadgetService bean is an instance of namespace.GadgetService'
+
+        get '/showBeanType/widgetService'
+        assertStatus 200
+        assertContentContains 'The widgetService bean is an instance of com.namespaceone.WidgetService'
     }
 }
