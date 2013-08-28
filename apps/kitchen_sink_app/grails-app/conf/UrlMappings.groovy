@@ -8,6 +8,11 @@ class UrlMappings {
         }
         "/path/$file.$ext"(controller:"urlMappingsTest", action:"testExtension")
 
+        "/formatNumbers" {
+            controller = 'mainI18n'
+            action = 'formatNumbers'
+        }
+
         "/dynamic/variable" {
             controller = "urlMappingsTest"
             action = "dynaVariable"
