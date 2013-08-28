@@ -12,5 +12,11 @@ someDouble ${commandObject.someDouble}
 <p>
 someLong ${commandObject.someLong}
 </p>
+<p>
+someBigDecimal ${commandObject.someBigDecimal}
+</p>
+<p>
+someBigInteger ${commandObject.someBigInteger}
+</p>
 </body>
 </html>

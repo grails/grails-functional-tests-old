@@ -13,4 +13,6 @@ class MyCommandObject {
     float somePrimitiveFloat
     Double someDouble
     Long someLong
+    BigDecimal someBigDecimal
+    BigInteger someBigInteger
 }
