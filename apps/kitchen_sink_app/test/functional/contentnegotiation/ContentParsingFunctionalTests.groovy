@@ -113,4 +113,28 @@ class ContentParsingFunctionalTests extends functionaltestplugin.FunctionalTestC
         assertContentContains 'Author: Jeff Scott Brown'
         assertContentContains 'Person Name: Robert Fripp'
     }
+
+    @groovy.transform.NotYetImplemented
+    void testInvalidXmlPost() {
+        post '/post/bindRequestToPostObject', {
+            headers.'Content-Type' = 'application/xml'
+            body {
+                '<some invalid<xml here>'
+            }
+        }
+        assertStatus 200
+        assertContentContains 'The Post object could not be created because of bad request data'
+    }
+
+    @groovy.transform.NotYetImplemented
+    void testInvalidJsonPost() {
+        post '/post/bindRequestToPostObject', {
+            headers.'Content-Type' = 'application/json'
+            body {
+                '{some Invalid { json][ here'
+            }
+        }
+        assertStatus 200
+        assertContentContains 'The Post object could not be created because of bad request data'
+    }
 }

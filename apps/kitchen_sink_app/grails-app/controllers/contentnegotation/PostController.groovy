@@ -12,6 +12,12 @@ class PostController {
         [post: post]
     }
 
+    def bindRequestToPostObject() {
+        def post = new Post()
+        post.properties = request
+        render view: 'displayPostAndPerson', model: [post: post]
+    }
+
     def createWidget(Widget widget) {
         if(widget.hasErrors()) {
             render 'Something went wrong'
