@@ -114,7 +114,6 @@ class ContentParsingFunctionalTests extends functionaltestplugin.FunctionalTestC
         assertContentContains 'Person Name: Robert Fripp'
     }
 
-    @groovy.transform.NotYetImplemented
     void testInvalidXmlPost() {
         post '/post/bindRequestToPostObject', {
             headers.'Content-Type' = 'application/xml'
@@ -126,7 +125,6 @@ class ContentParsingFunctionalTests extends functionaltestplugin.FunctionalTestC
         assertContentContains 'The Post object could not be created because of bad request data'
     }
 
-    @groovy.transform.NotYetImplemented
     void testInvalidJsonPost() {
         post '/post/bindRequestToPostObject', {
             headers.'Content-Type' = 'application/json'
