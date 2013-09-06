@@ -38,7 +38,7 @@ grails.project.dependency.resolution = {
         runtime ":hibernate:3.6.10"
         build ":tomcat:7.0.42"
         compile ":webflow:2.0.8.1"
-        compile ':scaffolding:1.0.BUILD-SNAPSHOT'
+        compile ':scaffolding:2.0.0'
 
         compile ":compress:0.3"
         compile ":db-util:0.4"
