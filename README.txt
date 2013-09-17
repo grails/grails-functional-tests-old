@@ -7,10 +7,10 @@ that may be set to control which tests are run:
 - skipApps may be set to skip all of the functional test apps
 - appToTest may be set to specify a specific functional test app to run
 
-As an example, to skip the scripts tests, skip the new app tests and run only the webflow
+As an example, to skip the scripts tests, skip the new app tests and run only the spring
 functional test app:
 
-ant -DskipNewApp=true -DskipScripts=true -DappToTest=webflow
+ant -DskipNewApp=true -DskipScripts=true -DappToTest=spring
 
 Running the test suite relies on access to a copy of the Grails.  When
 running the build you need to set the grails.home system property
