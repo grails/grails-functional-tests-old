@@ -38,6 +38,22 @@ class NamespaceServiceFunctionalTests extends functionaltestplugin.FunctionalTes
         get '/containsBean/namespaceTwoFidgetService'
         assertStatus 200
         assertContentContains "Contains bean 'namespaceTwoFidgetService'? true"
+
+        get '/containsBean/helloService'
+        assertStatus 200
+        assertContentContains "Contains bean 'helloService'? true"
+
+        get '/containsBean/specialHelloService'
+        assertStatus 200
+        assertContentContains "Contains bean 'specialHelloService'? true"
+
+        get '/containsBean/namespaceTwoSpecialHelloService'
+        assertStatus 200
+        assertContentContains "Contains bean 'namespaceTwoSpecialHelloService'? true"
+
+        get '/containsBean/namespaceOneHelloService'
+        assertStatus 200
+        assertContentContains "Contains bean 'namespaceOneHelloService'? true"
     }
 
     void testExpectedBeanTypes() {
@@ -52,5 +68,17 @@ class NamespaceServiceFunctionalTests extends functionaltestplugin.FunctionalTes
         get '/showBeanType/widgetService'
         assertStatus 200
         assertContentContains 'The widgetService bean is an instance of com.namespaceone.WidgetService'
+
+        get '/showBeanType/helloService'
+        assertStatus 200
+        assertContentContains 'The helloService bean is an instance of com.namespacetwo.SpecialHelloService'
+
+        get '/showBeanType/namespaceOneHelloService'
+        assertStatus 200
+        assertContentContains 'The namespaceOneHelloService bean is an instance of com.namespaceone.HelloService'
+
+        get '/showBeanType/namespaceTwoSpecialHelloService'
+        assertStatus 200
+        assertContentContains 'The namespaceTwoSpecialHelloService bean is an instance of com.namespacetwo.SpecialHelloService'
     }
 }
