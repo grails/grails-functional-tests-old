@@ -52,6 +52,6 @@ grails.project.dependency.resolution = {
         runtime ":database-migration:1.3.6"
 
         test ':functional-test:1.3-RC1'
-        runtime ":build-test-data:2.0.5"
+        runtime ":build-test-data:1.1.1"
     }    
 }
