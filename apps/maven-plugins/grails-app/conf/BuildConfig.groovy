@@ -18,8 +18,8 @@ grails.project.dependency.resolution = {
     plugins {
         runtime ':cloud-foundry:1.2.3'
         test ":functional-test:1.3-RC1"
-        runtime ":hibernate:3.6.10.M3"
-        build ":tomcat:7.0.40"
+        runtime ":hibernate:3.6.10.1"
+        build ":tomcat:7.0.42"
         compile ':scaffolding:1.0.BUILD-SNAPSHOT'
     }
     dependencies {
