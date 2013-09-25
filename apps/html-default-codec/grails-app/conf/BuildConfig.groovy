@@ -43,10 +43,10 @@ grails.project.dependency.resolution = {
         runtime ":hibernate:3.6.10.1"
         build ":tomcat:7.0.42"
         compile ":jquery:1.7"
-        compile ":resources:1.1.2"
+        compile ":resources:1.2.1"
         compile ':scaffolding:2.0.0'
 
-        runtime ":database-migration:1.0"
+        runtime ":database-migration:1.3.6"
         
         test ':functional-test:2.0.RC1', {
             excludes 'htmlunit'

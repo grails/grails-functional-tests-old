@@ -55,9 +55,9 @@ grails.project.dependency.resolution = {
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate:3.6.10.1" // or ":hibernate4:4.1.11.BUILD-SNAPSHOT"
-        runtime ":database-migration:1.3.3"
+        runtime ":database-migration:1.3.6"
         runtime ":jquery:1.10.0"
-        runtime ":resources:1.2"
+        runtime ":resources:1.2.1"
 
         test ":spock:0.7", {
             excludes "spock-grails-support"
