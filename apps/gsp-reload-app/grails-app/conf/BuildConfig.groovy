@@ -41,13 +41,15 @@ grails.project.dependency.resolution = {
 	   }
         test "org.gebish:geb-junit4:$gebVersion"
         test 'org.w3c.css:sac:1.3'
+        test 'net.sourceforge.nekohtml:nekohtml:1.9.18'
+        test 'net.sourceforge.htmlunit:htmlunit:2.12'
     }
 
     plugins {
         runtime ":hibernate:3.6.10.1"
         build ":tomcat:7.0.42"
         compile ":jquery:1.6.1.1"
-        compile ":resources:1.2.1"
+        //compile ":resources:1.2.1"
         compile ':scaffolding:2.0.0'
 
         test ":geb:$gebVersion"
