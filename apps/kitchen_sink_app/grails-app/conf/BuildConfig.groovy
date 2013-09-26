@@ -32,6 +32,9 @@ grails.project.dependency.resolution = {
     }
     dependencies {
         runtime "org.grails:grails-test:$grailsVersion"
+        test 'net.sourceforge.nekohtml:nekohtml:1.9.18'
+        test 'net.sourceforge.htmlunit:htmlunit:2.12'
+        test 'net.sourceforge.htmlunit:htmlunit-core-js:2.12'
     }
 
     plugins {
@@ -42,7 +45,7 @@ grails.project.dependency.resolution = {
         }
         compile ':scaffolding:2.0.0'
 
-        compile ":compress:0.3"
+        //compile ":compress:0.3"
         compile ":db-util:0.4"
         compile ":freemarker:0.3"
 
@@ -51,7 +54,7 @@ grails.project.dependency.resolution = {
 
         runtime ":database-migration:1.3.6"
 
-        test ':functional-test:1.3-RC1'
+        test ':functional-test:2.0.RC1'
         runtime ":build-test-data:1.1.1"
     }    
 }
