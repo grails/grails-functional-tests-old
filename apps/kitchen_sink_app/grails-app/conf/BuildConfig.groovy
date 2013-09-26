@@ -35,6 +35,7 @@ grails.project.dependency.resolution = {
         test 'net.sourceforge.nekohtml:nekohtml:1.9.18'
         test 'net.sourceforge.htmlunit:htmlunit:2.12'
         test 'net.sourceforge.htmlunit:htmlunit-core-js:2.12'
+        runtime "org.grails:grails-datastore-gorm-hibernate:2.0.2.BUILD-SNAPSHOT"
     }
 
     plugins {
@@ -54,7 +55,7 @@ grails.project.dependency.resolution = {
 
         runtime ":database-migration:1.3.6"
 
-        test ':functional-test:2.0.RC1'
+        test ':functional-test:2.0.RC2-SNAPSHOT'
         runtime ":build-test-data:1.1.1"
     }    
 }
