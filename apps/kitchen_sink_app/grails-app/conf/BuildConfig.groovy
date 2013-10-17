@@ -35,11 +35,10 @@ grails.project.dependency.resolution = {
         test 'net.sourceforge.nekohtml:nekohtml:1.9.18'
         test 'net.sourceforge.htmlunit:htmlunit:2.12'
         test 'net.sourceforge.htmlunit:htmlunit-core-js:2.12'
-        runtime "org.grails:grails-datastore-gorm-hibernate:2.0.2.BUILD-SNAPSHOT"
     }
 
     plugins {
-        runtime ":hibernate:3.6.10.1"
+        runtime ":hibernate:3.6.10.2"
         build ":tomcat:7.0.42"
         compile ":webflow:2.0.8.1", {
                excludes 'javassist'
