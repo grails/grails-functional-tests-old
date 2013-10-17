@@ -37,7 +37,7 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        runtime ":hibernate:3.6.10.1" // or ":hibernate4:4.1.11.BUILD-SNAPSHOT"
+        runtime ":hibernate:3.6.10.2" // or ":hibernate4:4.1.11.BUILD-SNAPSHOT"
         build ":tomcat:7.0.42", {
             // exclude "tomcat-embed-logging-juli"
             // exclude "org.apache.tomcat:tomcat-catalina-ant"
