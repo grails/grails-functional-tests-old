@@ -43,7 +43,7 @@ grails.project.dependency.resolution = {
         compile ":webflow:2.0.8.1", {
                excludes 'javassist'
         }
-        compile ':scaffolding:2.0.0'
+        compile ':scaffolding:2.0.1'
 
         //compile ":compress:0.3"
         compile ":db-util:0.4"
