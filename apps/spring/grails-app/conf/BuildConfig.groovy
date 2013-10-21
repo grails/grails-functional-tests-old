@@ -26,9 +26,9 @@ grails.project.dependency.resolution = {
         runtime 'hsqldb:hsqldb:1.8.0.10'
     }
     plugins {
-        runtime ":hibernate:3.6.10.1"
+        runtime ":hibernate:3.6.10.2"
         build ":tomcat:7.0.42"
         test ':functional-test:1.3-RC1'
-        compile ':scaffolding:1.0.BUILD-SNAPSHOT'
+        compile ':scaffolding:2.0.1'
     }    
 }
