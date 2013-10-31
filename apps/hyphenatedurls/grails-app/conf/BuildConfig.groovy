@@ -50,7 +50,7 @@ grails.project.dependency.resolution = {
 
         runtime ":database-migration:1.3.6"
 
-        test ':functional-test:2.0.RC1', {
+        test ':functional-test:2.0.RC2-SNAPSHOT', {
             excludes 'htmlunit'
         }
     }
