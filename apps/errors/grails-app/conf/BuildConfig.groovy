@@ -27,9 +27,9 @@ grails.project.dependency.resolution = {
         test( 'commons-codec:commons-codec:1.6') {
             excludes 'xml-apis', 'xerces'
         }
-        test( 'net.sourceforge.nekohtml:nekohtml:1.9.16') {
-            excludes 'xml-apis', 'xerces'
-        }
+        test 'net.sourceforge.nekohtml:nekohtml:1.9.18'
+        test 'net.sourceforge.htmlunit:htmlunit:2.12'
+        test 'net.sourceforge.htmlunit:htmlunit-core-js:2.12'
         test( 'net.sourceforge.cssparser:cssparser:0.9.7') {
             excludes 'xml-apis', 'xerces'
         }
