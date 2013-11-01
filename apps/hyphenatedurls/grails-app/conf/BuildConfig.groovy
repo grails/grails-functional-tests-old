@@ -48,7 +48,7 @@ grails.project.dependency.resolution = {
         compile ":resources:1.2.1"
         compile ':scaffolding:2.0.1'
 
-        runtime ":database-migration:1.3.6"
+        runtime ":database-migration:1.3.8"
 
         test ':functional-test:2.0.RC2-SNAPSHOT', {
             excludes 'htmlunit'
