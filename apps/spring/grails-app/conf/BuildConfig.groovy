@@ -24,11 +24,14 @@ grails.project.dependency.resolution = {
         // runtime 'mysql:mysql-connector-java:5.1.13'
         
         runtime 'hsqldb:hsqldb:1.8.0.10'
+        test 'net.sourceforge.nekohtml:nekohtml:1.9.18'
+        test 'net.sourceforge.htmlunit:htmlunit:2.12'
+        test 'net.sourceforge.htmlunit:htmlunit-core-js:2.12'        
     }
     plugins {
-        runtime ":hibernate:3.6.10.2"
+        runtime ":hibernate:3.6.10.3-SNAPSHOT"
         build ":tomcat:7.0.42"
-        test ':functional-test:1.3-RC1'
+        test ':functional-test:2.0.RC2-SNAPSHOT'
         compile ':scaffolding:2.0.1'
     }    
 }

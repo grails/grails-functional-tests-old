@@ -17,13 +17,16 @@ grails.project.dependency.resolution = {
     }
     plugins {
         runtime ':cloud-foundry:1.2.3'
-        test ":functional-test:1.3-RC1"
-        runtime ":hibernate:3.6.10.2"
+        test ":functional-test:2.0.RC2-SNAPSHOT"
+        runtime ":hibernate:3.6.10.3-SNAPSHOT"
         build ":tomcat:7.0.42"
         compile ':scaffolding:2.0.1'
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
         runtime 'hsqldb:hsqldb:1.8.0.10'
+        test 'net.sourceforge.nekohtml:nekohtml:1.9.18'
+        test 'net.sourceforge.htmlunit:htmlunit:2.12'
+        test 'net.sourceforge.htmlunit:htmlunit-core-js:2.12'        
     }
 }

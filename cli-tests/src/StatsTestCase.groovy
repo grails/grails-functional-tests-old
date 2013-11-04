@@ -16,8 +16,8 @@ class StatsTestCase extends AbstractCliTestCase {
 		assertTrue output.contains('| Domain Classes       |     3 |    10 |')
 		assertTrue output.contains('| Services             |     1 |     3 |')
 		assertTrue output.contains('| Unit Tests           |     1 |     6 |')
-		assertTrue output.contains('| Integration Tests    |     3 |    69 |')
-		assertTrue output.contains('| Totals               |     8 |    88 |')
+		assertTrue output.contains('| Integration Tests    |     3 |    76 |')
+		assertTrue output.contains('| Totals               |     8 |    95 |')
 	}
 
 	def copyDir(source, destination) {

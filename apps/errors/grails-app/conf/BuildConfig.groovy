@@ -27,9 +27,9 @@ grails.project.dependency.resolution = {
         test( 'commons-codec:commons-codec:1.6') {
             excludes 'xml-apis', 'xerces'
         }
-        test( 'net.sourceforge.nekohtml:nekohtml:1.9.16') {
-            excludes 'xml-apis', 'xerces'
-        }
+        test 'net.sourceforge.nekohtml:nekohtml:1.9.18'
+        test 'net.sourceforge.htmlunit:htmlunit:2.12'
+        test 'net.sourceforge.htmlunit:htmlunit-core-js:2.12'
         test( 'net.sourceforge.cssparser:cssparser:0.9.7') {
             excludes 'xml-apis', 'xerces'
         }
@@ -50,9 +50,9 @@ grails.project.dependency.resolution = {
         }
     }
     plugins {
-        runtime ":hibernate:3.6.10.2"
+        runtime ":hibernate:3.6.10.3-SNAPSHOT"
         build ":tomcat:7.0.42"
-        test ':functional-test:2.0.RC1'
+        test ':functional-test:2.0.RC2-SNAPSHOT'
         compile ':scaffolding:2.0.1'
     }
 }

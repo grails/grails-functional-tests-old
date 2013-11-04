@@ -38,7 +38,7 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        runtime ":hibernate:3.6.10.2"
+        runtime ":hibernate:3.6.10.3-SNAPSHOT"
         build ":tomcat:7.0.42"
         /*
         compile ":webflow:2.0.8.1", {
@@ -51,10 +51,10 @@ grails.project.dependency.resolution = {
         compile ":db-util:0.4"
         compile ":freemarker:0.3"
 
-        compile ":jquery:1.8.3"
+        compile ":jquery:1.10.2"
         compile ":resources:1.2.1"
 
-        runtime ":database-migration:1.3.6"
+        runtime ":database-migration:1.3.8"
 
         test ':functional-test:2.0.RC2-SNAPSHOT'
         runtime ":build-test-data:1.1.1"
