@@ -283,6 +283,7 @@ class Blog {
 
  		<property file="${grails.home}/build.properties"/>
 		<java classname="RunTests" fork="true" failonerror="true" maxmemory="256m" dir='cli-tests'>
+			<env key="GRAILS_HOME" value="${grails.home}"/>
 			<classpath>
 				<path refid="classpath"/>
 				<fileset dir="${grails.lib}/junit/junit/jars" includes="junit*.jar"/>
