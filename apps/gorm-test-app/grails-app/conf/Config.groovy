@@ -116,5 +116,5 @@ log4j = {
 
 // reproduce GRAILS-9805
 grails.gorm.default.mapping = {
-    id generator:'sequence'
+    id generator:'sequence-identity'
 }
