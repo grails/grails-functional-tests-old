@@ -23,8 +23,13 @@ environments {
     test {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            url = "jdbc:oracle:thin:@localhost:1521:XE"
             logSql = true
+            // default system/master 
+            // create user grails identified by grails; grant connect, resource to grails;
+            username = "grails"
+            password = "grails"
+            driverClassName = "oracle.jdbc.driver.OracleDriver"
         }
     }
     production {
