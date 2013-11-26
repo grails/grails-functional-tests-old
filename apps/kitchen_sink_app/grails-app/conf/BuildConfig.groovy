@@ -39,7 +39,7 @@ grails.project.dependency.resolution = {
 
     plugins {
         runtime ":hibernate:3.6.10.4"
-        build ":tomcat:7.0.42"
+        build ":tomcat:7.0.47"
         /*
         compile ":webflow:2.0.8.1", {
                excludes 'javassist'
