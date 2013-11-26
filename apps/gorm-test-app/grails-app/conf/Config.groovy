@@ -113,3 +113,8 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+// reproduce GRAILS-9805
+grails.gorm.default.mapping = {
+    id generator:'sequence-identity'
+}

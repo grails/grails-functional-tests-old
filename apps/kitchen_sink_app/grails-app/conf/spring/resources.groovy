@@ -23,4 +23,6 @@ beans = {
     myCustomBindingSourceCreator MyCustomDataBindingSourceCreator
 
     someBeanService namespace.SomeBean
+
+    structuredEmployeeEditor databinding.converters.StructuredEmployeeEditor
 }
