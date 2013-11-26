@@ -12,9 +12,5 @@ class StructuredEmployeeEditor extends AbstractStructuredBindingEditor<Employee>
         employee.lastName = values.lastName
         employee
     }
-
-    Class getTargetType() {
-        Employee
-    }
 }
 
