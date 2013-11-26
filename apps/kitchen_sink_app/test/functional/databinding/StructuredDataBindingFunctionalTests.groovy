@@ -8,5 +8,12 @@ class StructuredDataBindingFunctionalTests extends functionaltestplugin.Function
         assertContentContains 'Mother: Betsy Brown'
         assertContentContains 'Father: Jeff Brown'
     }
+
+    void testStructuredEditorRegisteredAsSpringBean() {
+        get '/structuredDatabinding/createCompany?president=struct&president_firstName=Tim&president_lastName=Cook&vicePresident=struct&vicePresident_firstName=Eddy&vicePresident_lastName=Cue'
+        assertStatus 200
+        assertContentContains 'The Vice President: Eddy Cue'
+        assertContentContains 'The President: Tim Cook'
+    }
 }
 
