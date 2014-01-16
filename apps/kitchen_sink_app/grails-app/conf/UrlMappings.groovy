@@ -21,7 +21,7 @@ class UrlMappings {
 
         "/declared/params" {
             controller = "urlMappingsTest"
-            action = "declaredParams"		
+            action = "declaredParams"
             var = 'foo'; var2='bar'
         }
         "/decode/$myparam?"(controller:"urlMappingsTest", action:"decode")
@@ -59,6 +59,9 @@ class UrlMappings {
         "/anotherNumberOne"(redirect: [uri: '/redirect/one'])
         "/anotherNumberTwo"(redirect: '/redirect/two')
         "/redirectToOutput"(redirect: [controller: 'redirect', action: 'output'])
+
+        "/numberOfPeopleWithName/$name"(controller: 'typeChecked', action: 'numberOfPeopleWithName')
+        "/findOrSavePersonWithName/$name"(controller: 'typeChecked', action: 'findOrSavePersonWithName')
 
         "/"(view:"/index")
         "500"(view:'/error')
