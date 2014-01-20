@@ -15,5 +15,12 @@ class StructuredDataBindingFunctionalTests extends functionaltestplugin.Function
         assertContentContains 'The Vice President: Eddy Cue'
         assertContentContains 'The President: Tim Cook'
     }
+
+    void testShapeStructuredEditorRegisteredAsSpringBean() {
+        get '/structuredDatabinding/createGadget?expandedShape=struct&expandedShape_width=80&expandedShape_height=30&compressedShape=struct&compressedShape_width=10&compressedShape_height=3'
+        assertStatus 200
+        assertContentContains 'Expanded Area: 2400'
+        assertContentContains 'Compressed Area: 30'
+    }
 }
 

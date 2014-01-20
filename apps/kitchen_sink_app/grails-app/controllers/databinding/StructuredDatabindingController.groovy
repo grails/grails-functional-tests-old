@@ -9,5 +9,9 @@ class StructuredDatabindingController {
     def createCompany(Company company) {
         [company: company]
     }
+
+    def createGadget(Gadget gadget) {
+        [gadget: gadget]
+    }
 }
 
