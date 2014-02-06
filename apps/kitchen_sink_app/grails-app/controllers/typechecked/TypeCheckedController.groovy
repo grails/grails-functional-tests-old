@@ -1,9 +1,9 @@
 package typechecked
 
 import gorm.Person
-import grails.compiler.GrailsTypeChecked
+import grails.compiler.GrailsCompileStatic
 
-@GrailsTypeChecked
+@GrailsCompileStatic
 class TypeCheckedController {
 
     def numberOfPeopleWithName(String name) {
