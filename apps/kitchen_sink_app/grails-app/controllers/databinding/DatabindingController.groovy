@@ -51,6 +51,10 @@ class DatabindingController {
     def bindCommaSeparatedList(Band band) {
         [band: band]
     }
+
+    def createOffice(Office office) {
+        [office: office]
+    }
 }
 
 class Band {
