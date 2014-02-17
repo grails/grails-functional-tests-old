@@ -37,7 +37,7 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        runtime ":hibernate:3.6.10.7" // or ":hibernate4:4.1.11.BUILD-SNAPSHOT"
+        runtime ":hibernate:3.6.10.8" // or ":hibernate4:4.3.1.1"
         build ":tomcat:7.0.50", {
             // exclude "tomcat-embed-logging-juli"
             // exclude "org.apache.tomcat:tomcat-catalina-ant"
@@ -46,7 +46,7 @@ grails.project.dependency.resolution = {
 
         compile ":jquery:1.10.2"
         compile ":resources:1.2.1"
-        compile ':scaffolding:2.0.1'
+        compile ':scaffolding:2.0.2'
 
         runtime ":database-migration:1.3.8"
 
