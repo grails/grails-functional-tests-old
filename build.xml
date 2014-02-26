@@ -155,12 +155,6 @@
 						fileset(dir: appDir.path, includes: "**/functional-test-*/**/*")
 					}
 
-					// First upgrade.
-					runGrails("upgrade -force")
-					if (failed(false)) {
-						outcomes << "Couldn't upgrade application ${properties.projectName}"
-					}
-
 					// Install the appropriate testing plugin, run the tests, and check the reportsDir
 					if (new File(appDir, "test/functional").exists()) {
 						if ((properties.projectName in ['gsp-reload-app'])) {
