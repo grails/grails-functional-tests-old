@@ -1,14 +1,13 @@
 class GenerateAllTestCase extends AbstractCliTestCase {
-	
+
 	protected void setUp() {
 		super.setUp()
     	def appSource = new File(cliTestsDir, "testing-app")
     	workDir = new File(baseWorkDir, "generate-all-testing-app")
 		copyDir(appSource, workDir)
-		upgrade()
-		execute([ 'compile' ])
+		compile()
 	}
-	
+
     void testGenerateAllForDomainInRootPackage() {
         assertFalse 'Person controller test case should not have existed but it did', new File(workDir, 'grails-app/controllers/PersonController.groovy').exists()
         assertFalse 'Person controller should not have existed but it did', new File(workDir, 'test/unit/PersonControllerSpec.groovy').exists()
