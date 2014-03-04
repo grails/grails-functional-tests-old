@@ -15,4 +15,11 @@ class IncludesFunctionalTests extends functionaltestplugin.FunctionalTestCase {
         assertContentContains '<title>Simple GSP page</title>'
         assertContentContains 'params = bar'
     }
+
+    void testIncludeWithNamespaces() {
+        get('/simple/testIncludeWithNamespaces')
+        assertStatus 200
+        assertContentContains 'Rendered by the index action in the namespace.alpha.NamespacedController controller'
+        assertContentContains 'Rendered by the index action in the namespace.beta.NamespacedController controller'
+    }
 }
