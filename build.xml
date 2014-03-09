@@ -156,6 +156,9 @@
 						fileset(dir: appDir.path, includes: "**/functional-test-*/**/*")
 					}
 
+					// revert BuildConfig.groovy file and possible other changes in app dir
+					"git checkout .".execute([], appDir)	
+
 					// First upgrade.
 					runGrails("upgrade -force")
 					if (failed(false)) {
@@ -197,8 +200,7 @@
 						}
 					}				
 
-					// revert BuildConfig.groovy file
-					"git checkout grails-app/conf/BuildConfig.groovy".execute([], appDir)	
+					// run tests without changes
 					runTests(false)
 
 					// run same tests with hibernate4 plugin too if hibernate plugin is used
@@ -206,7 +208,14 @@
 					def buildConfigText =  buildConfigFile.text
 					def hibernate4BuildConfigText = buildConfigText.replaceAll(~/["']:hibernate:[^"']+["']/, '":hibernate4:4.3.4.1"')
 					if (hibernate4BuildConfigText != buildConfigText) {
+						// remove webflow plugin 
+						hibernate4BuildConfigText = hibernate4BuildConfigText.replaceAll(~/(?s)compile ["']:webflow:[^"']+["'], \{.*?\}/,'')
 						buildConfigFile.text = hibernate4BuildConfigText
+						// remove possible webflow tests
+						def webflowTestsDir = new File(appDir, 'test/functional/webflow')
+						if (webflowTestsDir.exists()) {
+							webflowTestsDir.deleteDir()
+						}
 						runGrails('clean')
 						runGrails('compile')
 						runTests(true)
