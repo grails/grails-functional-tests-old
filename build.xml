@@ -127,8 +127,9 @@
 					           projectName: properties.projectName, resultID: grailsInvocationCounter++)
 				}
 
-				def copyReports = { boolean war ->
+				def copyReports = { boolean war, boolean forHibernate4 ->
 					String dir = "reports/${properties.projectName}"
+					if (forHibernate4) dir += '_hibernate4'
 					if (war) dir += '_war'
 					ant.mkdir(dir: dir)
 					ant.copy(todir: dir) {
@@ -161,37 +162,54 @@
 						outcomes << "Couldn't upgrade application ${properties.projectName}"
 					}
 
-					// Install the appropriate testing plugin, run the tests, and check the reportsDir
-					if (new File(appDir, "test/functional").exists()) {
-						if ((properties.projectName in ['gsp-reload-app'])) {
-							// Workaround for GRAILS-8189
-							runGrails('compile')
-						}
+					def runTests = { boolean forHibernate4 = false ->
+						// Install the appropriate testing plugin, run the tests, and check the reportsDir
+						if (new File(appDir, "test/functional").exists()) {
+							if ((properties.projectName in ['gsp-reload-app'])) {
+								// Workaround for GRAILS-8189
+								runGrails('compile')
+							}
 
-						if (!(properties.projectName in ['gsp-reload-app'])) {
-							// Run the tests.
-							runGrails("test-app", "functional: --dev-mode", "dev")
-							copyReports(false)
+							if (!(properties.projectName in ['gsp-reload-app'])) {
+								// Run the tests.
+								runGrails("test-app", "functional: --dev-mode", "dev")
+								copyReports(false, forHibernate4)
+								outcomes << "Functional tests in application ${properties.projectName}: " + (failed() ? "Failed" : "OK")
+							}
+
+							// Run the WAR tests.
+							String warArgs = "-war functional: --dev-mode"
+							String warEnv = "test"
+							if (properties.projectName in ['gsp-reload-app']) {
+								warArgs = 'functional: -war'
+								warEnv ='production'
+							}
+
+							runGrails("test-app", warArgs, warEnv)
+							copyReports(true, forHibernate4)
 							outcomes << "Functional tests in application ${properties.projectName}: " + (failed() ? "Failed" : "OK")
 						}
-
-						// Run the WAR tests.
-						String warArgs = "-war functional: --dev-mode"
-						String warEnv = "test"
-						if (properties.projectName in ['gsp-reload-app']) {
-							warArgs = 'functional: -war'
-							warEnv ='production'
+						else {
+							// Run unit & integration tests.
+							runGrails("test-app", "",  "test")
+							copyReports(false, forHibernate4)
+							outcomes << "Integration/unit tests in application ${properties.projectName}: " + (failed() ? "Failed" : "OK")
 						}
+					}				
 
-						runGrails("test-app", warArgs, warEnv)
-						copyReports(true)
-						outcomes << "Functional tests in application ${properties.projectName}: " + (failed() ? "Failed" : "OK")
-					}
-					else {
-						// Run unit & integration tests.
-						runGrails("test-app", "",  "test")
-						copyReports(false)
-						outcomes << "Integration/unit tests in application ${properties.projectName}: " + (failed() ? "Failed" : "OK")
+					// revert BuildConfig.groovy file
+					"git checkout grails-app/conf/BuildConfig.groovy".execute([], appDir)	
+					runTests(false)
+
+					// run same tests with hibernate4 plugin too if hibernate plugin is used
+					def buildConfigFile = new File(appDir, 'grails-app/conf/BuildConfig.groovy')
+					def buildConfigText =  buildConfigFile.text
+					def hibernate4BuildConfigText = buildConfigText.replaceAll(~/["']:hibernate:[^"']+["']/, '":hibernate4:4.3.4"')
+					if (hibernate4BuildConfigText != buildConfigText) {
+						buildConfigFile.text = hibernate4BuildConfigText
+						runGrails('clean')
+						runGrails('compile')
+						runTests(true)
 					}
 				}
 
