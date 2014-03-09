@@ -204,7 +204,7 @@
 					// run same tests with hibernate4 plugin too if hibernate plugin is used
 					def buildConfigFile = new File(appDir, 'grails-app/conf/BuildConfig.groovy')
 					def buildConfigText =  buildConfigFile.text
-					def hibernate4BuildConfigText = buildConfigText.replaceAll(~/["']:hibernate:[^"']+["']/, '":hibernate4:4.3.4"')
+					def hibernate4BuildConfigText = buildConfigText.replaceAll(~/["']:hibernate:[^"']+["']/, '":hibernate4:4.3.4.1"')
 					if (hibernate4BuildConfigText != buildConfigText) {
 						buildConfigFile.text = hibernate4BuildConfigText
 						runGrails('clean')
