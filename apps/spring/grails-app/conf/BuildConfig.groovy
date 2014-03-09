@@ -23,7 +23,7 @@ grails.project.dependency.resolution = {
 
         // runtime 'mysql:mysql-connector-java:5.1.13'
         
-        runtime 'hsqldb:hsqldb:1.8.0.10'
+        runtime 'org.hsqldb:hsqldb:2.3.2'
         test 'net.sourceforge.nekohtml:nekohtml:1.9.18'
         test 'net.sourceforge.htmlunit:htmlunit:2.12'
         test 'net.sourceforge.htmlunit:htmlunit-core-js:2.12'        

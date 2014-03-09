@@ -23,7 +23,7 @@ grails.project.dependency.resolution = {
 
         // runtime 'mysql:mysql-connector-java:5.1.13'
 
-        runtime 'hsqldb:hsqldb:1.8.0.10'
+        runtime 'org.hsqldb:hsqldb:2.3.2'
         test( 'commons-codec:commons-codec:1.6') {
             excludes 'xml-apis', 'xerces'
         }
