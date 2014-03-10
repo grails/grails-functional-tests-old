@@ -1,9 +1,8 @@
 package org.codehaus.groovy.grails.plugins.dbutil
 
 import java.sql.*
-import org.apache.commons.dbcp.*
-import javax.sql.*
 import org.apache.commons.dbutils.handlers.MapListHandler
+import javax.sql.DataSource
 
 class DbUtilController {
 
@@ -63,11 +62,13 @@ class DbUtilController {
       def ResultSet colrs = rs.getColumns(null, null, tableName, null)
       def tableCols = [:]
       def isFirstRow = true
-      def colLabels = []
+      def colLabels = [] // This will be an arraylist of uppercase column names
       while (colrs.next()) {
         if (isFirstRow) {
-          // This should be an arraylist of uppercase column names
-          colLabels = colrs.getMetaData().columnMetaData.columnLabel*.toUpperCase()
+          def x = 0
+          while (++x <= colrs.getMetaData().getColumnCount()) {
+            colLabels << colrs.getMetaData().getColumnLabel(x)
+          }
           isFirstRow = false
         }
 
@@ -163,25 +164,30 @@ class DbUtilController {
       return
     def sql = params.sqlText?.trim()
     def retList
-    Connection conn = dataSource.getConnection()
-    Statement stmt = conn.createStatement()
-    ResultSet rs
-    if (sql[0..5].equalsIgnoreCase("SELECT")) {
-      rs = stmt.executeQuery(sql)
-      MapListHandler handler = new MapListHandler()
-      retList = handler.handle(rs)
-    }
-    else {
-      try {
+    Connection conn
+    Statement stmt
+    try {
+      conn = dataSource.getConnection()
+      stmt = conn.createStatement()
+      ResultSet rs
+      if (sql[0..5].equalsIgnoreCase("SELECT")) {
+        rs = stmt.executeQuery(sql)
+        MapListHandler handler = new MapListHandler()
+        def rowMap = handler.handle(rs)
+        retList = (rowMap)?rowMap:["Rows":"NO ROWS FOUND"]  // If there were rows, display them, otherwise show msg
+      }
+      else {
         def cnt = stmt.executeUpdate(sql)
         retList = ["Rows affected": cnt]
       }
-      catch (SQLException e) {
-        retList = ["The following error occurred": e.toString()]
-      }
     }
-    conn.commit();
-    conn.close()
+    catch (SQLException e) {
+      retList = ["The following error occurred": e.toString()]
+    }
+    finally {
+      conn?.commit()
+      conn?.close()
+    }
     render(view: "sql", model: [dataList: retList, sqlText: sql])
   }
   
