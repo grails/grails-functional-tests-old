@@ -60,4 +60,16 @@ class ViewResolutionFunctionalTests extends functionaltestplugin.FunctionalTestC
         assertStatus 200
         assertContentContains 'Congratulations, you have successfully started your first Grails application!'
     }
+
+    void testRenderPluginView() {
+        get '/viewResolutionTest/renderPluginView'
+        assertStatus 200
+        assertContentContains 'This is demo.gsp in the plugin-views plugin'
+    }
+
+    void testRenderViewWhichHasSamePathAsViewProvidedByPlugin() {
+        get '/viewResolutionTest/renderViewWhichHasSamePathAsViewProvidedByPlugin'
+        assertStatus 200
+        assertContentContains 'This is demo.gsp in the main app'
+    }
 }

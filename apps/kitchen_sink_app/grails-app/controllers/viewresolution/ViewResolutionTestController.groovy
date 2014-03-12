@@ -19,4 +19,11 @@ class ViewResolutionTestController {
 		render view:"local/simple", model:[foo:"bar"]
 	}
 
+    def renderPluginView() {
+        render view: '/renderTest/demo', plugin: 'plugin-views'
+    }
+
+    def renderViewWhichHasSamePathAsViewProvidedByPlugin() {
+        render view: '/renderTest/demo'
+    }
 }
