@@ -1,7 +1,11 @@
 package webflow
 
 class WebFlowFunctionalTests extends functionaltestplugin.FunctionalTestCase {
+	static boolean hibernate4PluginTestRun = System.getProperty('hibernatePluginVersion')?.startsWith(':hibernate4:')
+	static boolean ignoreTests = hibernate4PluginTestRun
+
     void testFlowMethodDispatch() {
+    	if (ignoreTests) return
         get('/testFlow/my')
         assertStatus 200
         assertContentContains '<title>Test Flow</title>'
@@ -16,6 +20,7 @@ class WebFlowFunctionalTests extends functionaltestplugin.FunctionalTestCase {
     }
 
 	void testFlowDependencyInjection() {
+		if (ignoreTests) return
         get('/testFlow/second')
         assertStatus 200
         assertContentContains '<title>Test Flow</title>'
@@ -30,6 +35,7 @@ class WebFlowFunctionalTests extends functionaltestplugin.FunctionalTestCase {
 	}
 	
 	void testRedirectWithoutSpecifyingController() {
+		if (ignoreTests) return
 	    get '/testFlow/shoppingCart'
 	    
 	    assertStatus 200

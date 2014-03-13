@@ -101,6 +101,12 @@
 				boolean failure = false
 				int grailsInvocationCounter = 0
 
+				// hibernate plugin versions
+				def hibernatePlugin3Version = ':hibernate:3.6.10.10'
+				def hibernatePlugin4Version = ':hibernate4:4.3.4.1'
+
+				def runGrailsSettings = [hibernatePluginVersion: hibernatePlugin3Version]
+
 				def failed = { boolean tests = true ->
 					boolean ok = properties["testResult_${grailsInvocationCounter - 1}"].toInteger() == 0
 					if (ok && tests) {
@@ -124,7 +130,7 @@
 
 				def runGrails = { String command, String args = '', String environment = 'development' ->
 					ant.grails(command: command, args: args, environment: environment,
-					           projectName: properties.projectName, resultID: grailsInvocationCounter++)
+					           projectName: properties.projectName, resultID: grailsInvocationCounter++, hibernatePluginVersion: runGrailsSettings.hibernatePluginVersion)
 				}
 
 				def copyReports = { boolean war, boolean forHibernate4 ->
@@ -156,9 +162,6 @@
 						fileset(dir: appDir.path, includes: "**/functional-test-*/**/*")
 					}
 
-					// revert BuildConfig.groovy file and possible other changes in app dir
-					"git checkout .".execute([], appDir)	
-
 					// First upgrade.
 					runGrails("upgrade -force")
 					if (failed(false)) {
@@ -166,6 +169,13 @@
 					}
 
 					def runTests = { boolean forHibernate4 = false ->
+						runGrailsSettings.hibernatePluginVersion = forHibernate4 ? hibernatePlugin4Version : hibernatePlugin3Version
+
+						if (forHibernate4) {
+							runGrails('-refresh-dependencies clean')
+							runGrails('compile')						
+						}
+
 						// Install the appropriate testing plugin, run the tests, and check the reportsDir
 						if (new File(appDir, "test/functional").exists()) {
 							if ((properties.projectName in ['gsp-reload-app'])) {
@@ -203,21 +213,9 @@
 					// run tests without changes
 					runTests(false)
 
-					// run same tests with hibernate4 plugin too if hibernate plugin is used
+					// run same tests with hibernate4 plugin too if hibernate plugin is used with hibernatePluginVersion reference
 					def buildConfigFile = new File(appDir, 'grails-app/conf/BuildConfig.groovy')
-					def buildConfigText =  buildConfigFile.text
-					def hibernate4BuildConfigText = buildConfigText.replaceAll(~/["']:hibernate:[^"']+["']/, '":hibernate4:4.3.4.1"')
-					if (hibernate4BuildConfigText != buildConfigText) {
-						// remove webflow plugin 
-						hibernate4BuildConfigText = hibernate4BuildConfigText.replaceAll(~/(?s)compile ["']:webflow:[^"']+["'], \{.*?\}/,'')
-						buildConfigFile.text = hibernate4BuildConfigText
-						// remove possible webflow tests
-						def webflowTestsDir = new File(appDir, 'test/functional/webflow')
-						if (webflowTestsDir.exists()) {
-							webflowTestsDir.deleteDir()
-						}
-						runGrails('clean')
-						runGrails('compile')
+					if (System.getProperty('disableHibernate4Tests','false')!='true' && buildConfigFile.text =~ /hibernatePluginVersion/) {
 						runTests(true)
 					}
 				}
