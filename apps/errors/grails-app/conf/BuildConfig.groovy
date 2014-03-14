@@ -17,13 +17,13 @@ grails.project.dependency.resolution = {
         mavenRepo "http://repo.grails.org/grails/core"
         mavenCentral()
     }
-    
+
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.13'
 
-        runtime 'hsqldb:hsqldb:1.8.0.10'
+        runtime 'org.hsqldb:hsqldb:2.3.2'
         test( 'commons-codec:commons-codec:1.6') {
             excludes 'xml-apis', 'xerces'
         }
@@ -50,7 +50,7 @@ grails.project.dependency.resolution = {
         }
     }
     plugins {
-        runtime ":hibernate:3.6.10.9"
+        runtime "${System.getProperty('hibernatePluginVersion',':hibernate:3.6.10.10')}"
         build ":tomcat:7.0.52.1"
         test ':functional-test:2.0.RC2-SNAPSHOT'
         compile ':scaffolding:2.0.2'

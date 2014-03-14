@@ -18,20 +18,20 @@ grails.project.dependency.resolution = {
         mavenCentral()
         mavenRepo "http://repo.grails.org/grails/core"
     }
-   
+
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.13'
-        runtime 'hsqldb:hsqldb:1.8.0.10'
+        runtime 'org.hsqldb:hsqldb:2.3.2'
         test 'net.sourceforge.nekohtml:nekohtml:1.9.18'
         test 'net.sourceforge.htmlunit:htmlunit:2.12'
-        test 'net.sourceforge.htmlunit:htmlunit-core-js:2.12'        
+        test 'net.sourceforge.htmlunit:htmlunit-core-js:2.12'
     }
     plugins {
-        runtime ":hibernate:3.6.10.9"
+        runtime "${System.getProperty('hibernatePluginVersion',':hibernate:3.6.10.10')}"
         build ":tomcat:7.0.52.1"
         test ':functional-test:2.0.RC2-SNAPSHOT'
         compile ':scaffolding:2.0.2'
-    }    
+    }
 }
