@@ -15,6 +15,8 @@ grails.project.dependency.resolution = {
         mavenLocal()
         grailsCentral()
         mavenCentral()
+        mavenRepo "http://snapshots.repository.codehaus.org"
+        mavenRepo 'http://maven.springframework.org/milestone'        
     }
     plugins {
         runtime ':cloud-foundry:1.2.3'
