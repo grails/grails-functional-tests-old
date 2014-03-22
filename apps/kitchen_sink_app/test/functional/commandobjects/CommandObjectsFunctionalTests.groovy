@@ -5,7 +5,7 @@ import groovy.xml.MarkupBuilder
 class CommandObjectsFunctionalTests extends functionaltestplugin.FunctionalTestCase {
 
     void testRetrievingCommandObjectFromDatabase() {
-        get '/commandObjectsTest/createGadget?name=ALPHA&age=42'
+        post '/commandObjectsTest/createGadget?name=ALPHA&age=42'
         assertStatus 200
         assertContentContains 'Create succeeded. id: 1, name: ALPHA, age: 42'
 
@@ -96,19 +96,19 @@ class CommandObjectsFunctionalTests extends functionaltestplugin.FunctionalTestC
 	}
 
 	void testDomainClassAsCommandObject() {
-        get '/commandObjectsTest/closureActionWithDomainClassAsCommandObject?name=Jon'
+        post '/commandObjectsTest/closureActionWithDomainClassAsCommandObject?name=Jon'
         assertStatus 200
         assertContentContains 'name: Jon, has errors?: true'
 
-        get '/commandObjectsTest/methodActionWithDomainClassAsCommandObject?name=Jon'
+        post '/commandObjectsTest/methodActionWithDomainClassAsCommandObject?name=Jon'
         assertStatus 200
         assertContentContains 'name: Jon, has errors?: true'
 
-        get '/commandObjectsTest/closureActionWithDomainClassAsCommandObject?name=JON'
+        post '/commandObjectsTest/closureActionWithDomainClassAsCommandObject?name=JON'
         assertStatus 200
         assertContentContains 'name: JON, has errors?: false'
 
-        get '/commandObjectsTest/methodActionWithDomainClassAsCommandObject?name=JON'
+        post '/commandObjectsTest/methodActionWithDomainClassAsCommandObject?name=JON'
         assertStatus 200
         assertContentContains 'name: JON, has errors?: false'
 	}
