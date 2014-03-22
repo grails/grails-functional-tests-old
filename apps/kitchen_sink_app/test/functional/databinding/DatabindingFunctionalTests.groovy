@@ -3,7 +3,7 @@ package databinding
 class DatabindingFunctionalTests extends functionaltestplugin.FunctionalTestCase {
 
     void testBindingToInheritedPersistentProperty() {
-        get '/databinding/createOffice?address.city=Norfolk&address.state=Virginia'
+        post '/databinding/createOffice?address.city=Norfolk&address.state=Virginia'
         assertStatus 200
         assertContentContains 'The city is Norfolk and the state is Virginia.'
     }
