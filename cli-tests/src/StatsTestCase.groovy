@@ -6,7 +6,7 @@ class StatsTestCase extends AbstractCliTestCase {
 		super.setUp()
 		copyDir(appSource, app)
 		workDir = app
-		upgrade()
+		compile()
 	}
 
 	void testStats() {

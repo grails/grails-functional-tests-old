@@ -22,7 +22,7 @@
                 <g:renderErrors bean="${bookInstance}" as="list" />
             </div>
             </g:hasErrors>
-            <g:form name="editForm" method="post" >
+            <g:form name="editForm" method="PUT" >
                 <input type="hidden" name="id" value="${bookInstance?.id}" />
                 <input type="hidden" name="version" value="${bookInstance?.version}" />
                 <div class="dialog">

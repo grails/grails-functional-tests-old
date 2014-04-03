@@ -58,6 +58,7 @@ class ContentParsingFunctionalTests extends functionaltestplugin.FunctionalTestC
         mkb.post {
             delegate.width '8'
             delegate.height '6'
+            delegate.name 'some name'
         }
 
         post '/post/createWidget', {
@@ -83,8 +84,8 @@ class ContentParsingFunctionalTests extends functionaltestplugin.FunctionalTestC
         post '/post/createWidget', {
             headers.'Content-Type' = 'application/json'
             body {
-                '{"width":8,"height":4}'
-            } 
+                '{"width":8,"height":4,"name":"some name"}'
+            }
         }
         assertStatus 200
         assertContentContains 'Area is 32'

@@ -162,18 +162,12 @@
 						fileset(dir: appDir.path, includes: "**/functional-test-*/**/*")
 					}
 
-					// First upgrade.
-					runGrails("upgrade -force")
-					if (failed(false)) {
-						outcomes << "Couldn't upgrade application ${properties.projectName}"
-					}
-
 					def runTests = { boolean forHibernate4 = false ->
 						runGrailsSettings.hibernatePluginVersion = forHibernate4 ? hibernatePlugin4Version : hibernatePlugin3Version
 
 						if (forHibernate4) {
 							runGrails('-refresh-dependencies clean')
-							runGrails('compile')						
+							runGrails('compile')
 						}
 
 						// Install the appropriate testing plugin, run the tests, and check the reportsDir
@@ -208,7 +202,7 @@
 							copyReports(false, forHibernate4)
 							outcomes << "Integration/unit tests in application ${properties.projectName}: " + (failed() ? "Failed" : "OK")
 						}
-					}				
+					}
 
 					// run tests without changes
 					runTests(false)

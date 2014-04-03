@@ -31,9 +31,7 @@ abstract class AbstractCliTestCase extends GroovyTestCase {
 
     long timeout = 2 * 60 * 1000 // min * sec/min * ms/sec
 
-    protected void upgrade() {
-        execute(["upgrade", "--non-interactive", "--force"])
-        assertEquals("upgrade failed", 0, waitForProcess())
+    protected void compile() {
         execute(["compile", "--non-interactive"])
         assertEquals("compile failed", 0, waitForProcess())
     }

@@ -23,7 +23,7 @@ class CreateUnitTestTestCase extends AbstractCliTestCase {
         copyDir appSource, app
         workDir = app
 
-        upgrade()
+        compile()
 
         // Make sure the plugin is installed and compiled.
         execute([ "compile" ])
@@ -31,26 +31,26 @@ class CreateUnitTestTestCase extends AbstractCliTestCase {
 
         execute([ "create-unit-test" ])
         enterInput "com.demo.unit.HelloWorld"
-        
+
         assertEquals 0, waitForProcess()
-        
+
         def appDir = new File(baseWorkDir, 'app1')
         def expectedTestFile = new File(app, 'test/unit/com/demo/unit/HelloWorldSpec.groovy')
-        
+
         assertTrue 'Spock unit test case was not created', expectedTestFile.exists()
 
         def fileContent = expectedTestFile.text
         assertTrue 'Unit test case is not a Spock test', fileContent.contains(" extends Specification")
     }
-    
+
     void testSuffixStripping() {
         execute([ "create-unit-test" ])
         enterInput "com.demo.unit.DemoTests"
-        
+
         assertEquals 0, waitForProcess()
-        
+
         def appDir = new File(baseWorkDir, 'app1')
-        
+
         assertTrue 'unit test case was not created', new File(appDir, 'test/unit/com/demo/unit/DemoSpec.groovy').exists()
         assertFalse 'test with wrong name was created', new File(appDir, 'test/unit/com/demo/unit/DemoSpecSpec.groovy').exists()
     }
