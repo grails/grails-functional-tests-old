@@ -9,21 +9,27 @@ grails.project.dependency.resolution = {
     }
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     repositories {
+        inherits true // Whether to inherit repository definitions from plugins
+        grailsPlugins()
+        grailsHome()
+        mavenLocal()
         grailsCentral()
-        mavenRepo "http://snapshots.repository.codehaus.org"
-        mavenRepo "http://repo.grails.org/grails/core"
-        mavenRepo 'http://maven.springframework.org/milestone'
         mavenCentral()
+        mavenRepo "http://snapshots.repository.codehaus.org"
+        mavenRepo 'http://maven.springframework.org/milestone'        
     }
     plugins {
         runtime ':cloud-foundry:1.2.3'
-        test ":functional-test:1.3-RC1"
-        runtime ":hibernate:3.6.10.1"
-        build ":tomcat:7.0.42"
-        compile ':scaffolding:1.0.BUILD-SNAPSHOT'
+        test ":functional-test:2.0.RC2-SNAPSHOT"
+        runtime "${System.getProperty('hibernatePluginVersion',':hibernate:3.6.10.11')}"
+        build ":tomcat:7.0.52.1"
+        compile ':scaffolding:2.0.2'
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-        runtime 'hsqldb:hsqldb:1.8.0.10'
+        runtime 'org.hsqldb:hsqldb:2.3.2'
+        test 'net.sourceforge.nekohtml:nekohtml:1.9.18'
+        test 'net.sourceforge.htmlunit:htmlunit:2.12'
+        test 'net.sourceforge.htmlunit:htmlunit-core-js:2.12'        
     }
 }

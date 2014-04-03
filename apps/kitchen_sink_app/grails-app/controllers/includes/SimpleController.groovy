@@ -8,6 +8,8 @@ class SimpleController {
 
 	def testIncludeWithActionAndNoController = {}
 
+	def testIncludeWithNamespaces = {}
+
 	def testForwardWithParams = {
 		forward(controller:"simple", action:"index", params:[foo:'bar'])
 	}

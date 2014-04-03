@@ -32,23 +32,25 @@ grails.project.dependency.resolution = {
         mavenRepo "https://nexus.codehaus.org/content/repositories/snapshots"
     }
 
-    def gebVersion = "0.6.0"
-    def seleniumVersion = "2.0rc3"
+    def gebVersion = "0.9.1"
+    def seleniumVersion = "2.35.0"
 
     dependencies {
         test("org.seleniumhq.selenium:selenium-htmlunit-driver:$seleniumVersion") {
     	    exclude "xml-apis"
 	   }
-        test "org.codehaus.geb:geb-junit4:$gebVersion"
+        test "org.gebish:geb-junit4:$gebVersion"
         test 'org.w3c.css:sac:1.3'
+        test 'net.sourceforge.nekohtml:nekohtml:1.9.18'
+        test 'net.sourceforge.htmlunit:htmlunit:2.12'
     }
 
     plugins {
-        runtime ":hibernate:3.6.10.1"
-        build ":tomcat:7.0.42"
-        compile ":jquery:1.6.1.1"
-        compile ":resources:1.0.2"
-        compile ':scaffolding:1.0.BUILD-SNAPSHOT'
+        runtime "${System.getProperty('hibernatePluginVersion',':hibernate:3.6.10.11')}"
+        build ":tomcat:7.0.52.1"
+        compile ":jquery:1.11.0.2"
+        //compile ":resources:1.2.1"
+        compile ':scaffolding:2.0.2'
 
         test ":geb:$gebVersion"
     }

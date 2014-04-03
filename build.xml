@@ -101,6 +101,12 @@
 				boolean failure = false
 				int grailsInvocationCounter = 0
 
+				// hibernate plugin versions
+				def hibernatePlugin3Version = ':hibernate:3.6.10.12'
+				def hibernatePlugin4Version = ':hibernate4:4.3.4.2'
+
+				def runGrailsSettings = [hibernatePluginVersion: hibernatePlugin3Version]
+
 				def failed = { boolean tests = true ->
 					boolean ok = properties["testResult_${grailsInvocationCounter - 1}"].toInteger() == 0
 					if (ok && tests) {
@@ -124,11 +130,12 @@
 
 				def runGrails = { String command, String args = '', String environment = 'development' ->
 					ant.grails(command: command, args: args, environment: environment,
-					           projectName: properties.projectName, resultID: grailsInvocationCounter++)
+					           projectName: properties.projectName, resultID: grailsInvocationCounter++, hibernatePluginVersion: runGrailsSettings.hibernatePluginVersion)
 				}
 
-				def copyReports = { boolean war ->
+				def copyReports = { boolean war, boolean forHibernate4 ->
 					String dir = "reports/${properties.projectName}"
+					if (forHibernate4) dir += '_hibernate4'
 					if (war) dir += '_war'
 					ant.mkdir(dir: dir)
 					ant.copy(todir: dir) {
@@ -161,37 +168,55 @@
 						outcomes << "Couldn't upgrade application ${properties.projectName}"
 					}
 
-					// Install the appropriate testing plugin, run the tests, and check the reportsDir
-					if (new File(appDir, "test/functional").exists()) {
-						if ((properties.projectName in ['gsp-reload-app'])) {
-							// Workaround for GRAILS-8189
-							runGrails('compile')
+					def runTests = { boolean forHibernate4 = false ->
+						runGrailsSettings.hibernatePluginVersion = forHibernate4 ? hibernatePlugin4Version : hibernatePlugin3Version
+
+						if (forHibernate4) {
+							runGrails('-refresh-dependencies clean')
+							runGrails('compile')						
 						}
 
-						if (!(properties.projectName in ['gsp-reload-app'])) {
-							// Run the tests.
-							runGrails("test-app", "functional: --dev-mode", "dev")
-							copyReports(false)
+						// Install the appropriate testing plugin, run the tests, and check the reportsDir
+						if (new File(appDir, "test/functional").exists()) {
+							if ((properties.projectName in ['gsp-reload-app'])) {
+								// Workaround for GRAILS-8189
+								runGrails('compile')
+							}
+
+							if (!(properties.projectName in ['gsp-reload-app'])) {
+								// Run the tests.
+								runGrails("test-app", "functional: --dev-mode", "dev")
+								copyReports(false, forHibernate4)
+								outcomes << "Functional tests in application ${properties.projectName}: " + (failed() ? "Failed" : "OK")
+							}
+
+							// Run the WAR tests.
+							String warArgs = "-war functional: --dev-mode"
+							String warEnv = "test"
+							if (properties.projectName in ['gsp-reload-app']) {
+								warArgs = 'functional: -war'
+								warEnv ='production'
+							}
+
+							runGrails("test-app", warArgs, warEnv)
+							copyReports(true, forHibernate4)
 							outcomes << "Functional tests in application ${properties.projectName}: " + (failed() ? "Failed" : "OK")
 						}
-
-						// Run the WAR tests.
-						String warArgs = "-war functional: --dev-mode"
-						String warEnv = "test"
-						if (properties.projectName in ['gsp-reload-app']) {
-							warArgs = 'functional: -war'
-							warEnv ='production'
+						else {
+							// Run unit & integration tests.
+							runGrails("test-app", "",  "test")
+							copyReports(false, forHibernate4)
+							outcomes << "Integration/unit tests in application ${properties.projectName}: " + (failed() ? "Failed" : "OK")
 						}
+					}				
 
-						runGrails("test-app", warArgs, warEnv)
-						copyReports(true)
-						outcomes << "Functional tests in application ${properties.projectName}: " + (failed() ? "Failed" : "OK")
-					}
-					else {
-						// Run unit & integration tests.
-						runGrails("test-app", "",  "test")
-						copyReports(false)
-						outcomes << "Integration/unit tests in application ${properties.projectName}: " + (failed() ? "Failed" : "OK")
+					// run tests without changes
+					runTests(false)
+
+					// run same tests with hibernate4 plugin too if hibernate plugin is used with hibernatePluginVersion reference
+					def buildConfigFile = new File(appDir, 'grails-app/conf/BuildConfig.groovy')
+					if (System.getProperty('disableHibernate4Tests','false')!='true' && buildConfigFile.text =~ /hibernatePluginVersion/) {
+						runTests(true)
 					}
 				}
 
@@ -283,6 +308,7 @@ class Blog {
 
  		<property file="${grails.home}/build.properties"/>
 		<java classname="RunTests" fork="true" failonerror="true" maxmemory="256m" dir='cli-tests'>
+			<env key="GRAILS_HOME" value="${grails.home}"/>
 			<classpath>
 				<path refid="classpath"/>
 				<fileset dir="${grails.lib}/junit/junit/jars" includes="junit*.jar"/>

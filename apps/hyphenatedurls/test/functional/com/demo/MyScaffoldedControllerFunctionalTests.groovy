@@ -7,7 +7,7 @@ class MyScaffoldedControllerFunctionalTests extends functionaltestplugin.Functio
         assertStatus 200
         assertContentContains 'Person List'
         
-        get '/my-scaffolded/list'
+        get '/my-scaffolded/index'
         assertStatus 200
         assertContentContains 'Person List'
         

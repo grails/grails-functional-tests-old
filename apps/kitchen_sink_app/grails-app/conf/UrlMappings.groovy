@@ -61,6 +61,7 @@ class UrlMappings {
         "/redirectToOutput"(redirect: [controller: 'redirect', action: 'output'])
 
         "/"(view:"/index")
+        "500"(controller: 'testFiltersError', action: 'handleException', exception: CustomRuntimeException)
         "500"(view:'/error')
         "404"(controller: 'i18nError', action: 'pageNotFound')
     }

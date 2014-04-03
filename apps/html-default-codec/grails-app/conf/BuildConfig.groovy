@@ -34,21 +34,21 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.16'
-        test 'net.sourceforge.htmlunit:htmlunit:2.12', {
-            // excludes 'xalan', 'xercesImpl'
-        }        
+        test 'net.sourceforge.nekohtml:nekohtml:1.9.18'
+        test 'net.sourceforge.htmlunit:htmlunit:2.12'
+        test 'net.sourceforge.htmlunit:htmlunit-core-js:2.12'        
     }
 
     plugins {
-        runtime ":hibernate:3.6.10.1"
-        build ":tomcat:7.0.42"
-        compile ":jquery:1.7"
-        compile ":resources:1.1.2"
-        compile ':scaffolding:1.0.BUILD-SNAPSHOT'
+        runtime "${System.getProperty('hibernatePluginVersion',':hibernate:3.6.10.11')}"
+        build ":tomcat:7.0.52.1"
+        compile ":jquery:1.11.0.2"
+        compile ":resources:1.2.1"
+        compile ':scaffolding:2.0.2'
 
-        runtime ":database-migration:1.0"
+        runtime ":database-migration:1.3.8"
         
-        test ':functional-test:2.0.RC1', {
+        test ':functional-test:2.0.RC2-SNAPSHOT', {
             excludes 'htmlunit'
         }
 

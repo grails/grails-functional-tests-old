@@ -1,3 +1,5 @@
+import grails.test.mixin.TestMixin
+import grails.test.mixin.integration.IntegrationTestMixin
 import org.springframework.transaction.TransactionDefinition
 import org.springframework.transaction.support.DefaultTransactionDefinition
 
@@ -6,11 +8,12 @@ import org.springframework.transaction.support.DefaultTransactionDefinition
  * 
  * The tearDown() also tests that the transaction spans the setup and teardown methods.
  */
+@TestMixin(IntegrationTestMixin)
 class TransactionalTests extends GroovyTestCase {
 
 	def transactionManager
 	
-	void setUp() {
+	void doSetUp() {
 		assertNotNull("transactionManager was not autowired in", transactionManager)
 		assertTransactionIsBound()
 		assertPersonCount(0)
@@ -31,12 +34,14 @@ class TransactionalTests extends GroovyTestCase {
 	} 
 
 	void testOne() {
+        doSetUp()
 		assertTransactionIsBound()
 		assertPersonCount(1)
 		createPerson()
 	}
 
 	void testTwo() {
+        doSetUp()
 		assertTransactionIsBound()
 		assertPersonCount(1)
 		createPerson()

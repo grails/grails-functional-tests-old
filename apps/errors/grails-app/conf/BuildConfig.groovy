@@ -23,13 +23,13 @@ grails.project.dependency.resolution = {
 
         // runtime 'mysql:mysql-connector-java:5.1.13'
 
-        runtime 'hsqldb:hsqldb:1.8.0.10'
+        runtime 'org.hsqldb:hsqldb:2.3.2'
         test( 'commons-codec:commons-codec:1.6') {
             excludes 'xml-apis', 'xerces'
         }
-        test( 'net.sourceforge.nekohtml:nekohtml:1.9.16') {
-            excludes 'xml-apis', 'xerces'
-        }
+        test 'net.sourceforge.nekohtml:nekohtml:1.9.18'
+        test 'net.sourceforge.htmlunit:htmlunit:2.12'
+        test 'net.sourceforge.htmlunit:htmlunit-core-js:2.12'
         test( 'net.sourceforge.cssparser:cssparser:0.9.7') {
             excludes 'xml-apis', 'xerces'
         }
@@ -50,9 +50,9 @@ grails.project.dependency.resolution = {
         }
     }
     plugins {
-        runtime ":hibernate:3.6.10.1"
-        build ":tomcat:7.0.42"
-        test ':functional-test:2.0.RC1'
-        compile ':scaffolding:1.0.BUILD-SNAPSHOT'
+        runtime "${System.getProperty('hibernatePluginVersion',':hibernate:3.6.10.11')}"
+        build ":tomcat:7.0.52.1"
+        test ':functional-test:2.0.RC2-SNAPSHOT'
+        compile ':scaffolding:2.0.2'
     }
 }

@@ -10,4 +10,8 @@ apps/*/*.ipr
 apps/*/*.iws
 apps/*/*.war
 stacktrace.log
-
+.classpath
+.project
+.settings/
+target-eclipse/
+.link_to_grails_plugins/

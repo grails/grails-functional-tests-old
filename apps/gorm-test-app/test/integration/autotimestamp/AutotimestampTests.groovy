@@ -1,19 +1,23 @@
 package autotimestamp
 
-class AutotimestampTests extends GroovyTestCase {
+import grails.test.mixin.TestMixin
+import grails.test.mixin.integration.IntegrationTestMixin
+
+@TestMixin(IntegrationTestMixin)
+class AutotimestampTests {
     
     void testAutotimestamp() {
         def category = new Category(name:'example', description:'testing this')
         category.save(flush:true)
-        assertNotNull(category.dateCreated)
-        assertNotNull(category.lastUpdated)
+        assert category.dateCreated != null
+        assert category.lastUpdated != null
     }
 
     void testAutotimestampNoFlush() {
         def category = new Category(name:'example', description:'testing this')
         category.save()
-        assertNotNull(category.dateCreated)
-        assertNotNull(category.lastUpdated)
+        assert category.dateCreated != null
+        assert category.lastUpdated != null
     }
     
 }
