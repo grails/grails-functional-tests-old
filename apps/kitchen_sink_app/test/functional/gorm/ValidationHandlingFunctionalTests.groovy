@@ -11,8 +11,10 @@ class ValidationHandlingFunctionalTests extends functionaltestplugin.FunctionalT
 			click "Create"
 		}
 		
-		assertStatus 200		
-		assertContentContains "Test 2 created"
+		assertStatus 200	
+		def match = client.responseAsString =~ /Test (\d+) created/
+		assertTrue match as boolean
+		def id = match[0][1]
 		
 		form("navForm") {
 			click "_action_Edit"
@@ -33,7 +35,7 @@ class ValidationHandlingFunctionalTests extends functionaltestplugin.FunctionalT
 		assertContentContains "Edit Test"		
 		assertContentContains "Property age must be a valid number"
 		
-        get('/test/show/2')
+        get("/test/show/$id")
 		assertStatus 200
 		assertContentContains '<td valign="top" class="value">test</td>'
 		assertContentContains '<td valign="top" class="value">25</td>'		
