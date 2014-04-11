@@ -29,8 +29,8 @@ class WarTestCase extends AbstractCliTestCase {
 
         assertTrue "aspectjweaver-1.7.4.jar file is missing from the WAR",
                    warEntries.contains("WEB-INF/lib/aspectjweaver-1.7.4.jar")
-        assertTrue "hibernate-core-3.6.10.Final.jar file is missing from the WAR",
-                   warEntries.contains("WEB-INF/lib/hibernate-core-3.6.10.Final.jar")
+        assertTrue "hibernate-core-x.x.x.Final.jar file is missing from the WAR",
+                   warEntries.any{it =~ $/WEB-INF/lib/hibernate-core-\d+.\d+.\d+.Final.jar/$}
         assertTrue "log4j-1.2.17.jar file is missing from the WAR",
                    warEntries.contains("WEB-INF/lib/log4j-1.2.17.jar")
         assertTrue "grails-bootstrap-${grailsVersion}.jar file is missing from the WAR",
