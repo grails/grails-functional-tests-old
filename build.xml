@@ -11,8 +11,11 @@
 	<property name="target" value="target"/>
 	<property name="default.port" value="8183"/>
 
+	<property name='grails.lib' value='${grails.home}/lib' />
+	<property name="groovy.lib" value="${grails.lib}/org.codehaus.groovy/groovy-all/jars" />
 	<path id="classpath">
 		<fileset dir="lib" includes="*.jar"/>
+		<fileset dir="${groovy.lib}" includes="*.jar" excludes="**/*-sources.jar,**/*-javadoc.jar"/>
 	</path>
 
 	<import file="./common/macros.xml" />
@@ -277,26 +280,18 @@ class Blog {
 	<target name="run-cli" unless="skipCli">
 
 		<property name='cli-classes' value='target/cli-classes' />
-		<property name='grails.lib' value='${grails.home}/lib' />
-		<property name="groovy.lib" value="${grails.lib}/org.codehaus.groovy/groovy-all/jars" />
+
 
 		<delete dir="target" />
 		<mkdir dir="${cli-classes}" />
 
-		<taskdef name="groovyc" classname="org.codehaus.groovy.ant.Groovyc">
-			<classpath>
-				<fileset dir="${groovy.lib}" includes="*.jar"/>
-			</classpath>
-		</taskdef>
+		<taskdef name="groovyc" classname="org.codehaus.groovy.ant.Groovyc" classpathref="classpath"/>
 
 		<groovyc destdir="${cli-classes}" encoding="UTF-8" srcdir='cli-tests/src'>
 			<classpath>
-				<fileset dir="${groovy.lib}" includes="*.jar"/>
 				<fileset dir="${grails.lib}/junit/junit/jars" includes="junit*.jar"/>
-
 				<path refid="classpath"/>
 			</classpath>
-
 			<javac deprecation="on" debug="yes" source="1.5" target="1.5" />
 		</groovyc>
 
