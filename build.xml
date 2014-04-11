@@ -308,6 +308,7 @@ class Blog {
 			<sysproperty key='cli.target.dir' value='../target'/>
 			<sysproperty key='cli.test.dir' value='.'/>
 			<sysproperty key='cli.plugin.dir' value='../in-place-plugins'/>
+			<sysproperty key='java.util.logging.config.file' value='jul-logging.properties' />
 		</java>
 
 	</target>

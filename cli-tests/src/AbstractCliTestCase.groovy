@@ -51,6 +51,10 @@ abstract class AbstractCliTestCase extends GroovyTestCase {
         // Add the path to the Grails script as the first element of
         // the command. Note that we use an absolute path.
         def cmd = [grailsHome + '/bin/grails', '-Dgrails.work.dir=' + System.getProperty('grails.work.dir')]
+        def loggingConfigFile = System.getProperty('java.util.logging.config.file')
+        if(loggingConfigFile) {
+            cmd.add "-Djava.util.logging.config.file=${new File(loggingConfigFile).absolutePath}".toString()
+        }
         cmd.addAll command
 
         // Prepare to execute Grails as a separate process in the configured working directory.
