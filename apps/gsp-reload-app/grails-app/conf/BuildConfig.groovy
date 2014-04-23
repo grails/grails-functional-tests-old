@@ -50,7 +50,7 @@ grails.project.dependency.resolution = {
         build ":tomcat:7.0.52.1"
         compile ":jquery:1.11.0.2"
         //compile ":resources:1.2.1"
-        compile ':scaffolding:2.1.0-SNAPSHOT'
+        compile ':scaffolding:2.1.0'
 
         test ":geb:$gebVersion"
     }
