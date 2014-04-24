@@ -103,7 +103,7 @@
 
 				// hibernate plugin versions
 				def hibernatePlugin3Version = ':hibernate:3.6.10.13'
-				def hibernatePlugin4Version = ':hibernate4:4.5.3.1'
+				def hibernatePlugin4Version = ':hibernate4:4.3.5.1'
 
 				def runGrailsSettings = [hibernatePluginVersion: hibernatePlugin3Version]
 
