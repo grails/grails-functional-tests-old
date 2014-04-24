@@ -38,7 +38,7 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        runtime "${System.getProperty('hibernatePluginVersion',':hibernate:3.6.10.12')}"
+        runtime "${System.getProperty('hibernatePluginVersion',':hibernate:3.6.10.13')}"
         build ":tomcat:7.0.52.1"
         /*
         compile ":webflow:2.0.8.1", {
@@ -56,7 +56,7 @@ grails.project.dependency.resolution = {
 
         runtime ":database-migration:1.3.8"
 
-        test ':functional-test:2.0.RC2-SNAPSHOT'
-        // runtime ":build-test-data:1.1.1"
-    }
+        test ':functional-test:2.0.0'
+        runtime ":build-test-data:1.1.1"
+    }    
 }

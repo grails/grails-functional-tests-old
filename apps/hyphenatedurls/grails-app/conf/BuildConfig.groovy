@@ -37,7 +37,7 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        runtime "${System.getProperty('hibernatePluginVersion',':hibernate:3.6.10.12')}" // or ":hibernate4:4.3.4.2"
+        runtime "${System.getProperty('hibernatePluginVersion',':hibernate:3.6.10.13')}" // or ":hibernate4:4.5.3.1"
         build ":tomcat:7.0.52.1", {
             // exclude "tomcat-embed-logging-juli"
             // exclude "org.apache.tomcat:tomcat-catalina-ant"
@@ -49,7 +49,7 @@ grails.project.dependency.resolution = {
 
         runtime ":database-migration:1.3.8"
 
-        test ':functional-test:2.0.RC2-SNAPSHOT', {
+        test ':functional-test:2.0.0', {
             excludes 'htmlunit'
         }
     }
