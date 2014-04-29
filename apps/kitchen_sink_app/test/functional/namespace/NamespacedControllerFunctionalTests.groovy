@@ -88,5 +88,19 @@ class NamespacedControllerFunctionalTests extends functionaltestplugin.Functiona
         assertStatus 200
         assertContentContains 'Rendered by the index action in the namespace.gamma.NamespacedController controller'
     }
+
+    void testNamespacedControllerViewRendering() {
+        get '/primary/namespaced/actionWhichReturnsMap'
+        assertStatus 200
+        assertContentContains 'This GSP is in grails-app/views/primary/namespaced/actionWhichReturnsMap.gsp'
+
+        get '/primary/namespaced/actionWichRendersExplicitRelativeView?viewToRender=viewInNamespaceFolder'
+        assertStatus 200
+        assertContentContains 'This GSP is in grails-app/views/primary/namespaced/viewInNamespaceFolder.gsp'
+
+        get '/primary/namespaced/actionWichRendersExplicitRelativeView?viewToRender=viewNotInNamespaceFolder'
+        assertStatus 200
+        assertContentContains 'This GSP is in grails-app/views/namespaced/viewNotInNamespaceFolder.gsp'
+    }
 }
 

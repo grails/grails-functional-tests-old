@@ -7,9 +7,17 @@ class NamespacedController {
     def index() {
         render 'Rendered by the index action in the namespace.alpha.NamespacedController controller'
     }
-    
+
     def demo() {
         render 'Rendered by the demo action in the namespace.alpha.NamespacedController controller'
+    }
+
+    def actionWhichReturnsMap() {
+        [:]
+    }
+
+    def actionWichRendersExplicitRelativeView(String viewToRender) {
+        render view: viewToRender
     }
 }
 
