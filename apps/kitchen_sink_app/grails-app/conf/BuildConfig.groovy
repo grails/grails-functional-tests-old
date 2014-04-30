@@ -55,7 +55,7 @@ grails.project.dependency.resolution = {
         compile ":jquery:1.11.0.2"
         compile ":resources:1.2.1"
 
-        runtime ":database-migration:1.3.8"
+        runtime ":database-migration:1.4.0"
 
         test ':functional-test:2.0.0'
         runtime ":build-test-data:1.1.1"
