@@ -51,7 +51,7 @@ grails.project.dependency.resolution = {
 
         // plugins for the compile step
         compile ":scaffolding:2.1.0"
-        compile ':cache:1.0.1'
+        compile ':cache:1.1.5'
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate:3.6.10.13" // or ":hibernate4:4.3.5.1"
