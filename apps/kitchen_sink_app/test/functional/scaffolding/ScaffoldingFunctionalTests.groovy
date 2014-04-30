@@ -6,7 +6,7 @@ class ScaffoldingFunctionalTests extends functionaltestplugin.FunctionalTestCase
     void testBodyOnce() {
         get '/book'
         assertStatus 200
-        assertEquals "text/html;charset=ISO-8859-1", response.getResponseHeaderValue('Content-Type')
+        assertEquals "text/html;charset=UTF-8", response.getResponseHeaderValue('Content-Type')
         	assertEquals 1, countMatches(response.contentAsString, /<body/)
         	assertEquals 1, countMatches(response.contentAsString, /<h1>Book List<\/h1>/)
     }
