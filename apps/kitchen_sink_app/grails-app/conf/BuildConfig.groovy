@@ -38,7 +38,7 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        runtime "${System.getProperty('hibernatePluginVersion',':hibernate:3.6.10.13')}"
+        runtime "${System.getProperty('hibernatePluginVersion',':hibernate:3.6.10.14')}"
         build ":tomcat:7.0.52.1"
         /*
         compile ":webflow:2.0.8.1", {
