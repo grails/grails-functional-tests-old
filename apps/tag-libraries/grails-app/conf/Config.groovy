@@ -94,3 +94,5 @@ grails {
     }
 }
 remove this line */
+
+grails.gsp.tldScanPattern='classpath*:/META-INF/*.tld,/WEB-INF/tld/*.tld'

@@ -27,6 +27,8 @@ grails.project.dependency.resolution = {
         test 'net.sourceforge.nekohtml:nekohtml:1.9.18'
         test 'net.sourceforge.htmlunit:htmlunit:2.12'
         test 'net.sourceforge.htmlunit:htmlunit-core-js:2.12'
+        runtime 'javax.servlet:jstl:1.1.2'
+        runtime 'taglibs:standard:1.1.2'
     }
     plugins {
         runtime "${System.getProperty('hibernatePluginVersion',':hibernate:3.6.10.14')}"
