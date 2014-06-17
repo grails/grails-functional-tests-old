@@ -45,7 +45,7 @@ grails.project.dependency.resolution = {
                excludes 'javassist'
         }
         */
-        compile ':scaffolding:2.1.0'
+        compile ':scaffolding:2.1.1'
 
         //compile ":compress:0.3"
 

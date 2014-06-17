@@ -23,7 +23,7 @@ grails.project.dependency.resolution = {
         test ":functional-test:2.0.0"
         runtime "${System.getProperty('hibernatePluginVersion',':hibernate:3.6.10.16')}"
         build ":tomcat:7.0.54"
-        compile ':scaffolding:2.1.0'
+        compile ':scaffolding:2.1.1'
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
