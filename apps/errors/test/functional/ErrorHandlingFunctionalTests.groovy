@@ -152,4 +152,13 @@ class ErrorHandlingFunctionalTests extends functionaltestplugin.FunctionalTestCa
         assertStatus 500
         assertContentDoesNotContain '<h2>Hello World</h2>'
     }
+
+	// GRAILS-10992
+	void testIncludeError() {
+		get('/errors/includeError')
+
+		assertStatus 500
+		assertContentDoesNotContain 'BEFORE THE EXCEPTION'
+		assertContentDoesNotContain 'AFTER THE EXCEPTION'
+	}
 }
