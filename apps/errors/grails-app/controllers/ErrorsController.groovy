@@ -54,4 +54,8 @@ class ErrorsController {
 	
 	def forwardError = {
 	}
+
+	def includeError = {
+		
+	}
 }
