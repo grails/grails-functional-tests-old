@@ -2,6 +2,7 @@ package commandobjects
 
 class CommandObjectsTestController {
 
+    static allowedMethods = [updateGadget: 'POST']
     def index = { }
 
 	def createCommand = {
@@ -57,12 +58,12 @@ class CommandObjectsTestController {
 
     def updateGadget(Gadget gadget) {
         if(gadget == null) {
-            render 'gadget is null'
+            render "gadget is null, error count is ${errors?.errorCount}"
         } else {
             render "Gadget was loaded.  id: ${gadget.id}, name: ${gadget.name}, age: ${gadget.age}"
         }
     }
- 
+
     def createGadget(Gadget gadget) {
         if(gadget.save()) {
             render "Create succeeded. id: ${gadget.id}, name: ${gadget.name}, age: ${gadget.age}"

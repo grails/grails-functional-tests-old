@@ -37,14 +37,28 @@ class CommandObjectsFunctionalTests extends functionaltestplugin.FunctionalTestC
         }
         assertStatus 200
         assertContentContains 'Gadget was loaded. id: 1, name: DELTA, age: 42'
+
+        post '/commandObjectsTest/updateGadget?id=bogus&name=BETA'
+        assertStatus 200
+        assertContentContains 'gadget is null, error count is 1'
+
+        post '/commandObjectsTest/updateGadget?id=2112&name=BETA'
+        assertStatus 200
+        assertContentContains 'gadget is null, error count is 0'
+
+        get '/commandObjectsTest/updateGadget?id=bogus&name=BETA'
+        assertStatus 405
+
+        get '/commandObjectsTest/updateGadget?id=2112&name=BETA'
+        assertStatus 405
     }
 
     void testCommandObjectIdNotFound() {
-        get '/commandObjectsTest/updateGadget?id=2112&name=BETA'
+        post '/commandObjectsTest/updateGadget?id=2112&name=BETA'
         assertStatus 200
         assertContentContains 'gadget is null'
     }
-    
+
     void testConstraintsProperty() {
         get '/commandObjectsTest/testConstraintsProperty'
         assertStatus 200
