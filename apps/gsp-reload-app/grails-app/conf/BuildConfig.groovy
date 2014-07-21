@@ -57,7 +57,7 @@ grails.project.dependency.resolution = {
 }
 
 grails.tomcat.jvmArgs = ["-XX:+DisableExplicitGC", '-Xmx768M', '-Xms256M', '-XX:PermSize=92m', '-XX:MaxPermSize=192m',
-                         '-Dgrails.reload.location=' + new File('target/reload').absolutePath]
+                         '-Dgrails.reload.location=' + new File('target/reload').absolutePath, '-Dgrails.reload.enabled=true', '-Dgrails.env=production']
 
 if (System.getProperty('grails.debug')) {
   grails.tomcat.jvmArgs = ["-Xdebug","-Xnoagent","-Dgrails.full.stacktrace=true","-Djava.compiler=NONE","-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"]
