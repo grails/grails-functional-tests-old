@@ -32,17 +32,17 @@ grails.project.dependency.resolution = {
         mavenRepo "https://nexus.codehaus.org/content/repositories/snapshots"
     }
 
-    def gebVersion = "0.9.1"
-    def seleniumVersion = "2.35.0"
+    def gebVersion = "0.9.3"
+    def seleniumVersion = "2.42.2"
 
     dependencies {
         test("org.seleniumhq.selenium:selenium-htmlunit-driver:$seleniumVersion") {
     	    exclude "xml-apis"
 	   }
         test "org.gebish:geb-junit4:$gebVersion"
-        test 'org.w3c.css:sac:1.3'
-        test 'net.sourceforge.nekohtml:nekohtml:1.9.18'
-        test 'net.sourceforge.htmlunit:htmlunit:2.12'
+        test "org.gebish:geb-spock:$gebVersion"
+        test 'net.sourceforge.nekohtml:nekohtml:1.9.20'
+        test 'net.sourceforge.htmlunit:htmlunit:2.14'
     }
 
     plugins {
