@@ -44,7 +44,7 @@ grails.project.dependency.resolution = {
         build ":tomcat:7.0.54"
         compile ":jquery:1.11.0.2"
         compile ":resources:1.2.7"
-        compile ':scaffolding:2.0.2'
+        compile ':scaffolding:2.0.3'
 
         runtime ":database-migration:1.4.0"
         
