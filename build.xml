@@ -191,7 +191,8 @@
 							String warArgs = "-war functional: --dev-mode"
 							String warEnv = "test"
 							if (properties.projectName in ['gsp-reload-app']) {
-								warArgs = 'functional: -war'
+							    // functional:spock is http://jira.codehaus.org/browse/GEB-314 workaround
+								warArgs = 'functional:spock -war'
 								warEnv ='production'
 							}
 
