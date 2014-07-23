@@ -64,6 +64,8 @@ grails.project.dependency.resolution = {
         build ":tomcat:7.0.54"
 
         test ":geb:$gebVersion"
+        
+        test ":rest-client-builder:2.0.3"
         // plugins for the compile step
         //compile ":scaffolding:2.0.3"
         //compile ':cache:1.1.5'
