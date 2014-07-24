@@ -17,7 +17,7 @@ class AutoflushSpec extends Specification {
             RestBuilder rest = new RestBuilder()
             String newTitle = "title ${System.currentTimeMillis()}" 
         when:
-            String url = "http://localhost:8080/gorm-test-app/autoFlush/updateItemTitle/${item.id}?title=${newTitle}&mode=${mode}&transactional=${transactional}"
+            String url = "http://localhost:${System.getProperty('grails.server.port.http','8080')}/gorm-test-app/autoFlush/updateItemTitle/${item.id}?title=${newTitle}&mode=${mode}&transactional=${transactional}"
             RestResponse response = rest.get(url)
         then:    
             response.status == 200
