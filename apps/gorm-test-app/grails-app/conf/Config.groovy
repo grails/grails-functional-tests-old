@@ -118,3 +118,6 @@ log4j = {
 grails.gorm.default.mapping = {
     id generator:'sequence-identity'
 }
+
+// enable remotecontrol for all environments
+remoteControl.enabled = true
