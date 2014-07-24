@@ -1,8 +1,24 @@
 package autoflush
 
-class AutoFlushController {
+import grails.transaction.NotTransactional
+import grails.transaction.Transactional
 
-    def updateItemTitle(int id, String title, int mode) {
+class AutoFlushController {
+    @NotTransactional
+    def updateItemTitle(int id, String title, int mode, boolean transactional) {
+        if(transactional) {
+            updateItemTitleInTransaction(id, title, mode)
+        } else {
+            doUpdateItemTitle(id, title, mode)
+        }
+    }
+    
+    @Transactional
+    def updateItemTitleInTransaction(int id, String title, int mode) {
+        doUpdateItemTitle(id, title, mode)
+    }
+    
+    private def doUpdateItemTitle(int id, String title, int mode) {
         Item item = Item.get(id)
         item.title = title
         switch(mode) {
