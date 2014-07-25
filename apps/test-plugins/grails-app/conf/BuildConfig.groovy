@@ -28,7 +28,7 @@ grails.project.dependency.resolution = {
         test 'net.sourceforge.htmlunit:htmlunit-core-js:2.12'
     }
     plugins {
-        runtime "${System.getProperty('hibernatePluginVersion',':hibernate:3.6.10.16')}"
+        runtime "${System.getProperty('hibernatePluginVersion',':hibernate:3.6.10.17-SNAPSHOT')}"
         build ":tomcat:7.0.54"
         test ':functional-test:2.0.0'
         compile ':scaffolding:2.1.2'
