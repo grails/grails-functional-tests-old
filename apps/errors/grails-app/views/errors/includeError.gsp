@@ -1,0 +1,1 @@
+BEFORE THE EXCEPTION<g:include controller="errors" action="standard" />AFTER THE EXCEPTION
