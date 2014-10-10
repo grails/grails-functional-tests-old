@@ -63,7 +63,7 @@ grails.project.dependency.resolution = {
         runtime "${System.getProperty('hibernatePluginVersion',':hibernate:3.6.10.17')}" // or ":hibernate4:4.3.5.5"
         //runtime ":database-migration:1.4.0"
         //runtime ":jquery:1.11.1"
-        //runtime ":resources:1.2.9"
+        //runtime ":resources:1.2.10"
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0.1"
         //runtime ":cached-resources:1.1"

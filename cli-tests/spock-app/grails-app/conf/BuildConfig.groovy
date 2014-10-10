@@ -57,7 +57,7 @@ grails.project.dependency.resolution = {
         runtime ":hibernate:3.6.10.17" // or ":hibernate4:4.3.5.5"
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
-        runtime ":resources:1.2.9"
+        runtime ":resources:1.2.10"
 
         test ":spock:0.7", {
             excludes "spock-grails-support"
