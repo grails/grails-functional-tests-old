@@ -38,7 +38,7 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        runtime "${System.getProperty('hibernatePluginVersion',':hibernate:3.6.10.18-SNAPSHOT')}"
+        runtime "${System.getProperty('hibernatePluginVersion',':hibernate:3.6.10.19-SNAPSHOT')}"
         build ":tomcat:7.0.55"
         if(!System.getProperty('hibernatePluginVersion')?.startsWith(':hibernate4:')) {
             // not compatible with hibernate4 plugin
