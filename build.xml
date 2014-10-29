@@ -105,8 +105,8 @@
 				int grailsInvocationCounter = 0
 
 				// hibernate plugin versions
-				def hibernatePlugin3Version = ':hibernate:3.6.10.18-SNAPSHOT'
-				def hibernatePlugin4Version = ':hibernate4:4.3.6.1-SNAPSHOT'
+				def hibernatePlugin3Version = ':hibernate:3.6.10.19-SNAPSHOT'
+				def hibernatePlugin4Version = ':hibernate4:4.3.6.2-SNAPSHOT'
 
 				def runGrailsSettings = [hibernatePluginVersion: hibernatePlugin3Version]
 
