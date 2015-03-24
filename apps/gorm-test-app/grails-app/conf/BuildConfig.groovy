@@ -49,7 +49,7 @@ grails.project.dependency.resolution = {
 
     plugins {
         // plugins for the build system only
-        build ":tomcat:7.0.55"
+        build ":tomcat:7.0.55.2"
 
         test ":geb:$gebVersion"
         

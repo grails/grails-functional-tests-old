@@ -22,7 +22,7 @@ grails.project.dependency.resolution = {
         runtime ':cloud-foundry:1.2.3'
         test ":functional-test:2.0.0"
         runtime "${System.getProperty('hibernatePluginVersion',':hibernate:3.6.10.19')}"
-        build ":tomcat:7.0.55"
+        build ":tomcat:7.0.55.2"
         compile ':scaffolding:2.1.2'
     }
     dependencies {
