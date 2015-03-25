@@ -53,7 +53,7 @@ grails.project.dependency.resolution = {
 
         test ":geb:$gebVersion"
         
-        test ":rest-client-builder:2.0.3"
+        test ":rest-client-builder:2.1.0"
         compile ":remote-control:1.5"
         // plugins for the compile step
         //compile ":scaffolding:2.1.2"
