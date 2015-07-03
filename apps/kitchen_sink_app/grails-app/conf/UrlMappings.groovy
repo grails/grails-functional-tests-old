@@ -54,6 +54,9 @@ class UrlMappings {
 
         "/anotherRouteToNonNamespacedController"(controller: 'namespaced')
 
+        "/alphaDemo"(namespace: 'alpha', controller: 'demo', action: 'doit')
+        "/betaDemo"(namespace: 'beta', controller: 'demo', action: 'doit')
+
         "/numberOne"(redirect: [controller: 'redirect', action: 'one'])
         "/numberTwo"(redirect: [controller: 'redirect', action: 'two'])
         "/anotherNumberOne"(redirect: [uri: '/redirect/one'])
